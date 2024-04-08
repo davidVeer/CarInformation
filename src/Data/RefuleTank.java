@@ -18,7 +18,7 @@ public class RefuleTank {
 
 	private double literPrice;
 
-	private double lpkm;
+	private double kmpl;
 
 
 	public RefuleTank(int refuleNumber,int odometer, double liters, double totalPrice, LocalDate date) {
@@ -28,7 +28,7 @@ public class RefuleTank {
 		this.totalPrice = totalPrice;
 		this.date = date;
 		this.kilometersDriven = -1;
-		this.lpkm = -1.0;
+		this.kmpl = -1.0;
 		this.literPrice = calculateLiterPrice();
 	}
 
@@ -42,7 +42,7 @@ public class RefuleTank {
 
 	public void setKilometersDriven(int kilometersDriven) {
 		this.kilometersDriven = kilometersDriven;
-		this.lpkm = calculateLpkm();
+		this.kmpl = calculateLpkm();
 	}
 
 }

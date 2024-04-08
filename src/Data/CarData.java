@@ -12,28 +12,40 @@ public class CarData {
 		load();
 	}
 
-	public void printOrderedRefules() {
+	public ArrayList<RefuleTank> orderByRefules() {
+		ArrayList<RefuleTank> orderedRefules = new ArrayList<>();
 
+		return orderedRefules;
 	}
 
-	public void printTotalPrices() {
+	public ArrayList<RefuleTank> orderByTotalPrice() {
+		ArrayList<RefuleTank> orderedTotalPrices = new ArrayList<>();
 
+		return orderedTotalPrices;
 	}
 
-	public void printLiterPrices() {
+	public ArrayList<RefuleTank> orderByLiterPrice() {
+		ArrayList<RefuleTank> orderedLiterPrices = new ArrayList<>();
 
+		return orderedLiterPrices;
 	}
 
-	public void printLiters() {
+	public ArrayList<RefuleTank> orderByLiters() {
+		ArrayList<RefuleTank> orderedLiters = new ArrayList<>();
 
+		return orderedLiters;
 	}
 
-	public void printLpkm() {
+	public ArrayList<RefuleTank> orderByKmpl() {
+		ArrayList<RefuleTank> orderedKmpl = new ArrayList<>();
 
+		return orderedKmpl;
 	}
 
-	public void printKilometers() {
+	public ArrayList<RefuleTank> orderByKilometers() {
+		ArrayList<RefuleTank> orderedKilometers = new ArrayList<>();
 
+		return orderedKilometers;
 	}
 
 	public void printRepairJobs(){
@@ -45,7 +57,8 @@ public class CarData {
 	}
 
 	public void load() {
-
+		this.refuleTanks = new ArrayList<>();
+		this.repairJobs = new ArrayList<>();
 	}
 
 }
