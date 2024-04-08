@@ -1,5 +1,7 @@
 package Data;
 
+import comparators.*;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -39,38 +41,38 @@ public class CarData {
 	}
 
 	public ArrayList<RefuleTank> orderByRefules() {
-		ArrayList<RefuleTank> orderedRefules = new ArrayList<>();
-
+		ArrayList<RefuleTank> orderedRefules = refuleTanks;
+		orderedRefules.sort(new RefuleNumberComparator());
 		return orderedRefules;
 	}
 
 	public ArrayList<RefuleTank> orderByTotalPrice() {
-		ArrayList<RefuleTank> orderedTotalPrices = new ArrayList<>();
-
+		ArrayList<RefuleTank> orderedTotalPrices = refuleTanks;
+		orderedTotalPrices.sort(new totalPriceComparator());
 		return orderedTotalPrices;
 	}
 
 	public ArrayList<RefuleTank> orderByLiterPrice() {
-		ArrayList<RefuleTank> orderedLiterPrices = new ArrayList<>();
-
+		ArrayList<RefuleTank> orderedLiterPrices = refuleTanks;
+		orderedLiterPrices.sort(new LiterPriceComparator());
 		return orderedLiterPrices;
 	}
 
 	public ArrayList<RefuleTank> orderByLiters() {
-		ArrayList<RefuleTank> orderedLiters = new ArrayList<>();
-
+		ArrayList<RefuleTank> orderedLiters = refuleTanks;
+		orderedLiters.sort(new LitersComparator());
 		return orderedLiters;
 	}
 
 	public ArrayList<RefuleTank> orderByKmpl() {
-		ArrayList<RefuleTank> orderedKmpl = new ArrayList<>();
-
+		ArrayList<RefuleTank> orderedKmpl = refuleTanks;
+		orderedKmpl.sort(new kmplComparator());
 		return orderedKmpl;
 	}
 
 	public ArrayList<RefuleTank> orderByKilometers() {
-		ArrayList<RefuleTank> orderedKilometers = new ArrayList<>();
-
+		ArrayList<RefuleTank> orderedKilometers = refuleTanks;
+		orderedKilometers.sort(new KilometersComparator());
 		return orderedKilometers;
 	}
 

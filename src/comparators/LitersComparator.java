@@ -8,7 +8,7 @@ public class LitersComparator
 {
 
 	public int compare(RefuleTank rt1, RefuleTank rt2) {
-		return 0;
+		return Double.compare(rt1.getLiters(),rt2.getLiters());
 	}
 
 }

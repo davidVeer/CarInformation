@@ -8,7 +8,7 @@ public class totalPriceComparator
 {
 
 	public int compare(RefuleTank rt1, RefuleTank rt2) {
-		return 0;
+		return Double.compare(rt1.getTotalPrice(), rt2.getTotalPrice());
 	}
 
 }

@@ -8,7 +8,7 @@ public class KilometersComparator
 {
 
 	public int compare(RefuleTank rt1, RefuleTank rt2) {
-		return 0;
+		return Integer.compare(rt1.getKilometersDriven(), rt2.getKilometersDriven());
 	}
 
 }
