@@ -45,12 +45,9 @@ public class CarData {
 
 
 	//methods to order list in diffrerent ways
-	public ArrayList<RefuleTank> orderBy(Comparator<RefuleTank> comparator) {
-		ArrayList<RefuleTank> orderedList = refuleTanks;
-		orderedList.sort(comparator);
-		return orderedList;
+	public void orderBy(Comparator<RefuleTank> comparator) {
+		refuleTanks.sort(comparator);
 	}
-
 
 	public void printRepairJobs(){
 

@@ -1,6 +1,7 @@
 import Data.CarData;
 import GUI.GuiMain;
 import comparators.KilometersComparator;
+import comparators.LiterPriceComparator;
 import comparators.TotalPriceComparator;
 
 public class Main {
@@ -8,7 +9,7 @@ public class Main {
 //        GuiMain.main(args);
         CarData carData = new CarData();
 
-        carData.orderBy(new TotalPriceComparator());
+        carData.orderBy(new LiterPriceComparator());
         carData.printRefuleTanks();
     }
 }
