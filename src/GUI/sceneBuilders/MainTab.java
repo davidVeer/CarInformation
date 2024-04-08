@@ -1,4 +1,4 @@
-package GUI;
+package GUI.sceneBuilders;
 
 
 import GUI.nodeBuilders.DataTable;

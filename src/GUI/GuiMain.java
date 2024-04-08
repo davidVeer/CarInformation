@@ -1,6 +1,7 @@
 package GUI;
 
 import GUI.sceneBuilders.CrudTabs;
+import GUI.sceneBuilders.MainTab;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
