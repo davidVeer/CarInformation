@@ -1,20 +1,22 @@
 package GUI;
 
+import Data.CarData;
 import GUI.sceneBuilders.CrudTabs;
-import GUI.sceneBuilders.MainTab;
+import GUI.sceneBuilders.MainTable;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class GuiMain extends Application{
 
+	private CarData carData;
 	private CrudTabs crudTabs;
 
-	private MainTab mainTab;
+	private MainTable mainTab;
 
 	@Override
 	public void init() throws Exception {
 		crudTabs = new CrudTabs();
-		mainTab = new MainTab();
+		mainTab = new MainTable(carData);
 	}
 
 	@Override
