@@ -3,12 +3,12 @@ package comparators;
 import Data.RefuleTank;
 import java.util.Comparator;
 
-public class kmplComparator
+public class TotalPriceComparator
 		implements Comparator<RefuleTank>
 {
 
 	public int compare(RefuleTank rt1, RefuleTank rt2) {
-		return Double.compare(rt1.getKmpl(), rt2.getKmpl());
+		return Double.compare(rt1.getTotalPrice(), rt2.getTotalPrice());
 	}
 
 }

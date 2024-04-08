@@ -48,7 +48,7 @@ public class CarData {
 
 	public ArrayList<RefuleTank> orderByTotalPrice() {
 		ArrayList<RefuleTank> orderedTotalPrices = refuleTanks;
-		orderedTotalPrices.sort(new totalPriceComparator());
+		orderedTotalPrices.sort(new TotalPriceComparator());
 		return orderedTotalPrices;
 	}
 
@@ -66,7 +66,7 @@ public class CarData {
 
 	public ArrayList<RefuleTank> orderByKmpl() {
 		ArrayList<RefuleTank> orderedKmpl = refuleTanks;
-		orderedKmpl.sort(new kmplComparator());
+		orderedKmpl.sort(new KmplComparator());
 		return orderedKmpl;
 	}
 
