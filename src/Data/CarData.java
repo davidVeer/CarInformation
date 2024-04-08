@@ -15,13 +15,26 @@ public class CarData {
 		kilometerDrivenInitialiser();
 	}
 
-	public void kilometerDrivenInitialiser(){
+	private void kilometerDrivenInitialiser(){
 		RefuleTank previousRefule = refuleTanks.get(0);
 
 		for (RefuleTank refuleTank : refuleTanks) {
 			int deltaKilometers = refuleTank.getKilometersDriven() - previousRefule.getKilometersDriven();
 			refuleTank.setKilometersDriven(deltaKilometers);
 			previousRefule = refuleTank;
+		}
+	}
+
+	public void printRefuleTanks(){
+		for (RefuleTank refuleTank : refuleTanks) {
+			System.out.println("\n" + refuleTank.getRefuleNumber() + " : ");
+			System.out.println("date : " + refuleTank.getDate());
+			System.out.println("odometer : km " + refuleTank.getOdometer());
+			System.out.println("liters : l " + refuleTank.getLiters());
+			System.out.println("totalPrice : €" + refuleTank.getTotalPrice());
+			System.out.println("kilometersDriven : km " + refuleTank.getKilometersDriven());
+			System.out.println("kilometers per liter : 1/" + refuleTank.getKmpl());
+			System.out.println("literPrice : €" + refuleTank.getLiterPrice());
 		}
 	}
 
