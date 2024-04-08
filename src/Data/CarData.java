@@ -5,6 +5,7 @@ import comparators.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class CarData {
 
@@ -40,41 +41,16 @@ public class CarData {
 		}
 	}
 
-	public ArrayList<RefuleTank> orderByRefules() {
-		ArrayList<RefuleTank> orderedRefules = refuleTanks;
-		orderedRefules.sort(new RefuleNumberComparator());
-		return orderedRefules;
+	//statistics calculations
+
+
+	//methods to order list in diffrerent ways
+	public ArrayList<RefuleTank> orderBy(Comparator<RefuleTank> comparator) {
+		ArrayList<RefuleTank> orderedList = refuleTanks;
+		orderedList.sort(comparator);
+		return orderedList;
 	}
 
-	public ArrayList<RefuleTank> orderByTotalPrice() {
-		ArrayList<RefuleTank> orderedTotalPrices = refuleTanks;
-		orderedTotalPrices.sort(new TotalPriceComparator());
-		return orderedTotalPrices;
-	}
-
-	public ArrayList<RefuleTank> orderByLiterPrice() {
-		ArrayList<RefuleTank> orderedLiterPrices = refuleTanks;
-		orderedLiterPrices.sort(new LiterPriceComparator());
-		return orderedLiterPrices;
-	}
-
-	public ArrayList<RefuleTank> orderByLiters() {
-		ArrayList<RefuleTank> orderedLiters = refuleTanks;
-		orderedLiters.sort(new LitersComparator());
-		return orderedLiters;
-	}
-
-	public ArrayList<RefuleTank> orderByKmpl() {
-		ArrayList<RefuleTank> orderedKmpl = refuleTanks;
-		orderedKmpl.sort(new KmplComparator());
-		return orderedKmpl;
-	}
-
-	public ArrayList<RefuleTank> orderByKilometers() {
-		ArrayList<RefuleTank> orderedKilometers = refuleTanks;
-		orderedKilometers.sort(new KilometersComparator());
-		return orderedKilometers;
-	}
 
 	public void printRepairJobs(){
 
