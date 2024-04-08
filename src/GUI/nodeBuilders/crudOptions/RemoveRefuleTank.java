@@ -1,11 +1,11 @@
-package CrudOptions;
+package GUI.nodeBuilders.crudOptions;
+
+import GUI.nodeBuilders.nodeGetter;
+import javafx.scene.Node;
 
 public class RemoveRefuleTank implements nodeGetter {
 
 
-	/**
-	 * @see nodeGetter#getNode()
-	 */
 	public Node getNode() {
 		return null;
 	}
