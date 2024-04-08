@@ -32,6 +32,7 @@ public class RefuleTank {
 		this.literPrice = calculateLiterPrice();
 	}
 
+	//calculations for unknown variables
 	public double calculateLpkm() {
 		return kilometersDriven / liters;
 	}
@@ -40,9 +41,44 @@ public class RefuleTank {
 		return totalPrice/liters;
 	}
 
+
+	//setter for kilometers driven (which also sets kilometers per liters)
 	public void setKilometersDriven(int kilometersDriven) {
 		this.kilometersDriven = kilometersDriven;
 		this.kmpl = calculateLpkm();
 	}
 
+
+	//getters for all data
+	public int getRefuleNumber() {
+		return refuleNumber;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public int getOdometer() {
+		return odometer;
+	}
+
+	public double getLiters() {
+		return liters;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public int getKilometersDriven() {
+		return kilometersDriven;
+	}
+
+	public double getLiterPrice() {
+		return literPrice;
+	}
+
+	public double getKmpl() {
+		return kmpl;
+	}
 }
