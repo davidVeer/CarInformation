@@ -19,7 +19,7 @@ public class CarData {
 		RefuleTank previousRefule = refuleTanks.get(0);
 
 		for (RefuleTank refuleTank : refuleTanks) {
-			int deltaKilometers = refuleTank.getKilometersDriven() - previousRefule.getKilometersDriven();
+			int deltaKilometers = refuleTank.getOdometer() - previousRefule.getOdometer();
 			refuleTank.setKilometersDriven(deltaKilometers);
 			previousRefule = refuleTank;
 		}
@@ -92,8 +92,12 @@ public class CarData {
 		refuleTanks.add(new RefuleTank(3,58474,30.70,64.13, LocalDate.of(2023, Month.SEPTEMBER,11)));
 		refuleTanks.add(new RefuleTank(4,58727,8.50,20.00, LocalDate.of(2023, Month.SEPTEMBER,15)));
 		refuleTanks.add(new RefuleTank(5,58822,19.02,40.60, LocalDate.of(2023, Month.SEPTEMBER,19)));
-
-
+		refuleTanks.add(new RefuleTank(6,59149,25.92,52.92, LocalDate.of(2023, Month.SEPTEMBER,24)));
+		refuleTanks.add(new RefuleTank(7,59525,35.28,72.64, LocalDate.of(2023, Month.OCTOBER,6)));
+		refuleTanks.add(new RefuleTank(8,59645,10.62,21.65, LocalDate.of(2023, Month.OCTOBER,7)));
+		refuleTanks.add(new RefuleTank(9,59693,8.37,16.48, LocalDate.of(2023, Month.NOVEMBER,16)));
+		refuleTanks.add(new RefuleTank(10,60032,25.43,49.82, LocalDate.of(2023, Month.NOVEMBER,17)));
+		refuleTanks.add(new RefuleTank(11,60278,23.80,46.15, LocalDate.of(2023, Month.NOVEMBER,22)));
 	}
 
 }
