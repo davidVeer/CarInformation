@@ -36,11 +36,21 @@ public class CarData {
     }
 
     public void printMedians(InformationType wantedInformation) {
-        System.out.println("median(s) for " + wantedInformation + " are : ");
+        System.out.println("median(s) of " + wantedInformation + " are/is : ");
 
         for (RefuleTank refuleTank : statisticsCalculator.medianRefuleTank(this.refuleTanks, wantedInformation)) {
             System.out.println(refuleTank);
         }
+    }
+
+    public void printHighest(InformationType wantedInformation) {
+        System.out.println("highest " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.highestRefuleTank(this.refuleTanks, wantedInformation));
+    }
+
+    public void printLowest(InformationType wantedInformation) {
+        System.out.println("lowest " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.lowestRefuleTank(this.refuleTanks, wantedInformation));
     }
 
     public void printRefuleTanks() {

@@ -7,15 +7,21 @@ public class Main {
 //        GuiMain.main(args);
         CarData carData = new CarData();
 
-//        carData.orderBy(new LitersComparator());
-//        carData.orderBy(new KmplComparator());
-        carData.orderBy(InformationType.REFULENUMBER);
+        InformationType testType = InformationType.LITERPRICE;
+
+        carData.orderBy(testType);
         carData.printRefuleTanks();
 
+        //highest and lowest test
+        carData.printHighest(testType);
+        carData.printLowest(testType);
+
+        //median test
         System.out.println("index 5");
         carData.printIndex(5);
-//        carData.printMedians(InformationType.LITERS);
-//        carData.printMedians(InformationType.KMPL);
-//        carData.printMedians(InformationType.KILOMETERSDRIVEN);
+        carData.printIndex(4);
+        carData.printMedians(testType);
+
+
     }
 }
