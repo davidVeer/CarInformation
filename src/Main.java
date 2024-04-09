@@ -9,5 +9,7 @@ public class Main {
 
         carData.orderBy(new LiterPriceComparator());
         carData.printRefuleTanks();
+
+        carData.printHighest();
     }
 }

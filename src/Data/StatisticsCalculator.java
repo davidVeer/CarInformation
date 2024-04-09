@@ -1,19 +1,8 @@
 package Data;
 
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class StatisticsCalculator {
-
-    private enum WantedInformation {
-        LITERS,
-        TOTALPRICE,
-        KILOMETERSDRIVEN,
-        LITERPRICE,
-        KMPL
-    }
 
     //statistic calculations with doubles
     private double highestDouble(ArrayList<Double> doubles) {
@@ -46,60 +35,60 @@ public class StatisticsCalculator {
 
 
     //statistic calculations with integers
-    private int highestInt(ArrayList<Integer> integers) {
+    public int highestInt(ArrayList<Integer> integers) {
         return 0;
     }
 
-    private int lowestInt(ArrayList<Integer> integers) {
+    public int lowestInt(ArrayList<Integer> integers) {
         return 0;
     }
 
-    private int highestDeltaInt(ArrayList<Integer> integers) {
+    public int highestDeltaInt(ArrayList<Integer> integers) {
         return 0;
     }
 
-    private int averageInt(ArrayList<Integer> integers) {
+    public int averageInt(ArrayList<Integer> integers) {
         return 0;
     }
 
-    private int medianInt(ArrayList<Integer> integers) {
+    public int medianInt(ArrayList<Integer> integers) {
         return 0;
     }
 
-    private int modeInt(ArrayList<Integer> integers) {
+    public int modeInt(ArrayList<Integer> integers) {
         return 0;
     }
 
-    private int standardDeviationInt(ArrayList<Integer> integers) {
+    public int standardDeviationInt(ArrayList<Integer> integers) {
         return 0;
     }
 
     //statistics returning RefuleTanks
-    private RefuleTank highestRefuleTank(ArrayList<RefuleTank> refuleTanks, WantedInformation wantedInformation) {
+    public RefuleTank highestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return null;
     }
 
-    private RefuleTank lowestRefuleTank(ArrayList<RefuleTank> refuleTanks, WantedInformation wantedInformation) {
+    public RefuleTank lowestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return null;
     }
 
-    private RefuleTank highestDeltaRefuleTank(ArrayList<RefuleTank> refuleTanks, WantedInformation wantedInformation) {
+    public RefuleTank highestDeltaRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return null;
     }
 
-    private RefuleTank averageRefuleTank(ArrayList<RefuleTank> refuleTanks, WantedInformation wantedInformation) {
+    public RefuleTank averageRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return null;
     }
 
-    private RefuleTank medianRefuleTank(ArrayList<RefuleTank> refuleTanks, WantedInformation wantedInformation) {
+    public RefuleTank medianRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return null;
     }
 
-    private RefuleTank modeRefuleTank(ArrayList<RefuleTank> refuleTanks, WantedInformation wantedInformation) {
+    public RefuleTank modeRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return null;
     }
 
-    private RefuleTank standardDeviationRefuleTank(ArrayList<RefuleTank> refuleTanks, WantedInformation wantedInformation) {
+    public RefuleTank standardDeviationRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return null;
     }
 }

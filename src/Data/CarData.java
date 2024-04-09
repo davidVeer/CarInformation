@@ -10,12 +10,13 @@ import java.util.Comparator;
 public class CarData {
 
 	private ArrayList<RefuleTank> refuleTanks;
-
 	private ArrayList<RepairJob> repairJobs;
+	private StatisticsCalculator statisticsCalculator;
 
 	public CarData() {
 		load();
 		kilometerDrivenInitialiser();
+		statisticsCalculator = new StatisticsCalculator();
 	}
 
 	//initialiser for kilometers driven
@@ -32,14 +33,7 @@ public class CarData {
 	//todo: add testcode here if necessary, remove before commit to main (version-release)
 	public void printRefuleTanks(){
 		for (RefuleTank refuleTank : refuleTanks) {
-			System.out.println("\n" + refuleTank.getRefuleNumber() + " : ");
-			System.out.println("date : " + refuleTank.getDate());
-			System.out.println("odometer : km " + refuleTank.getOdometer());
-			System.out.println("liters : l " + refuleTank.getLiters());
-			System.out.println("totalPrice : €" + refuleTank.getTotalPrice());
-			System.out.println("kilometersDriven : km " + refuleTank.getKilometersDriven());
-			System.out.println("kilometers per liter : 1/" + refuleTank.getKmpl());
-			System.out.println("literPrice : €" + refuleTank.getLiterPrice());
+			System.out.println(refuleTank);
 		}
 	}
 
@@ -79,4 +73,7 @@ public class CarData {
 		refuleTanks.add(new RefuleTank(11,60278,23.80,46.15, LocalDate.of(2023, Month.NOVEMBER,22)));
 	}
 
+	public void printHighest() {
+		System.out.println(statisticsCalculator.highestRefuleTank(this.refuleTanks, InformationType.KILOMETERSDRIVEN));
+	}
 }
