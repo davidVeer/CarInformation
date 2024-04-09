@@ -31,15 +31,22 @@ public class CarData {
 	}
 
 	//todo: add testcode here if necessary, remove before commit to main (version-release)
+	public void printHighest(InformationType wantedInformation) {
+		System.out.println(statisticsCalculator.highestRefuleTank(this.refuleTanks, wantedInformation));
+	}
+
+	public void printLowest(InformationType wantedInformation){
+		System.out.println(statisticsCalculator.lowestRefuleTank(this.refuleTanks, wantedInformation));
+	}
+
 	public void printRefuleTanks(){
 		for (RefuleTank refuleTank : refuleTanks) {
 			System.out.println(refuleTank);
 		}
 	}
 
-	//statistics calculations
-
 	//methods to order list in diffrerent ways
+
 	public void orderBy(Comparator<RefuleTank> comparator) {
 		refuleTanks.sort(comparator);
 	}
@@ -50,12 +57,12 @@ public class CarData {
 
 
 	//save and load functionalities
-
 	//todo: add proper saving functionality
 	public void save() {
 
 	}
 	//todo: add proper loading functionality
+
 	public void load() {
 		this.refuleTanks = new ArrayList<>();
 		this.repairJobs = new ArrayList<>();
@@ -71,9 +78,5 @@ public class CarData {
 		refuleTanks.add(new RefuleTank(9,59693,8.37,16.48, LocalDate.of(2023, Month.NOVEMBER,16)));
 		refuleTanks.add(new RefuleTank(10,60032,25.43,49.82, LocalDate.of(2023, Month.NOVEMBER,17)));
 		refuleTanks.add(new RefuleTank(11,60278,23.80,46.15, LocalDate.of(2023, Month.NOVEMBER,22)));
-	}
-
-	public void printHighest(InformationType wantedInformation) {
-		System.out.println(statisticsCalculator.highestRefuleTank(this.refuleTanks, wantedInformation));
 	}
 }

@@ -101,7 +101,33 @@ public class StatisticsCalculator {
     }
 
     public RefuleTank lowestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
-        return null;
+        RefuleTank lowestValue = refuleTanks.get(0);
+
+        for (RefuleTank refuleTank : refuleTanks) {
+            switch (wantedInformation){
+                case LITERS:
+                    if (refuleTank.getLiters() < lowestValue.getLiters())
+                        lowestValue = refuleTank;
+                    break;
+                case TOTALPRICE:
+                    if (refuleTank.getTotalPrice() < lowestValue.getTotalPrice())
+                        lowestValue = refuleTank;
+                    break;
+                case KILOMETERSDRIVEN:
+                    if (refuleTank.getKilometersDriven() < lowestValue.getKilometersDriven())
+                        lowestValue = refuleTank;
+                    break;
+                case LITERPRICE:
+                    if (refuleTank.getLiterPrice() < lowestValue.getLiterPrice())
+                        lowestValue = refuleTank;
+                    break;
+                case KMPL:
+                    if (refuleTank.getKmpl() < lowestValue.getKmpl())
+                        lowestValue = refuleTank;
+                    break;
+            }
+        }
+        return lowestValue;
     }
 
     public RefuleTank highestDeltaRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {

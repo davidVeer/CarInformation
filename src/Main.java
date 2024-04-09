@@ -11,8 +11,8 @@ public class Main {
         carData.orderBy(new LitersComparator());
         carData.printRefuleTanks();
 
-        carData.printHighest(InformationType.KMPL);
-        carData.printHighest(InformationType.LITERS);
+        carData.printLowest(InformationType.KMPL);
+        carData.printLowest(InformationType.LITERS);
 
     }
 }
