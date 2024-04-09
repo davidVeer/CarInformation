@@ -10,13 +10,13 @@ public class Main {
 
 //        carData.orderBy(new LitersComparator());
 //        carData.orderBy(new KmplComparator());
-        carData.orderBy(new KilometersComparator());
+        carData.orderBy(InformationType.REFULENUMBER);
         carData.printRefuleTanks();
 
         System.out.println("index 5");
         carData.printIndex(5);
 //        carData.printMedians(InformationType.LITERS);
 //        carData.printMedians(InformationType.KMPL);
-        carData.printMedians(InformationType.KILOMETERSDRIVEN);
+//        carData.printMedians(InformationType.KILOMETERSDRIVEN);
     }
 }

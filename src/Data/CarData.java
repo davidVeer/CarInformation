@@ -9,79 +9,99 @@ import java.util.Comparator;
 
 public class CarData {
 
-	private ArrayList<RefuleTank> refuleTanks;
-	private ArrayList<RepairJob> repairJobs;
-	private StatisticsCalculator statisticsCalculator;
+    private ArrayList<RefuleTank> refuleTanks;
+    private ArrayList<RepairJob> repairJobs;
+    private StatisticsCalculator statisticsCalculator;
 
-	public CarData() {
-		load();
-		kilometerDrivenInitialiser();
-		statisticsCalculator = new StatisticsCalculator();
-	}
+    public CarData() {
+        load();
+        kilometerDrivenInitialiser();
+        statisticsCalculator = new StatisticsCalculator();
+    }
 
-	//initialiser for kilometers driven
-	private void kilometerDrivenInitialiser(){
-		RefuleTank previousRefule = refuleTanks.get(0);
+    //initialiser for kilometers driven
+    private void kilometerDrivenInitialiser() {
+        RefuleTank previousRefule = refuleTanks.get(0);
 
-		for (RefuleTank refuleTank : refuleTanks) {
-			int deltaKilometers = refuleTank.getOdometer() - previousRefule.getOdometer();
-			refuleTank.setKilometersDriven(deltaKilometers);
-			previousRefule = refuleTank;
-		}
-	}
+        for (RefuleTank refuleTank : refuleTanks) {
+            int deltaKilometers = refuleTank.getOdometer() - previousRefule.getOdometer();
+            refuleTank.setKilometersDriven(deltaKilometers);
+            previousRefule = refuleTank;
+        }
+    }
 
-	//todo: add testcode here if necessary, remove before commit to main (version-release)
+    //todo: add testcode here if necessary, remove before commit to main (version-release)
 
-	public void printIndex(int index){
-		System.out.println(refuleTanks.get(index));
-	}
-	public void printMedians(InformationType wantedInformation){
-		System.out.println("median(s) for " + wantedInformation + " are : ");
+    public void printIndex(int index) {
+        System.out.println(refuleTanks.get(index));
+    }
 
-		for (RefuleTank refuleTank : statisticsCalculator.medianRefuleTank(this.refuleTanks, wantedInformation)) {
-			System.out.println(refuleTank);
-		}
-	}
+    public void printMedians(InformationType wantedInformation) {
+        System.out.println("median(s) for " + wantedInformation + " are : ");
 
-	public void printRefuleTanks(){
-		for (RefuleTank refuleTank : refuleTanks) {
-			System.out.println(refuleTank);
-		}
-	}
+        for (RefuleTank refuleTank : statisticsCalculator.medianRefuleTank(this.refuleTanks, wantedInformation)) {
+            System.out.println(refuleTank);
+        }
+    }
 
-
-	//methods to order list in diffrerent ways
-
-	public void orderBy(Comparator<RefuleTank> comparator) {
-		refuleTanks.sort(comparator);
-	}
-
-	public void printRepairJobs(){
-
-	}
+    public void printRefuleTanks() {
+        for (RefuleTank refuleTank : refuleTanks) {
+            System.out.println(refuleTank);
+        }
+    }
 
 
-	//save and load functionalities
-	//todo: add proper saving functionality
-	public void save() {
+    //methods to order list in diffrerent ways
 
-	}
-	//todo: add proper loading functionality
+    public void orderBy(InformationType wantedInformation) {
+        switch (wantedInformation) {
+            case LITERS:
+                refuleTanks.sort(new LitersComparator());
+                break;
+            case TOTALPRICE:
+                refuleTanks.sort(new TotalPriceComparator());
+                break;
+            case KILOMETERSDRIVEN:
+                refuleTanks.sort(new KilometersComparator());
+                break;
+            case LITERPRICE:
+                refuleTanks.sort(new LiterPriceComparator());
+                break;
+            case KMPL:
+                refuleTanks.sort(new KmplComparator());
+                break;
+            case REFULENUMBER:
+                refuleTanks.sort(new RefuleNumberComparator());
+                break;
+        }
+    }
 
-	public void load() {
-		this.refuleTanks = new ArrayList<>();
-		this.repairJobs = new ArrayList<>();
+    public void printRepairJobs() {
 
-		refuleTanks.add(new RefuleTank(1,57888,33.23,69.75, LocalDate.of(2023, Month.SEPTEMBER,4)));
-		refuleTanks.add(new RefuleTank(2,58130,20.45,42.52, LocalDate.of(2023, Month.SEPTEMBER,6)));
-		refuleTanks.add(new RefuleTank(3,58474,30.70,64.13, LocalDate.of(2023, Month.SEPTEMBER,11)));
-		refuleTanks.add(new RefuleTank(4,58727,8.50,20.00, LocalDate.of(2023, Month.SEPTEMBER,15)));
-		refuleTanks.add(new RefuleTank(5,58822,19.02,40.60, LocalDate.of(2023, Month.SEPTEMBER,19)));
-		refuleTanks.add(new RefuleTank(6,59149,25.92,52.92, LocalDate.of(2023, Month.SEPTEMBER,24)));
-		refuleTanks.add(new RefuleTank(7,59525,35.28,72.64, LocalDate.of(2023, Month.OCTOBER,6)));
-		refuleTanks.add(new RefuleTank(8,59645,10.62,21.65, LocalDate.of(2023, Month.OCTOBER,7)));
-		refuleTanks.add(new RefuleTank(9,59693,8.37,16.48, LocalDate.of(2023, Month.NOVEMBER,16)));
-		refuleTanks.add(new RefuleTank(10,60032,25.43,49.82, LocalDate.of(2023, Month.NOVEMBER,17)));
-		refuleTanks.add(new RefuleTank(11,60278,23.80,46.15, LocalDate.of(2023, Month.NOVEMBER,22)));
-	}
+    }
+
+
+    //save and load functionalities
+    //todo: add proper saving functionality
+    public void save() {
+
+    }
+    //todo: add proper loading functionality
+
+    public void load() {
+        this.refuleTanks = new ArrayList<>();
+        this.repairJobs = new ArrayList<>();
+
+        refuleTanks.add(new RefuleTank(1, 57888, 33.23, 69.75, LocalDate.of(2023, Month.SEPTEMBER, 4)));
+        refuleTanks.add(new RefuleTank(2, 58130, 20.45, 42.52, LocalDate.of(2023, Month.SEPTEMBER, 6)));
+        refuleTanks.add(new RefuleTank(3, 58474, 30.70, 64.13, LocalDate.of(2023, Month.SEPTEMBER, 11)));
+        refuleTanks.add(new RefuleTank(4, 58727, 8.50, 20.00, LocalDate.of(2023, Month.SEPTEMBER, 15)));
+        refuleTanks.add(new RefuleTank(5, 58822, 19.02, 40.60, LocalDate.of(2023, Month.SEPTEMBER, 19)));
+        refuleTanks.add(new RefuleTank(6, 59149, 25.92, 52.92, LocalDate.of(2023, Month.SEPTEMBER, 24)));
+        refuleTanks.add(new RefuleTank(7, 59525, 35.28, 72.64, LocalDate.of(2023, Month.OCTOBER, 6)));
+        refuleTanks.add(new RefuleTank(8, 59645, 10.62, 21.65, LocalDate.of(2023, Month.OCTOBER, 7)));
+        refuleTanks.add(new RefuleTank(9, 59693, 8.37, 16.48, LocalDate.of(2023, Month.NOVEMBER, 16)));
+        refuleTanks.add(new RefuleTank(10, 60032, 25.43, 49.82, LocalDate.of(2023, Month.NOVEMBER, 17)));
+        refuleTanks.add(new RefuleTank(11, 60278, 23.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
+    }
 }
