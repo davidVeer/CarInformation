@@ -24,8 +24,14 @@ public class StatisticsCalculator {
         //sorting list based on information being asked
         orderByType(refuleTanks,wantedInformation);
 
+        //catching 0 values
+        int i = 0;
+        while (refuleTanks.get(i).getType(wantedInformation) == 0){
+            i++;
+        }
+
         //returning first (and therefore lowest) item of the sorted list
-        return refuleTanks.get(0);
+        return refuleTanks.get(i);
     }
 
     public ArrayList<RefuleTank> medianRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {

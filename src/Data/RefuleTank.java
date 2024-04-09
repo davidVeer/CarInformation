@@ -96,4 +96,21 @@ public class RefuleTank {
                         "kilometers per liter : 1/" + this.kmpl + "\n" +
                         "literPrice : €" + this.literPrice + "\n";
     }
+
+    public double getType(InformationType wantedInformation) {
+        switch (wantedInformation) {
+            case LITERS:
+                return this.liters;
+            case TOTALPRICE:
+                return this.totalPrice;
+            case KILOMETERSDRIVEN:
+                return this.kilometersDriven;
+            case LITERPRICE:
+                return this.literPrice;
+            case KMPL:
+                return this.kmpl;
+            default:
+                return this.refuleNumber;
+        }
+    }
 }
