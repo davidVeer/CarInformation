@@ -1,8 +1,6 @@
 import Data.CarData;
-import GUI.GuiMain;
-import comparators.KilometersComparator;
-import comparators.LiterPriceComparator;
-import comparators.TotalPriceComparator;
+
+import comparators.*;
 
 public class Main {
     public static void main(String[] args) {

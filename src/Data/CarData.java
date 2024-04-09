@@ -18,6 +18,7 @@ public class CarData {
 		kilometerDrivenInitialiser();
 	}
 
+	//initialiser for kilometers driven
 	private void kilometerDrivenInitialiser(){
 		RefuleTank previousRefule = refuleTanks.get(0);
 
@@ -28,6 +29,7 @@ public class CarData {
 		}
 	}
 
+	//todo: add testcode here if necessary, remove before commit to main (version-release)
 	public void printRefuleTanks(){
 		for (RefuleTank refuleTank : refuleTanks) {
 			System.out.println("\n" + refuleTank.getRefuleNumber() + " : ");
@@ -43,7 +45,6 @@ public class CarData {
 
 	//statistics calculations
 
-
 	//methods to order list in diffrerent ways
 	public void orderBy(Comparator<RefuleTank> comparator) {
 		refuleTanks.sort(comparator);
@@ -52,6 +53,9 @@ public class CarData {
 	public void printRepairJobs(){
 
 	}
+
+
+	//save and load functionalities
 
 	//todo: add proper saving functionality
 	public void save() {
