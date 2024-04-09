@@ -7,7 +7,7 @@ public class Main {
 //        GuiMain.main(args);
         CarData carData = new CarData();
 
-        InformationType testType = InformationType.LITERPRICE;
+        InformationType testType = InformationType.KILOMETERSDRIVEN;
 
         carData.orderBy(testType);
         carData.printRefuleTanks();
@@ -17,9 +17,6 @@ public class Main {
         carData.printLowest(testType);
 
         //median test
-        System.out.println("index 5");
-        carData.printIndex(5);
-        carData.printIndex(4);
         carData.printMedians(testType);
 
 

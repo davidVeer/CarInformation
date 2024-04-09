@@ -28,23 +28,7 @@ public class StatisticsCalculator {
     //statistics returning RefuleTanks
     public RefuleTank highestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         //sorting list based on information being asked
-        switch (wantedInformation) {
-            case LITERS:
-                refuleTanks.sort(new LitersComparator());
-                break;
-            case TOTALPRICE:
-                refuleTanks.sort(new TotalPriceComparator());
-                break;
-            case KILOMETERSDRIVEN:
-                refuleTanks.sort(new KilometersComparator());
-                break;
-            case LITERPRICE:
-                refuleTanks.sort(new LiterPriceComparator());
-                break;
-            case KMPL:
-                refuleTanks.sort(new KmplComparator());
-                break;
-        }
+        orderByType(refuleTanks, wantedInformation);
 
         //returning last (and therefore highest) item of the sorted list
         return refuleTanks.get(refuleTanks.size() - 1);
@@ -52,23 +36,7 @@ public class StatisticsCalculator {
 
     public RefuleTank lowestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         //sorting list based on information being asked
-        switch (wantedInformation) {
-            case LITERS:
-                refuleTanks.sort(new LitersComparator());
-                break;
-            case TOTALPRICE:
-                refuleTanks.sort(new TotalPriceComparator());
-                break;
-            case KILOMETERSDRIVEN:
-                refuleTanks.sort(new KilometersComparator());
-                break;
-            case LITERPRICE:
-                refuleTanks.sort(new LiterPriceComparator());
-                break;
-            case KMPL:
-                refuleTanks.sort(new KmplComparator());
-                break;
-        }
+        orderByType(refuleTanks,wantedInformation);
 
         //returning first (and therefore lowest) item of the sorted list
         return refuleTanks.get(0);
@@ -80,23 +48,7 @@ public class StatisticsCalculator {
         int standardMedian = refuleTanks.size() / 2;
 
         //sorting list based on information being asked
-        switch (wantedInformation) {
-            case LITERS:
-                refuleTanks.sort(new LitersComparator());
-                break;
-            case TOTALPRICE:
-                refuleTanks.sort(new TotalPriceComparator());
-                break;
-            case KILOMETERSDRIVEN:
-                refuleTanks.sort(new KilometersComparator());
-                break;
-            case LITERPRICE:
-                refuleTanks.sort(new LiterPriceComparator());
-                break;
-            case KMPL:
-                refuleTanks.sort(new KmplComparator());
-                break;
-        }
+        orderByType(refuleTanks,wantedInformation);
 
         //getting the medians and adding them to an ArrayList
         if (refuleTanks.size() % 2 == 1)
@@ -120,5 +72,27 @@ public class StatisticsCalculator {
 
     public double standardDeviationRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return 0;
+    }
+
+    //helper methods
+    private ArrayList<RefuleTank> orderByType(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation){
+        switch (wantedInformation) {
+            case LITERS:
+                refuleTanks.sort(new LitersComparator());
+                break;
+            case TOTALPRICE:
+                refuleTanks.sort(new TotalPriceComparator());
+                break;
+            case KILOMETERSDRIVEN:
+                refuleTanks.sort(new KilometersComparator());
+                break;
+            case LITERPRICE:
+                refuleTanks.sort(new LiterPriceComparator());
+                break;
+            case KMPL:
+                refuleTanks.sort(new KmplComparator());
+                break;
+        }
+        return refuleTanks;
     }
 }
