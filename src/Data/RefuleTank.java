@@ -88,12 +88,12 @@ public class RefuleTank {
     public String toString() {
         return
                 "\n" + this.refuleNumber + " : " + "\n" +
-                "date : " + this.date + "\n" +
-                "odometer : km " + this.odometer + "\n" +
-                "liters : l " + this.liters + "\n" +
-                "totalPrice : €" + this.totalPrice + "\n" +
-                "kilometersDriven : km " + this.kilometersDriven + "\n" +
-                "kilometers per liter : 1/" + this.kmpl + "\n" +
-                "literPrice : €" + this.literPrice + "\n";
+                        "date : " + this.date + "\n" +
+                        "odometer : km " + this.odometer + "\n" +
+                        "liters : l " + this.liters + "\n" +
+                        "totalPrice : €" + this.totalPrice + "\n" +
+                        "kilometersDriven : km " + this.kilometersDriven + "\n" +
+                        "kilometers per liter : 1/" + this.kmpl + "\n" +
+                        "literPrice : €" + this.literPrice + "\n";
     }
 }

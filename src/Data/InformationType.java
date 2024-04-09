@@ -5,5 +5,6 @@ public enum InformationType {
     TOTALPRICE,
     KILOMETERSDRIVEN,
     LITERPRICE,
-    KMPL
+    KMPL,
+    REFULENUMBER
 }
