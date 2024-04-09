@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 public class StatisticsCalculator {
 
-    //todo: catch 0 values of first RefuleTank with lowest value calculator
-
-
     //statistics returning RefuleTanks
     public RefuleTank highestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
 
