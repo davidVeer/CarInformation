@@ -36,7 +36,13 @@ public class StatisticsCalculator {
 
     //statistic calculations with integers
     public int highestInt(ArrayList<Integer> integers) {
-        return 0;
+        int highestValue = integers.get(0);
+        for (Integer integer : integers) {
+            if (integer > highestValue)
+                highestValue = integer;
+        }
+        return highestValue;
+
     }
 
     public int lowestInt(ArrayList<Integer> integers) {
@@ -65,7 +71,33 @@ public class StatisticsCalculator {
 
     //statistics returning RefuleTanks
     public RefuleTank highestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
-        return null;
+        RefuleTank highestValue = refuleTanks.get(0);
+
+        for (RefuleTank refuleTank : refuleTanks) {
+            switch (wantedInformation){
+                case LITERS:
+                    if (refuleTank.getLiters() > highestValue.getLiters())
+                        highestValue = refuleTank;
+                    break;
+                case TOTALPRICE:
+                    if (refuleTank.getTotalPrice() > highestValue.getTotalPrice())
+                        highestValue = refuleTank;
+                    break;
+                case KILOMETERSDRIVEN:
+                    if (refuleTank.getKilometersDriven() > highestValue.getKilometersDriven())
+                        highestValue = refuleTank;
+                    break;
+                case LITERPRICE:
+                    if (refuleTank.getLiterPrice() > highestValue.getLiterPrice())
+                        highestValue = refuleTank;
+                    break;
+                case KMPL:
+                    if (refuleTank.getKmpl() > highestValue.getKmpl())
+                        highestValue = refuleTank;
+                    break;
+            }
+        }
+        return highestValue;
     }
 
     public RefuleTank lowestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {

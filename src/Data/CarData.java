@@ -73,7 +73,7 @@ public class CarData {
 		refuleTanks.add(new RefuleTank(11,60278,23.80,46.15, LocalDate.of(2023, Month.NOVEMBER,22)));
 	}
 
-	public void printHighest() {
-		System.out.println(statisticsCalculator.highestRefuleTank(this.refuleTanks, InformationType.KILOMETERSDRIVEN));
+	public void printHighest(InformationType wantedInformation) {
+		System.out.println(statisticsCalculator.highestRefuleTank(this.refuleTanks, wantedInformation));
 	}
 }

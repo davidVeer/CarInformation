@@ -1,5 +1,6 @@
 import Data.CarData;
 
+import Data.InformationType;
 import comparators.*;
 
 public class Main {
@@ -7,9 +8,11 @@ public class Main {
 //        GuiMain.main(args);
         CarData carData = new CarData();
 
-        carData.orderBy(new LiterPriceComparator());
+        carData.orderBy(new LitersComparator());
         carData.printRefuleTanks();
 
-        carData.printHighest();
+        carData.printHighest(InformationType.KMPL);
+        carData.printHighest(InformationType.LITERS);
+
     }
 }
