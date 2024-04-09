@@ -50,6 +50,9 @@ public class CarData {
         }
     }
 
+    public void printRepairJobs() {
+
+    }
 
     //methods to order list in diffrerent ways
 
@@ -74,10 +77,6 @@ public class CarData {
                 refuleTanks.sort(new RefuleNumberComparator());
                 break;
         }
-    }
-
-    public void printRepairJobs() {
-
     }
 
 
