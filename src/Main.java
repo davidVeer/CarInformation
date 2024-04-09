@@ -13,10 +13,16 @@ public class Main {
         carData.printRefuleTanks();
 
         //highest and lowest test
+
+        carData.orderBy(InformationType.REFULENUMBER);
         carData.printHighest(testType);
+
+        carData.orderBy(InformationType.REFULENUMBER);
         carData.printLowest(testType);
 
         //median test
+
+        carData.orderBy(InformationType.REFULENUMBER);
         carData.printMedians(testType);
 
 

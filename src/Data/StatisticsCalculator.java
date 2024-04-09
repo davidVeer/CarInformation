@@ -6,27 +6,12 @@ import java.util.ArrayList;
 
 public class StatisticsCalculator {
 
+    //todo: catch 0 values of first RefuleTank with lowest value calculator
 
-    //empty switch-case
-//        switch (wantedInformation){
-//            case LITERS:
-//
-//                break;
-//            case TOTALPRICE:
-//
-//                break;
-//            case KILOMETERSDRIVEN:
-//
-//                break;
-//            case LITERPRICE:
-//
-//                break;
-//            case KMPL:
-//
-//                break;
 
     //statistics returning RefuleTanks
     public RefuleTank highestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+
         //sorting list based on information being asked
         orderByType(refuleTanks, wantedInformation);
 
@@ -35,6 +20,7 @@ public class StatisticsCalculator {
     }
 
     public RefuleTank lowestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+
         //sorting list based on information being asked
         orderByType(refuleTanks,wantedInformation);
 
@@ -43,6 +29,7 @@ public class StatisticsCalculator {
     }
 
     public ArrayList<RefuleTank> medianRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+
         //initialisation for method
         ArrayList<RefuleTank> medianRefuleTanks = new ArrayList<>();
         int standardMedian = refuleTanks.size() / 2;
@@ -62,11 +49,11 @@ public class StatisticsCalculator {
     }
 
     //statistics returning doubles
-    public double modeRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+    public double averageRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return 0;
     }
 
-    public double averageRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+    public double modeRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
         return 0;
     }
 
@@ -75,7 +62,7 @@ public class StatisticsCalculator {
     }
 
     //helper methods
-    private ArrayList<RefuleTank> orderByType(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation){
+    private void orderByType(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation){
         switch (wantedInformation) {
             case LITERS:
                 refuleTanks.sort(new LitersComparator());
@@ -93,6 +80,23 @@ public class StatisticsCalculator {
                 refuleTanks.sort(new KmplComparator());
                 break;
         }
-        return refuleTanks;
     }
+
+    //empty switch-case
+//        switch (wantedInformation){
+//            case LITERS:
+//
+//                break;
+//            case TOTALPRICE:
+//
+//                break;
+//            case KILOMETERSDRIVEN:
+//
+//                break;
+//            case LITERPRICE:
+//
+//                break;
+//            case KMPL:
+//
+//                break;
 }
