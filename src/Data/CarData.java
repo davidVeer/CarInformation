@@ -31,12 +31,16 @@ public class CarData {
 	}
 
 	//todo: add testcode here if necessary, remove before commit to main (version-release)
-	public void printHighest(InformationType wantedInformation) {
-		System.out.println(statisticsCalculator.highestRefuleTank(this.refuleTanks, wantedInformation));
-	}
 
-	public void printLowest(InformationType wantedInformation){
-		System.out.println(statisticsCalculator.lowestRefuleTank(this.refuleTanks, wantedInformation));
+	public void printIndex(int index){
+		System.out.println(refuleTanks.get(index));
+	}
+	public void printMedians(InformationType wantedInformation){
+		System.out.println("median(s) for " + wantedInformation + " are : ");
+
+		for (RefuleTank refuleTank : statisticsCalculator.medianRefuleTank(this.refuleTanks, wantedInformation)) {
+			System.out.println(refuleTank);
+		}
 	}
 
 	public void printRefuleTanks(){
@@ -44,6 +48,7 @@ public class CarData {
 			System.out.println(refuleTank);
 		}
 	}
+
 
 	//methods to order list in diffrerent ways
 

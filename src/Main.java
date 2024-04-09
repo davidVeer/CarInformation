@@ -8,11 +8,15 @@ public class Main {
 //        GuiMain.main(args);
         CarData carData = new CarData();
 
-        carData.orderBy(new LitersComparator());
+//        carData.orderBy(new LitersComparator());
+//        carData.orderBy(new KmplComparator());
+        carData.orderBy(new KilometersComparator());
         carData.printRefuleTanks();
 
-        carData.printLowest(InformationType.KMPL);
-        carData.printLowest(InformationType.LITERS);
-
+        System.out.println("index 5");
+        carData.printIndex(5);
+//        carData.printMedians(InformationType.LITERS);
+//        carData.printMedians(InformationType.KMPL);
+        carData.printMedians(InformationType.KILOMETERSDRIVEN);
     }
 }
