@@ -25,6 +25,7 @@ public class Main {
         carData.orderBy(InformationType.REFULENUMBER);
         carData.printMedians(testType);
 
-
+        carData.orderBy(InformationType.REFULENUMBER);
+        carData.printAverage(testType);
     }
 }

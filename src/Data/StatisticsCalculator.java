@@ -53,7 +53,11 @@ public class StatisticsCalculator {
 
     //statistics returning doubles
     public double averageRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
-        return 0;
+        double total = 0;
+        for (RefuleTank refuleTank : refuleTanks) {
+            total += refuleTank.getType(wantedInformation);
+        }
+        return total/refuleTanks.size();
     }
 
     public double modeRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
@@ -102,4 +106,7 @@ public class StatisticsCalculator {
 //            case KMPL:
 //
 //                break;
+//        }
+
+
 }

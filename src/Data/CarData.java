@@ -43,6 +43,11 @@ public class CarData {
         }
     }
 
+    public void printAverage(InformationType wantedInformation) {
+        System.out.println("average " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.averageRefuleTank(this.refuleTanks, wantedInformation));
+    }
+
     public void printHighest(InformationType wantedInformation) {
         System.out.println("highest " + wantedInformation + " is : ");
         System.out.println(statisticsCalculator.highestRefuleTank(this.refuleTanks, wantedInformation));
@@ -112,4 +117,5 @@ public class CarData {
         refuleTanks.add(new RefuleTank(10, 60032, 25.43, 49.82, LocalDate.of(2023, Month.NOVEMBER, 17)));
         refuleTanks.add(new RefuleTank(11, 60278, 23.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
     }
+
 }
