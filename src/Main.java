@@ -1,7 +1,6 @@
 import Data.CarData;
 
 import Data.InformationType;
-import comparators.*;
 
 public class Main {
     public static void main(String[] args) {
