@@ -1,14 +1,14 @@
-package comparators;
+package Comparators;
 
 import Data.RefuelTank;
 import java.util.Comparator;
 
-public class RefuelNumberComparator
+public class TotalPriceComparator
 		implements Comparator<RefuelTank>
 {
 
 	public int compare(RefuelTank rt1, RefuelTank rt2) {
-		return Integer.compare(rt1.getRefuelNumber(),rt2.getRefuelNumber());
+		return Double.compare(rt1.getTotalPrice(), rt2.getTotalPrice());
 	}
 
 }

@@ -1,6 +1,8 @@
-package Data;
+package Util;
 
-import comparators.*;
+import Data.InformationType;
+import Data.RefuelTank;
+import Comparators.*;
 
 import java.util.*;
 
@@ -22,9 +24,9 @@ public class StatisticsCalculator {
 
     public RefuelTank lowestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         RefuelTank LOWEST_NON_ZERO;
+        int lowestNonZeroIndex = 0;
 
         orderByType(refuelTanks, wantedInformation);
-        int lowestNonZeroIndex = 0;
         while (refuelTanks.get(lowestNonZeroIndex).getType(wantedInformation) == 0) {
             lowestNonZeroIndex++;
         }
@@ -46,18 +48,6 @@ public class StatisticsCalculator {
         }
 
         return medianRefuelTanks;
-    }
-
-    public double averageRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        double AVERAGE_VALUE;
-        double total = 0;
-
-        for (RefuelTank refuelTank : refuelTanks) {
-            total += refuelTank.getType(wantedInformation);
-        }
-        AVERAGE_VALUE = total / refuelTanks.size();
-
-        return AVERAGE_VALUE;
     }
 
     public ArrayList<Double> modeRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
@@ -84,6 +74,18 @@ public class StatisticsCalculator {
         return MODE_VALUES;
     }
 
+    public double averageRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        double AVERAGE_VALUE;
+        double total = 0;
+
+        for (RefuelTank refuelTank : refuelTanks) {
+            total += refuelTank.getType(wantedInformation);
+        }
+        AVERAGE_VALUE = total / refuelTanks.size();
+
+        return AVERAGE_VALUE;
+    }
+
     public double standardDeviationRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         return 0;
     }
@@ -107,6 +109,7 @@ public class StatisticsCalculator {
                 break;
         }
     }
+
     private HashMap<Double,Integer> calculateFrequencyByStep(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation,double COMPARISON_STEPS){
         HashMap<Double, Integer> frequencies = new HashMap<>();
 
@@ -125,6 +128,7 @@ public class StatisticsCalculator {
 
         return frequencies;
     }
+
     private ArrayList<Double> findMostFrequent(HashMap<Double, Integer> frequencies){
         ArrayList<Double> mostCommonFactors = new ArrayList<>(Collections.singletonList(0.0));
         double mostCommonValue = 0.0;
@@ -146,4 +150,5 @@ public class StatisticsCalculator {
 
         return mostCommonFactors;
     }
+
 }

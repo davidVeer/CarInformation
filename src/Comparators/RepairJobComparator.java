@@ -1,4 +1,4 @@
-package comparators;
+package Comparators;
 
 import Data.RepairJob;
 import java.util.Comparator;
