@@ -2,10 +2,7 @@ package Data;
 
 import comparators.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class StatisticsCalculator {
 
@@ -81,7 +78,7 @@ public class StatisticsCalculator {
                 COMPARISON_STEPS = 1;
                 break;
         }
-        frequencies = calculateFrequencyByFactor(refuelTanks, wantedInformation, COMPARISON_STEPS);
+        frequencies = calculateFrequencyByStep(refuelTanks, wantedInformation, COMPARISON_STEPS);
         MODE_VALUES = findMostFrequent(frequencies);
 
         return MODE_VALUES;
@@ -110,7 +107,7 @@ public class StatisticsCalculator {
                 break;
         }
     }
-    private HashMap<Double,Integer> calculateFrequencyByFactor(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation,double COMPARISON_STEPS){
+    private HashMap<Double,Integer> calculateFrequencyByStep(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation,double COMPARISON_STEPS){
         HashMap<Double, Integer> frequencies = new HashMap<>();
 
         for (RefuelTank refuelTank : refuelTanks) {
@@ -128,20 +125,22 @@ public class StatisticsCalculator {
 
         return frequencies;
     }
-
     private ArrayList<Double> findMostFrequent(HashMap<Double, Integer> frequencies){
+        ArrayList<Double> mostCommonFactors = new ArrayList<>(Collections.singletonList(0.0));
         double mostCommonValue = 0.0;
-        ArrayList<Double> mostCommonFactors = new ArrayList<>(Arrays.asList(0.0));
 
 
         for (Map.Entry<Double, Integer> frequency : frequencies.entrySet()) {
-            if (frequency.getValue() > mostCommonValue) {
-                mostCommonValue = frequency.getValue();
+            Double currentStep = frequency.getKey();
+            Integer currentfrequency = frequency.getValue();
+
+            if (currentfrequency > mostCommonValue) {
                 mostCommonFactors.clear();
-                mostCommonFactors.add(frequency.getKey());
+                mostCommonFactors.add(currentStep);
+                mostCommonValue = currentfrequency;
             }
-            else if (frequency.getValue() == mostCommonValue) {
-                mostCommonFactors.add(frequency.getKey());
+            else if (currentfrequency == mostCommonValue) {
+                mostCommonFactors.add(currentStep);
             }
         }
 
