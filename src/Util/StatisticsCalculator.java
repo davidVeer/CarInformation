@@ -11,7 +11,7 @@ public class StatisticsCalculator {
     public RefuelTank highestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         RefuelTank HIGHEST;
 
-        orderByType(refuelTanks, wantedInformation);
+        orderListByType(refuelTanks, wantedInformation);
         HIGHEST = refuelTanks.get(refuelTanks.size() - 1);
 
         return HIGHEST;
@@ -21,7 +21,7 @@ public class StatisticsCalculator {
         int lowestNonZeroIndex = 0;
         RefuelTank LOWEST_NON_ZERO;
 
-        orderByType(refuelTanks, wantedInformation);
+        orderListByType(refuelTanks, wantedInformation);
         while (refuelTanks.get(lowestNonZeroIndex).getType(wantedInformation) == 0) {
             lowestNonZeroIndex++;
         }
@@ -33,7 +33,7 @@ public class StatisticsCalculator {
     public ArrayList<RefuelTank> medianRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         ArrayList<RefuelTank> medianRefuelTanks = new ArrayList<>();
 
-        orderByType(refuelTanks, wantedInformation);
+        orderListByType(refuelTanks, wantedInformation);
         RefuelTank STANDARD_MEDIAN = refuelTanks.get(refuelTanks.size() / 2);
         RefuelTank EVEN_SECONDARY_MEDIAN = refuelTanks.get((refuelTanks.size() / 2) - 1);
 
@@ -46,25 +46,25 @@ public class StatisticsCalculator {
     }
 
     public ArrayList<Double> modeRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        HashMap<Double, Integer> frequencies;
+        HashMap<Double, Integer> frequencyTable;
         ArrayList<Double> MODE_VALUES;
-        double COMPARISON_STEPS;
+        double STEP_SIZE;
 
-        orderByType(refuelTanks, wantedInformation);
+        orderListByType(refuelTanks, wantedInformation);
 
         switch (wantedInformation) {
             case LITER_PRICE:
-                COMPARISON_STEPS = 0.5;
+                STEP_SIZE = 0.5;
                 break;
             case KILOMETERS_DRIVEN:
-                COMPARISON_STEPS = 10;
+                STEP_SIZE = 10;
                 break;
             default:
-                COMPARISON_STEPS = 1;
+                STEP_SIZE = 1;
                 break;
         }
-        frequencies = calculateFrequencyByStep(refuelTanks, wantedInformation, COMPARISON_STEPS);
-        MODE_VALUES = findMostFrequent(frequencies);
+        frequencyTable = calculateFrequencyByStep(refuelTanks, wantedInformation, STEP_SIZE);
+        MODE_VALUES = findMostFrequent(frequencyTable);
 
         return MODE_VALUES;
     }
@@ -106,7 +106,7 @@ public class StatisticsCalculator {
         return 0.0;
     }
 
-    private void orderByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    private void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         switch (wantedInformation) {
             case LITERS:
                 refuelTanks.sort(new LitersComparator());
@@ -126,45 +126,46 @@ public class StatisticsCalculator {
         }
     }
 
-    private HashMap<Double,Integer> calculateFrequencyByStep(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation,double COMPARISON_STEPS){
+    private HashMap<Double,Integer> calculateFrequencyByStep(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation,double STEP_SIZE){
         HashMap<Double, Integer> frequencies = new HashMap<>();
 
         for (RefuelTank refuelTank : refuelTanks) {
             double currentValue = refuelTank.getType(wantedInformation);
-            double factor = currentValue - (currentValue % COMPARISON_STEPS);
+            double STEP = currentValue - (currentValue % STEP_SIZE);
+            boolean HAS_ENTRY = frequencies.containsKey(STEP);
             int updatedFrequency;
 
-            if (!frequencies.containsKey(factor))
-                updatedFrequency =  1;
+            if (!HAS_ENTRY)
+                updatedFrequency = 1;
             else
-                updatedFrequency = frequencies.get(factor) + 1;
+                updatedFrequency = frequencies.get(STEP) + 1;
 
-            frequencies.put(factor , updatedFrequency);
+            frequencies.put(STEP , updatedFrequency);
         }
 
         return frequencies;
     }
 
     private ArrayList<Double> findMostFrequent(HashMap<Double, Integer> frequencies){
-        ArrayList<Double> mostCommonFactors = new ArrayList<>(Collections.singletonList(0.0));
-        double mostCommonValue = 0.0;
+        ArrayList<Double> mostCommonValues = new ArrayList<>(Collections.singletonList(0.0));
+        int mostCommonFrequency = 0;
 
 
         for (Map.Entry<Double, Integer> frequency : frequencies.entrySet()) {
-            Double currentStep = frequency.getKey();
-            Integer currentFrequency = frequency.getValue();
+            Double STEP = frequency.getKey();
+            Integer STEP_FREQUENCY = frequency.getValue();
 
-            if (currentFrequency > mostCommonValue) {
-                mostCommonFactors.clear();
-                mostCommonFactors.add(currentStep);
-                mostCommonValue = currentFrequency;
+            if (STEP_FREQUENCY > mostCommonFrequency) {
+                mostCommonValues.clear();
+                mostCommonValues.add(STEP);
+                mostCommonFrequency = STEP_FREQUENCY;
             }
-            else if (currentFrequency == mostCommonValue) {
-                mostCommonFactors.add(currentStep);
+            else if (STEP_FREQUENCY == mostCommonFrequency) {
+                mostCommonValues.add(STEP);
             }
         }
 
-        return mostCommonFactors;
+        return mostCommonValues;
     }
 
 }
