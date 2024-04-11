@@ -3,12 +3,12 @@ package comparators;
 import Data.RefuelTank;
 import java.util.Comparator;
 
-public class LitersComparator
+public class RefuelNumberComparator
 		implements Comparator<RefuelTank>
 {
 
 	public int compare(RefuelTank rt1, RefuelTank rt2) {
-		return Double.compare(rt1.getLiters(),rt2.getLiters());
+		return Integer.compare(rt1.getRefuelNumber(),rt2.getRefuelNumber());
 	}
 
 }

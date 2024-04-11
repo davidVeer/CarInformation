@@ -1,13 +1,13 @@
 package comparators;
 
-import Data.RefuleTank;
+import Data.RefuelTank;
 import java.util.Comparator;
 
 public class KilometersComparator
-		implements Comparator<RefuleTank>
+		implements Comparator<RefuelTank>
 {
 
-	public int compare(RefuleTank rt1, RefuleTank rt2) {
+	public int compare(RefuelTank rt1, RefuelTank rt2) {
 		return Integer.compare(rt1.getKilometersDriven(), rt2.getKilometersDriven());
 	}
 

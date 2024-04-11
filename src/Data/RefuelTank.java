@@ -2,9 +2,9 @@ package Data;
 
 import java.time.LocalDate;
 
-public class RefuleTank {
+public class RefuelTank {
 
-    private int refuleNumber;
+    private int refuelNumber;
 
     private LocalDate date;
 
@@ -21,8 +21,8 @@ public class RefuleTank {
     private double kmpl;
 
 
-    public RefuleTank(int refuleNumber, int odometer, double liters, double totalPrice, LocalDate date) {
-        this.refuleNumber = refuleNumber;
+    public RefuelTank(int refuelNumber, int odometer, double liters, double totalPrice, LocalDate date) {
+        this.refuelNumber = refuelNumber;
         this.odometer = odometer;
         this.liters = liters;
         this.totalPrice = totalPrice;
@@ -50,8 +50,8 @@ public class RefuleTank {
 
 
     //getters for all data
-    public int getRefuleNumber() {
-        return refuleNumber;
+    public int getRefuelNumber() {
+        return refuelNumber;
     }
 
     public LocalDate getDate() {
@@ -87,7 +87,7 @@ public class RefuleTank {
     @Override
     public String toString() {
         return
-                "\n" + this.refuleNumber + " : " + "\n" +
+                "\n" + this.refuelNumber + " : " + "\n" +
                         "date : " + this.date + "\n" +
                         "odometer : km " + this.odometer + "\n" +
                         "liters : l " + this.liters + "\n" +
@@ -101,16 +101,16 @@ public class RefuleTank {
         switch (wantedInformation) {
             case LITERS:
                 return this.liters;
-            case TOTALPRICE:
+            case TOTAL_PRICE:
                 return this.totalPrice;
-            case KILOMETERSDRIVEN:
+            case KILOMETERS_DRIVEN:
                 return this.kilometersDriven;
-            case LITERPRICE:
+            case LITER_PRICE:
                 return this.literPrice;
-            case KMPL:
+            case KILOMETERS_PER_LITER:
                 return this.kmpl;
             default:
-                return this.refuleNumber;
+                return this.refuelNumber;
         }
     }
 }

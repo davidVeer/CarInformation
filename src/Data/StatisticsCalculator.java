@@ -6,85 +6,87 @@ import java.util.ArrayList;
 
 public class StatisticsCalculator {
 
-    //statistics returning RefuleTanks
-    public RefuleTank highestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+    /**
+     * todo : other statistics
+     * - totalRefuel tank
+     */
 
-        //sorting list based on information being asked
-        orderByType(refuleTanks, wantedInformation);
 
-        //returning last (and therefore highest) item of the sorted list
-        return refuleTanks.get(refuleTanks.size() - 1);
+    //statistics returning RefuelTanks
+    public RefuelTank highestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        RefuelTank HIGHEST;
+
+        orderByType(refuelTanks, wantedInformation);
+
+        HIGHEST = refuelTanks.get(refuelTanks.size() - 1);
+        return HIGHEST;
     }
 
-    public RefuleTank lowestRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+    public RefuelTank lowestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        RefuelTank LOWEST_NON_ZERO;
 
-        //sorting list based on information being asked
-        orderByType(refuleTanks,wantedInformation);
+        orderByType(refuelTanks, wantedInformation);
 
-        //catching 0 values
-        int i = 0;
-        while (refuleTanks.get(i).getType(wantedInformation) == 0){
-            i++;
+        int lowestNonZeroIndex = 0;
+        while (refuelTanks.get(lowestNonZeroIndex).getType(wantedInformation) == 0) {
+            lowestNonZeroIndex++;
         }
+        LOWEST_NON_ZERO = refuelTanks.get(lowestNonZeroIndex);
 
-        //returning first (and therefore lowest) item of the sorted list
-        return refuleTanks.get(i);
+        return LOWEST_NON_ZERO;
     }
 
-    public ArrayList<RefuleTank> medianRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+    public ArrayList<RefuelTank> medianRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        ArrayList<RefuelTank> medianRefuelTanks = new ArrayList<>();
 
-        //initialisation for method
-        ArrayList<RefuleTank> medianRefuleTanks = new ArrayList<>();
-        int standardMedian = refuleTanks.size() / 2;
+        orderByType(refuelTanks, wantedInformation);
 
-        //sorting list based on information being asked
-        orderByType(refuleTanks,wantedInformation);
+        RefuelTank STANDARD_MEDIAN = refuelTanks.get(refuelTanks.size() / 2);
+        RefuelTank EVEN_SECONDARY_MEDIAN = refuelTanks.get((refuelTanks.size() / 2) - 1);
 
-        //getting the medians and adding them to an ArrayList
-        if (refuleTanks.size() % 2 == 1)
-            medianRefuleTanks.add(refuleTanks.get(standardMedian));
-        else {
-            medianRefuleTanks.add(refuleTanks.get(standardMedian));
-            medianRefuleTanks.add(refuleTanks.get(standardMedian - 1));
+        medianRefuelTanks.add(STANDARD_MEDIAN);
+
+        if (refuelTanks.size() % 2 == 0) {
+            medianRefuelTanks.add(EVEN_SECONDARY_MEDIAN);
         }
 
-        return medianRefuleTanks;
+        return medianRefuelTanks;
     }
 
     //statistics returning doubles
-    public double averageRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+    public double averageRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         double total = 0;
-        for (RefuleTank refuleTank : refuleTanks) {
-            total += refuleTank.getType(wantedInformation);
+        for (RefuelTank refuelTank : refuelTanks) {
+            total += refuelTank.getType(wantedInformation);
         }
-        return total/refuleTanks.size();
+        return total / refuelTanks.size();
     }
 
-    public double modeRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+    public double modeRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         return 0;
     }
 
-    public double standardDeviationRefuleTank(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation) {
+    public double standardDeviationRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         return 0;
     }
 
     //helper methods
-    private void orderByType(ArrayList<RefuleTank> refuleTanks, InformationType wantedInformation){
+    private void orderByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         switch (wantedInformation) {
             case LITERS:
-                refuleTanks.sort(new LitersComparator());
+                refuelTanks.sort(new LitersComparator());
                 break;
-            case TOTALPRICE:
-                refuleTanks.sort(new TotalPriceComparator());
+            case TOTAL_PRICE:
+                refuelTanks.sort(new TotalPriceComparator());
                 break;
-            case KILOMETERSDRIVEN:
-                refuleTanks.sort(new KilometersComparator());
+            case KILOMETERS_DRIVEN:
+                refuelTanks.sort(new KilometersComparator());
                 break;
-            case LITERPRICE:
-                refuleTanks.sort(new LiterPriceComparator());
+            case LITER_PRICE:
+                refuelTanks.sort(new LiterPriceComparator());
                 break;
-            case KMPL:
-                refuleTanks.sort(new KmplComparator());
+            case KILOMETERS_PER_LITER:
+                refuelTanks.sort(new KmplComparator());
                 break;
         }
     }

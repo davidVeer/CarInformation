@@ -2,9 +2,9 @@ package Data;
 
 public enum InformationType {
     LITERS,
-    TOTALPRICE,
-    KILOMETERSDRIVEN,
-    LITERPRICE,
-    KMPL,
-    REFULENUMBER
+    TOTAL_PRICE,
+    KILOMETERS_DRIVEN,
+    LITER_PRICE,
+    KILOMETERS_PER_LITER,
+    REFUEL_NUMBER
 }
