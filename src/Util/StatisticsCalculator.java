@@ -132,13 +132,14 @@ public class StatisticsCalculator {
         for (RefuelTank refuelTank : refuelTanks) {
             double currentValue = refuelTank.getType(wantedInformation);
             double STEP = currentValue - (currentValue % STEP_SIZE);
+            int CURRENT_FREQUENCY = frequencies.get(STEP);
             boolean HAS_ENTRY = frequencies.containsKey(STEP);
             int updatedFrequency;
 
-            if (!HAS_ENTRY)
-                updatedFrequency = 1;
+            if (HAS_ENTRY)
+                updatedFrequency = CURRENT_FREQUENCY + 1;
             else
-                updatedFrequency = frequencies.get(STEP) + 1;
+                updatedFrequency = 1;
 
             frequencies.put(STEP, updatedFrequency);
         }
