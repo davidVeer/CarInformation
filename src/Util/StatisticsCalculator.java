@@ -83,7 +83,7 @@ public class StatisticsCalculator {
         return AVERAGE_VALUE;
     }
 
-    public double totalValueRefuleTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation){
+    public double totalValueRefuleTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         double totalValue = 0.0;
 
         if (
@@ -126,7 +126,7 @@ public class StatisticsCalculator {
         }
     }
 
-    private HashMap<Double,Integer> calculateFrequencyByStep(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation,double STEP_SIZE){
+    private HashMap<Double, Integer> calculateFrequencyByStep(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation, double STEP_SIZE) {
         HashMap<Double, Integer> frequencies = new HashMap<>();
 
         for (RefuelTank refuelTank : refuelTanks) {
@@ -140,13 +140,13 @@ public class StatisticsCalculator {
             else
                 updatedFrequency = frequencies.get(STEP) + 1;
 
-            frequencies.put(STEP , updatedFrequency);
+            frequencies.put(STEP, updatedFrequency);
         }
 
         return frequencies;
     }
 
-    private ArrayList<Double> findMostFrequent(HashMap<Double, Integer> frequencies){
+    private ArrayList<Double> findMostFrequent(HashMap<Double, Integer> frequencies) {
         ArrayList<Double> mostCommonValues = new ArrayList<>(Collections.singletonList(0.0));
         int mostCommonFrequency = 0;
 
@@ -159,8 +159,7 @@ public class StatisticsCalculator {
                 mostCommonValues.clear();
                 mostCommonValues.add(STEP);
                 mostCommonFrequency = STEP_FREQUENCY;
-            }
-            else if (STEP_FREQUENCY == mostCommonFrequency) {
+            } else if (STEP_FREQUENCY == mostCommonFrequency) {
                 mostCommonValues.add(STEP);
             }
         }
