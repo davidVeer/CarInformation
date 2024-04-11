@@ -3,16 +3,17 @@ package Data;
 import comparators.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StatisticsCalculator {
 
-    /**
-     * todo : other statistics
-     * - totalRefuel tank
+    /*
+     todo : other statistics
+     - totalRefuel tank
      */
 
-
-    //statistics returning RefuelTanks
     public RefuelTank highestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         RefuelTank HIGHEST;
 
@@ -50,7 +51,6 @@ public class StatisticsCalculator {
         return medianRefuelTanks;
     }
 
-    //statistics returning doubles
     public double averageRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         double AVERAGE_VALUE;
         double total = 0;
@@ -63,15 +63,34 @@ public class StatisticsCalculator {
         return AVERAGE_VALUE;
     }
 
-    public double modeRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        return 0;
+    public ArrayList<Double> modeRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        HashMap<Double, Integer> frequencies;
+        ArrayList<Double> MODE_VALUES;
+        double COMPARISON_STEPS;
+
+        orderByType(refuelTanks, wantedInformation);
+
+        switch (wantedInformation) {
+            case LITER_PRICE:
+                COMPARISON_STEPS = 0.5;
+                break;
+            case KILOMETERS_DRIVEN:
+                COMPARISON_STEPS = 10;
+                break;
+            default:
+                COMPARISON_STEPS = 1;
+                break;
+        }
+        frequencies = calculateFrequencyByFactor(refuelTanks, wantedInformation, COMPARISON_STEPS);
+        MODE_VALUES = findMostFrequent(frequencies);
+
+        return MODE_VALUES;
     }
 
     public double standardDeviationRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         return 0;
     }
 
-    //helper methods
     private void orderByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         switch (wantedInformation) {
             case LITERS:
@@ -91,25 +110,41 @@ public class StatisticsCalculator {
                 break;
         }
     }
+    private HashMap<Double,Integer> calculateFrequencyByFactor(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation,double COMPARISON_STEPS){
+        HashMap<Double, Integer> frequencies = new HashMap<>();
 
-    //empty switch-case
-//        switch (wantedInformation){
-//            case LITERS:
-//
-//                break;
-//            case TOTALPRICE:
-//
-//                break;
-//            case KILOMETERSDRIVEN:
-//
-//                break;
-//            case LITERPRICE:
-//
-//                break;
-//            case KMPL:
-//
-//                break;
-//        }
+        for (RefuelTank refuelTank : refuelTanks) {
+            double currentValue = refuelTank.getType(wantedInformation);
+            double factor = currentValue - (currentValue % COMPARISON_STEPS);
+            int updatedFrequency;
+
+            if (!frequencies.containsKey(factor))
+                updatedFrequency =  1;
+            else
+                updatedFrequency = frequencies.get(factor) + 1;
+
+            frequencies.put(factor , updatedFrequency);
+        }
+
+        return frequencies;
+    }
+
+    private ArrayList<Double> findMostFrequent(HashMap<Double, Integer> frequencies){
+        double mostCommonValue = 0.0;
+        ArrayList<Double> mostCommonFactors = new ArrayList<>(Arrays.asList(0.0));
 
 
+        for (Map.Entry<Double, Integer> frequency : frequencies.entrySet()) {
+            if (frequency.getValue() > mostCommonValue) {
+                mostCommonValue = frequency.getValue();
+                mostCommonFactors.clear();
+                mostCommonFactors.add(frequency.getKey());
+            }
+            else if (frequency.getValue() == mostCommonValue) {
+                mostCommonFactors.add(frequency.getKey());
+            }
+        }
+
+        return mostCommonFactors;
+    }
 }

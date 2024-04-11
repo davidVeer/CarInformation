@@ -27,5 +27,8 @@ public class Main {
 
         carData.orderBy(InformationType.REFUEL_NUMBER);
         carData.printAverage(testType);
+
+        carData.orderBy(InformationType.REFUEL_NUMBER);
+        carData.printMode(testType);
     }
 }
