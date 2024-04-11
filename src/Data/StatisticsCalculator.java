@@ -17,8 +17,8 @@ public class StatisticsCalculator {
         RefuelTank HIGHEST;
 
         orderByType(refuelTanks, wantedInformation);
-
         HIGHEST = refuelTanks.get(refuelTanks.size() - 1);
+
         return HIGHEST;
     }
 
@@ -26,7 +26,6 @@ public class StatisticsCalculator {
         RefuelTank LOWEST_NON_ZERO;
 
         orderByType(refuelTanks, wantedInformation);
-
         int lowestNonZeroIndex = 0;
         while (refuelTanks.get(lowestNonZeroIndex).getType(wantedInformation) == 0) {
             lowestNonZeroIndex++;
@@ -40,12 +39,10 @@ public class StatisticsCalculator {
         ArrayList<RefuelTank> medianRefuelTanks = new ArrayList<>();
 
         orderByType(refuelTanks, wantedInformation);
-
         RefuelTank STANDARD_MEDIAN = refuelTanks.get(refuelTanks.size() / 2);
         RefuelTank EVEN_SECONDARY_MEDIAN = refuelTanks.get((refuelTanks.size() / 2) - 1);
 
         medianRefuelTanks.add(STANDARD_MEDIAN);
-
         if (refuelTanks.size() % 2 == 0) {
             medianRefuelTanks.add(EVEN_SECONDARY_MEDIAN);
         }
@@ -55,11 +52,15 @@ public class StatisticsCalculator {
 
     //statistics returning doubles
     public double averageRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        double AVERAGE_VALUE;
         double total = 0;
+
         for (RefuelTank refuelTank : refuelTanks) {
             total += refuelTank.getType(wantedInformation);
         }
-        return total / refuelTanks.size();
+        AVERAGE_VALUE = total / refuelTanks.size();
+
+        return AVERAGE_VALUE;
     }
 
     public double modeRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
