@@ -109,8 +109,9 @@ public class RefuelTank {
                 return this.literPrice;
             case KILOMETERS_PER_LITER:
                 return this.kmpl;
-            default:
+            case REFUEL_NUMBER:
                 return this.refuelNumber;
         }
+        return this.refuelNumber;
     }
 }
