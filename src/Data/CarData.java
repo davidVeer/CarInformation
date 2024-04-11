@@ -66,6 +66,11 @@ public class CarData {
         }
     }
 
+    public void printTotalValue(InformationType wantedInformation) {
+        System.out.println("total " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.totalValueRefuleTank(this.refuelTanks, wantedInformation));
+    }
+
     public void printRefuelTanks() {
         for (RefuelTank refuelTank : refuelTanks) {
             System.out.println(refuelTank);

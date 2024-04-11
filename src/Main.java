@@ -7,7 +7,7 @@ public class Main {
 //        GuiMain.main(args);
         CarData carData = new CarData();
 
-        InformationType testType = InformationType.LITER_PRICE;
+        InformationType testType = InformationType.TOTAL_PRICE;
 
         carData.orderBy(testType);
         carData.printRefuelTanks();
@@ -30,5 +30,8 @@ public class Main {
 
         carData.orderBy(InformationType.REFUEL_NUMBER);
         carData.printMode(testType);
+
+        carData.orderBy(InformationType.REFUEL_NUMBER);
+        carData.printTotalValue(testType);
     }
 }

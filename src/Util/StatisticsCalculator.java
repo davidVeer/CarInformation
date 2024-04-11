@@ -8,11 +8,6 @@ import java.util.*;
 
 public class StatisticsCalculator {
 
-    /*
-     todo : other statistics
-     - totalRefuel tank
-     */
-
     public RefuelTank highestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         RefuelTank HIGHEST;
 
@@ -23,8 +18,8 @@ public class StatisticsCalculator {
     }
 
     public RefuelTank lowestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        RefuelTank LOWEST_NON_ZERO;
         int lowestNonZeroIndex = 0;
+        RefuelTank LOWEST_NON_ZERO;
 
         orderByType(refuelTanks, wantedInformation);
         while (refuelTanks.get(lowestNonZeroIndex).getType(wantedInformation) == 0) {
@@ -75,19 +70,40 @@ public class StatisticsCalculator {
     }
 
     public double averageRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        double total = 0.0;
         double AVERAGE_VALUE;
-        double total = 0;
 
         for (RefuelTank refuelTank : refuelTanks) {
-            total += refuelTank.getType(wantedInformation);
+            double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
+
+            total += REFUEL_TANK_TYPE_VALUE;
         }
         AVERAGE_VALUE = total / refuelTanks.size();
 
         return AVERAGE_VALUE;
     }
 
+    public double totalValueRefuleTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation){
+        double totalValue = 0.0;
+
+        if (
+                wantedInformation.equals(InformationType.LITER_PRICE) ||
+                wantedInformation.equals(InformationType.KILOMETERS_PER_LITER) ||
+                wantedInformation.equals(InformationType.REFUEL_NUMBER)
+        )
+            return Double.NEGATIVE_INFINITY;
+
+        for (RefuelTank refuelTank : refuelTanks) {
+            double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
+
+            totalValue += REFUEL_TANK_TYPE_VALUE;
+        }
+
+        return totalValue;
+    }
+
     public double standardDeviationRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        return 0;
+        return 0.0;
     }
 
     private void orderByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
@@ -136,14 +152,14 @@ public class StatisticsCalculator {
 
         for (Map.Entry<Double, Integer> frequency : frequencies.entrySet()) {
             Double currentStep = frequency.getKey();
-            Integer currentfrequency = frequency.getValue();
+            Integer currentFrequency = frequency.getValue();
 
-            if (currentfrequency > mostCommonValue) {
+            if (currentFrequency > mostCommonValue) {
                 mostCommonFactors.clear();
                 mostCommonFactors.add(currentStep);
-                mostCommonValue = currentfrequency;
+                mostCommonValue = currentFrequency;
             }
-            else if (currentfrequency == mostCommonValue) {
+            else if (currentFrequency == mostCommonValue) {
                 mostCommonFactors.add(currentStep);
             }
         }
