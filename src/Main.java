@@ -33,5 +33,8 @@ public class Main {
 
         carData.orderBy(InformationType.REFUEL_NUMBER);
         carData.printTotalValue(testType);
+
+        carData.orderBy(InformationType.REFUEL_NUMBER);
+        carData.printVariance(testType);
     }
 }

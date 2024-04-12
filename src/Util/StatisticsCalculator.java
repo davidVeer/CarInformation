@@ -103,7 +103,7 @@ public class StatisticsCalculator {
     }
 
     /**
-     * a simple method that returns the variance using the formula: s^2 = Σ(x[i]-X̄)/n-1.
+     * a simple method that returns the variance using the formula: s^2 = Σ(x[i]-X̄)^2/n-1.
      * source: <a href="https://www.youtube.com/watch?v=deIQeQzPK08">...</a>
      *
      * @author David van der Veer
@@ -112,15 +112,16 @@ public class StatisticsCalculator {
     public double varianceRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation){
         double SAMPLE_MEAN = averageRefuelTank(refuelTanks,wantedInformation);
         double SET_MINUS_1 = refuelTanks.size()-1;
-        double SUM_OF_ENTRIES = 0.0;
+        double sumOfEntries = 0.0;
         double VARIANCE;
 
         for (RefuelTank refuelTank : refuelTanks) {
-            double ENTRY = refuelTank.getType(wantedInformation);
+            double CURRENT_INDEX = refuelTank.getType(wantedInformation);
+            double ENTRY = Math.pow((CURRENT_INDEX - SAMPLE_MEAN),2);
 
-            SUM_OF_ENTRIES += ENTRY - SAMPLE_MEAN;
+            sumOfEntries += ENTRY;
         }
-        VARIANCE = SUM_OF_ENTRIES/SET_MINUS_1;
+        VARIANCE = sumOfEntries/SET_MINUS_1;
 
         return VARIANCE;
     }
@@ -159,12 +160,14 @@ public class StatisticsCalculator {
         for (RefuelTank refuelTank : refuelTanks) {
             double currentValue = refuelTank.getType(wantedInformation);
             double STEP = currentValue - (currentValue % STEP_SIZE);
-            int CURRENT_FREQUENCY = frequencies.get(STEP);
             boolean HAS_ENTRY = frequencies.containsKey(STEP);
             int updatedFrequency;
 
-            if (HAS_ENTRY)
+            if (HAS_ENTRY) {
+                int CURRENT_FREQUENCY = frequencies.get(STEP);
+
                 updatedFrequency = CURRENT_FREQUENCY + 1;
+            }
             else
                 updatedFrequency = 1;
 
