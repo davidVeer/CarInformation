@@ -56,7 +56,7 @@ public class CarData {
 
     public void printAverage(InformationType wantedInformation) {
         System.out.println("average " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.averageRefuelTank(this.refuelTanks, wantedInformation) + "\n");
+        System.out.println(statisticsCalculator.meanRefuelTank(this.refuelTanks, wantedInformation) + "\n");
     }
 
     public void printMode(InformationType wantedInformation) {

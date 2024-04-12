@@ -8,6 +8,12 @@ import java.util.*;
 
 public class StatisticsCalculator {
 
+    /**
+     * this method finds the last value of provided InformationType in a list sorted by that InformationType
+     *
+     * @author David van der Veer
+     * @return lowest non zero RefuelTank
+     */
     public RefuelTank highestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         RefuelTank HIGHEST;
 
@@ -17,6 +23,12 @@ public class StatisticsCalculator {
         return HIGHEST;
     }
 
+    /**
+     * this method finds the first non 0 value of provided InformationType in a list sorted by that InformationType
+     *
+     * @author David van der Veer
+     * @return lowest non zero RefuelTank
+     */
     public RefuelTank lowestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         int lowestNonZeroIndex = 0;
         RefuelTank LOWEST_NON_ZERO;
@@ -30,6 +42,13 @@ public class StatisticsCalculator {
         return LOWEST_NON_ZERO;
     }
 
+    /**
+     * this method finds the median RefuelTanks in a sorted set of RefuelTanks
+     * todo: make method return a single double as the median
+     *
+     * @author David van der Veer
+     * @return median RefuelTanks
+     */
     public ArrayList<RefuelTank> medianRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         ArrayList<RefuelTank> medianRefuelTanks = new ArrayList<>();
 
@@ -45,7 +64,16 @@ public class StatisticsCalculator {
         return medianRefuelTanks;
     }
 
+    /**
+     * this method calculates the mean by first creating a frequency table and subsequently comparing every frequency
+     * and finding which one(s) are the highest.
+     *
+     * @author David van der Veer
+     * @return mode value(s)
+     */
     public ArrayList<Double> modeRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        ArrayList<Double> mostCommonValues = new ArrayList<>(Collections.singletonList(0.0));
+        int mostCommonFrequency = 0;
         HashMap<Double, Integer> frequencyTable;
         ArrayList<Double> MODE_VALUES;
         double STEP_SIZE;
@@ -64,25 +92,57 @@ public class StatisticsCalculator {
                 break;
         }
         frequencyTable = calculateFrequencyByStep(refuelTanks, wantedInformation, STEP_SIZE);
-        MODE_VALUES = findMostFrequent(frequencyTable);
+
+
+        for (Map.Entry<Double, Integer> frequency : frequencyTable.entrySet()) {
+            Double STEP = frequency.getKey();
+            Integer STEP_FREQUENCY = frequency.getValue();
+
+            if (STEP_FREQUENCY > mostCommonFrequency) {
+                mostCommonValues.clear();
+                mostCommonValues.add(STEP);
+                mostCommonFrequency = STEP_FREQUENCY;
+            } else if (STEP_FREQUENCY == mostCommonFrequency) {
+                mostCommonValues.add(STEP);
+            }
+        }
+        MODE_VALUES = mostCommonValues;
 
         return MODE_VALUES;
     }
 
-    public double averageRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    /**
+     * this method calculates the mean value in a set using the formula: μ = Σ ( X[i] ) / n
+     * <p>
+     * this simply stated is the total value divided by the number of items in the set
+     * </p>
+     *
+     * @author David van der Veer
+     * @return mean (average)
+     */
+    public double meanRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         double total = 0.0;
-        double AVERAGE_VALUE;
+        double MEAN;
 
         for (RefuelTank refuelTank : refuelTanks) {
             double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
 
             total += REFUEL_TANK_TYPE_VALUE;
         }
-        AVERAGE_VALUE = total / refuelTanks.size();
+        MEAN = total / refuelTanks.size();
 
-        return AVERAGE_VALUE;
+        return MEAN;
     }
 
+    /**
+     * this method calculates the total value of a set using the formula: X[total] = Σ (X[i]).
+     * <p>
+     * basically this means adding up every value in the set to get a total
+     * </p>
+     *
+     * @author David van der Veer
+     * @return total value
+     */
     public double totalValueRefuleTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         double totalValue = 0.0;
 
@@ -103,7 +163,7 @@ public class StatisticsCalculator {
     }
 
     /**
-     * this method calculates the population standard deviation using the formula: σ = √(Σ(x[i]-μ)^2/n)
+     * this method calculates the population standard deviation using the formula: σ = √ (Σ (x[i] - μ)^2 / n)
      * <p>
      * the standard deviation represents how far apart numbers in a set are from each other
      * </p><p>
@@ -116,7 +176,7 @@ public class StatisticsCalculator {
      * @return population standard deviation
      */
     public double populationStandardDeviationRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        double SAMPLE_MEAN = averageRefuelTank(refuelTanks,wantedInformation);
+        double SAMPLE_MEAN = meanRefuelTank(refuelTanks,wantedInformation);
         double SET_SIZE = refuelTanks.size();
         double sumOfEntries = 0.0;
         double STANDARD_DEVIATION;
@@ -133,7 +193,7 @@ public class StatisticsCalculator {
     }
 
     /**
-     * a simple method that calculates the population variance using the formula: σ^2 = Σ(x[i]-μ)^2/n.
+     * this method that calculates the population variance using the formula: σ^2 = Σ (x[i] - μ)^2 / n.
      * <p>
      * this is slightly different from the sample variance (s^2 = Σ(x[i]-x̄)^2/n-1)
      * which takes into account the deviation created as a result of having a low sample size.
@@ -160,6 +220,14 @@ public class StatisticsCalculator {
         return VARIANCE;
     }
 
+    /**
+     * this method sorts a list by the InformationType specified in the parameter.
+     * it's a helper method that is used multiple times in the class for calculations that require
+     * a sorted and assending list. the lists are sorted using custom comparators that can be found in /comparators.
+     * this practical method can potentially be used elsewhere (in different classes)
+     *
+     * @author David van der Veer
+     */
     private void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         switch (wantedInformation) {
             case LITERS:
@@ -180,6 +248,13 @@ public class StatisticsCalculator {
         }
     }
 
+    /**
+     * this method creates a frequency table (HashMap) of every step along with its frequency as long
+     * as the step has a frequency higher than 0.
+     *
+     * @author David van der Veer
+     * @return frequency table
+     */
     private HashMap<Double, Integer> calculateFrequencyByStep(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation, double STEP_SIZE) {
         HashMap<Double, Integer> frequencies = new HashMap<>();
 
@@ -201,27 +276,6 @@ public class StatisticsCalculator {
         }
 
         return frequencies;
-    }
-
-    private ArrayList<Double> findMostFrequent(HashMap<Double, Integer> frequencies) {
-        ArrayList<Double> mostCommonValues = new ArrayList<>(Collections.singletonList(0.0));
-        int mostCommonFrequency = 0;
-
-
-        for (Map.Entry<Double, Integer> frequency : frequencies.entrySet()) {
-            Double STEP = frequency.getKey();
-            Integer STEP_FREQUENCY = frequency.getValue();
-
-            if (STEP_FREQUENCY > mostCommonFrequency) {
-                mostCommonValues.clear();
-                mostCommonValues.add(STEP);
-                mostCommonFrequency = STEP_FREQUENCY;
-            } else if (STEP_FREQUENCY == mostCommonFrequency) {
-                mostCommonValues.add(STEP);
-            }
-        }
-
-        return mostCommonValues;
     }
 
 }
