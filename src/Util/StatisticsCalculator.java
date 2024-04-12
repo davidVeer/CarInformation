@@ -103,42 +103,61 @@ public class StatisticsCalculator {
     }
 
     /**
-     * a simple method that returns the population variance using the formula: σ^2 = Σ(x[i]-μ)^2/n.
-     * this is slightly different from the sample variance (s^2 = Σ(x[i]-x̄)^2/n-1),
-     * which takes into account the deviation created as a result of having a low sample size.
-     * this however is fine as the current program wil only calculate the entire set of measurements.
-     * the feature of calculating sample values might be added later if required
+     * this method calculates the population standard deviation using the formula: σ = √(Σ(x[i]-μ)^2/n)
      * <p>
+     * the standard deviation represents how far apart numbers in a set are from each other
+     * </p><p>
      * source: "Standard Deviation Formula, Statistics, Variance, Sample and Population Mean",
      * by: The Organic Chemistry Tutor (12 feb 2017),
      * YouTube : <a href="https://www.youtube.com/watch?v=deIQeQzPK08">...</a>
+     *  <p/>
      *
      * @author David van der Veer
-     * @return VARIANCE
+     * @return population standard deviation
      */
-    public double PopulationVarianceRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation){
+    public double populationStandardDeviationRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         double SAMPLE_MEAN = averageRefuelTank(refuelTanks,wantedInformation);
         double SET_SIZE = refuelTanks.size();
         double sumOfEntries = 0.0;
-        double VARIANCE;
+        double STANDARD_DEVIATION;
 
         for (RefuelTank refuelTank : refuelTanks) {
             double CURRENT_INDEX = refuelTank.getType(wantedInformation);
-            double ENTRY = Math.pow((CURRENT_INDEX - SAMPLE_MEAN),2);
+            double ENTRY = Math.pow((CURRENT_INDEX - SAMPLE_MEAN), 2);
 
             sumOfEntries += ENTRY;
         }
-        VARIANCE = sumOfEntries/SET_SIZE;
+        STANDARD_DEVIATION = Math.sqrt(sumOfEntries/SET_SIZE);
 
-        return VARIANCE;
+        return STANDARD_DEVIATION;
     }
 
-    public double standardDeviationRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        double STANDARD_DEVIATION;
+    /**
+     * a simple method that calculates the population variance using the formula: σ^2 = Σ(x[i]-μ)^2/n.
+     * <p>
+     * this is slightly different from the sample variance (s^2 = Σ(x[i]-x̄)^2/n-1)
+     * which takes into account the deviation created as a result of having a low sample size.
+     * this however is fine as the current program wil only calculate the entire set of measurements.
+     * the feature of calculating sample values might be added later if required.
+     * </p><p>
+     * regardless the variance represents how far numbers in a set are relative to the mean and is simply stated the
+     * standard deviation squared.
+     * </p><p>
+     * source: "Standard Deviation Formula, Statistics, Variance, Sample and Population Mean",
+     * by: The Organic Chemistry Tutor (12 feb 2017),
+     * YouTube : <a href="https://www.youtube.com/watch?v=deIQeQzPK08">...</a>
+     * </p>
+     *
+     * @author David van der Veer
+     * @return population variance
+     */
+    public double populationVarianceRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation){
+        double VARIANCE;
+        double STANDARD_DEVIATION = populationStandardDeviationRefuelTank(refuelTanks,wantedInformation);
 
+        VARIANCE = Math.pow(STANDARD_DEVIATION , 2);
 
-        STANDARD_DEVIATION = 0;
-        return STANDARD_DEVIATION;
+        return VARIANCE;
     }
 
     private void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {

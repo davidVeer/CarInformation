@@ -73,7 +73,12 @@ public class CarData {
 
     public void printVariance(InformationType wantedInformation) {
         System.out.println("variance of " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.varianceRefuelTank(this.refuelTanks, wantedInformation));
+        System.out.println(statisticsCalculator.populationVarianceRefuelTank(this.refuelTanks, wantedInformation));
+    }
+
+    public void printStandardDeviation(InformationType wantedInformation) {
+        System.out.println("variance of " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.populationStandardDeviationRefuelTank(this.refuelTanks, wantedInformation));
     }
 
     public void printRefuelTanks() {
@@ -123,12 +128,12 @@ public class CarData {
         this.refuelTanks = new ArrayList<>();
         this.repairJobs = new ArrayList<>();
 
-        refuelTanks.add(new RefuelTank(3, 58474, 34.70, 6, LocalDate.of(2023, Month.SEPTEMBER, 11)));
-        refuelTanks.add(new RefuelTank(2, 58130, 21.45, 9, LocalDate.of(2023, Month.SEPTEMBER, 6)));
-        refuelTanks.add(new RefuelTank(4, 58727, 10.50, 14, LocalDate.of(2023, Month.SEPTEMBER, 15)));
-        refuelTanks.add(new RefuelTank(5, 58822, 20.02, 5, LocalDate.of(2023, Month.SEPTEMBER, 19)));
-        refuelTanks.add(new RefuelTank(6, 59149, 25.92, 8, LocalDate.of(2023, Month.SEPTEMBER, 24)));
-        refuelTanks.add(new RefuelTank(7, 59525, 34.28, 11, LocalDate.of(2023, Month.OCTOBER, 6)));
+        refuelTanks.add(new RefuelTank(3, 58474, 34.70,5, LocalDate.of(2023, Month.SEPTEMBER, 11)));
+        refuelTanks.add(new RefuelTank(2, 58130, 21.45,5, LocalDate.of(2023, Month.SEPTEMBER, 6)));
+        refuelTanks.add(new RefuelTank(4, 58727, 10.50,1, LocalDate.of(2023, Month.SEPTEMBER, 15)));
+        refuelTanks.add(new RefuelTank(5, 58822, 20.02,7, LocalDate.of(2023, Month.SEPTEMBER, 19)));
+        refuelTanks.add(new RefuelTank(6, 59149, 25.92,1, LocalDate.of(2023, Month.SEPTEMBER, 24)));
+        refuelTanks.add(new RefuelTank(7, 59525, 34.28,9, LocalDate.of(2023, Month.OCTOBER, 6)));
         refuelTanks.add(new RefuelTank(8, 59645, 8.62, 10, LocalDate.of(2023, Month.OCTOBER, 7)));
 //        refuelTanks.add(new RefuelTank(9, 59693, 8.37, 16.48, LocalDate.of(2023, Month.NOVEMBER, 16)));
 //        refuelTanks.add(new RefuelTank(10, 60032, 24.43, 49.82, LocalDate.of(2023, Month.NOVEMBER, 17)));
