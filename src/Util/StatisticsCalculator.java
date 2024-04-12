@@ -102,8 +102,35 @@ public class StatisticsCalculator {
         return totalValue;
     }
 
+    /**
+     * a simple method that returns the variance using the formula: s^2 = Σ(x[i]-X̄)/n-1.
+     * source: <a href="https://www.youtube.com/watch?v=deIQeQzPK08">...</a>
+     *
+     * @author David van der Veer
+     * @return VARIANCE
+     */
+    public double varianceRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation){
+        double SAMPLE_MEAN = averageRefuelTank(refuelTanks,wantedInformation);
+        double SET_MINUS_1 = refuelTanks.size()-1;
+        double SUM_OF_ENTRIES = 0.0;
+        double VARIANCE;
+
+        for (RefuelTank refuelTank : refuelTanks) {
+            double ENTRY = refuelTank.getType(wantedInformation);
+
+            SUM_OF_ENTRIES += ENTRY - SAMPLE_MEAN;
+        }
+        VARIANCE = SUM_OF_ENTRIES/SET_MINUS_1;
+
+        return VARIANCE;
+    }
+
     public double standardDeviationRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        return 0.0;
+        double STANDARD_DEVIATION;
+
+
+        STANDARD_DEVIATION = 0;
+        return STANDARD_DEVIATION;
     }
 
     private void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
