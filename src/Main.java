@@ -1,13 +1,13 @@
 import Data.CarData;
 
-import Data.InformationType;
+import Util.InformationType;
 
 public class Main {
     public static void main(String[] args) {
 //        GuiMain.main(args);
         CarData carData = new CarData();
 
-        InformationType testType = InformationType.TOTAL_PRICE;
+        InformationType testType = InformationType.REFUEL_PRICE;
 
         carData.orderBy(testType);
         carData.printRefuelTanks();

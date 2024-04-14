@@ -1,5 +1,6 @@
 package Data;
 
+import Util.InformationType;
 import Util.StatisticsCalculator;
 import Comparators.*;
 
@@ -11,7 +12,7 @@ public class CarData {
 
     private ArrayList<RefuelTank> refuelTanks;
     private ArrayList<RepairJob> repairJobs;
-    private StatisticsCalculator statisticsCalculator;
+    private final StatisticsCalculator statisticsCalculator;
 
     public CarData() {
         load();
@@ -98,7 +99,7 @@ public class CarData {
             case LITERS:
                 refuelTanks.sort(new LitersComparator());
                 break;
-            case TOTAL_PRICE:
+            case REFUEL_PRICE:
                 refuelTanks.sort(new TotalPriceComparator());
                 break;
             case KILOMETERS_DRIVEN:

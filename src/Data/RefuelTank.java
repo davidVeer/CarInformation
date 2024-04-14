@@ -1,5 +1,7 @@
 package Data;
 
+import Util.InformationType;
+
 import java.time.LocalDate;
 
 public class RefuelTank {
@@ -101,7 +103,7 @@ public class RefuelTank {
         switch (wantedInformation) {
             case LITERS:
                 return this.liters;
-            case TOTAL_PRICE:
+            case REFUEL_PRICE:
                 return this.totalPrice;
             case KILOMETERS_DRIVEN:
                 return this.kilometersDriven;

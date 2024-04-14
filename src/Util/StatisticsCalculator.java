@@ -1,11 +1,37 @@
 package Util;
 
-import Data.InformationType;
 import Data.RefuelTank;
 import Comparators.*;
 
 import java.util.*;
 
+/**
+ * a class that is responsible for calculating all the statistical data utilised in the application
+ * <p>
+ * overview of calculations (all of these return the calculation for the requested InformationType data):
+ * Refuel tank with highest value,
+ * Refuel tank with lowest value,
+ * median value,
+ * mean/average value,
+ * mode value(s),
+ * total value,
+ * population standard deviation,
+ * population variance.
+ * </p><p>
+ * InformationType overview (anything in the InformationType Enum):
+ * amount of liters tanked,
+ * price of the tank,
+ * kilometers driven since last tank,
+ * liter price,
+ * fuel economy (km/l),
+ * refuel number (sequential numbering of amount of refuels).
+ * </p>
+ *
+ *
+ *
+ * @author David van der Veer
+ * @version 1.0
+ */
 public class StatisticsCalculator {
 
     /**
@@ -233,7 +259,7 @@ public class StatisticsCalculator {
             case LITERS:
                 refuelTanks.sort(new LitersComparator());
                 break;
-            case TOTAL_PRICE:
+            case REFUEL_PRICE:
                 refuelTanks.sort(new TotalPriceComparator());
                 break;
             case KILOMETERS_DRIVEN:
