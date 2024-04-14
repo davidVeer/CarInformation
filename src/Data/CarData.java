@@ -2,7 +2,7 @@ package Data;
 
 import Util.InformationType;
 import Util.StatisticsCalculator;
-import Comparators.*;
+import Util.Comparators.*;
 
 import java.time.LocalDate;
 import java.time.Month;

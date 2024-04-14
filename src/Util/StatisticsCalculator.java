@@ -1,7 +1,7 @@
 package Util;
 
 import Data.RefuelTank;
-import Comparators.*;
+import Util.Comparators.*;
 
 import java.util.*;
 

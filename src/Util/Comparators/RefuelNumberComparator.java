@@ -1,4 +1,4 @@
-package Comparators;
+package Util.Comparators;
 
 import Data.RefuelTank;
 import java.util.Comparator;

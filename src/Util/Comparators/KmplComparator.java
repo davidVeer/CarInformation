@@ -1,14 +1,14 @@
-package Comparators;
+package Util.Comparators;
 
 import Data.RefuelTank;
 import java.util.Comparator;
 
-public class KilometersComparator
+public class KmplComparator
 		implements Comparator<RefuelTank>
 {
 
 	public int compare(RefuelTank rt1, RefuelTank rt2) {
-		return Integer.compare(rt1.getKilometersDriven(), rt2.getKilometersDriven());
+		return Double.compare(rt1.getKmpl(), rt2.getKmpl());
 	}
 
 }
