@@ -1,10 +1,7 @@
 package GUI.nodeBuilders;
 
 import Data.CarData;
-import Data.RefuleTank;
 import javafx.scene.Node;
-
-import javax.swing.text.TableView;
 
 public class DataTable implements nodeGetter {
 

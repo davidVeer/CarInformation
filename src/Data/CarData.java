@@ -1,64 +1,157 @@
 package Data;
 
+import Util.InformationType;
+import Util.StatisticsCalculator;
+import Comparators.*;
+
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 public class CarData {
 
-	private ArrayList<RefuleTank> refuleTanks;
+    private ArrayList<RefuelTank> refuelTanks;
+    private ArrayList<RepairJob> repairJobs;
+    private final StatisticsCalculator statisticsCalculator;
 
-	private ArrayList<RepairJob> repairJobs;
+    public CarData() {
+        load();
+        kilometerDrivenInitialiser();
+        statisticsCalculator = new StatisticsCalculator();
+    }
 
-	public CarData() {
-		load();
-	}
+    //initialiser for kilometers driven
+    private void kilometerDrivenInitialiser() {
+        RefuelTank previousRefuel = refuelTanks.get(0);
 
-	public ArrayList<RefuleTank> orderByRefules() {
-		ArrayList<RefuleTank> orderedRefules = new ArrayList<>();
+        for (RefuelTank refuelTank : refuelTanks) {
+            int deltaKilometers = refuelTank.getOdometer() - previousRefuel.getOdometer();
+            refuelTank.setKilometersDriven(deltaKilometers);
+            previousRefuel = refuelTank;
+        }
+    }
 
-		return orderedRefules;
-	}
+    //todo: add testcode here if necessary, remove before commit to main (version-release)
 
-	public ArrayList<RefuleTank> orderByTotalPrice() {
-		ArrayList<RefuleTank> orderedTotalPrices = new ArrayList<>();
+    public void printIndex(int index) {
+        System.out.println(refuelTanks.get(index));
+    }
 
-		return orderedTotalPrices;
-	}
+    public void printHighest(InformationType wantedInformation) {
+        System.out.println("highest " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.highestRefuelTank(this.refuelTanks, wantedInformation));
+    }
 
-	public ArrayList<RefuleTank> orderByLiterPrice() {
-		ArrayList<RefuleTank> orderedLiterPrices = new ArrayList<>();
+    public void printLowest(InformationType wantedInformation) {
+        System.out.println("lowest " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.lowestRefuelTank(this.refuelTanks, wantedInformation));
+    }
 
-		return orderedLiterPrices;
-	}
+    public void printMedians(InformationType wantedInformation) {
+        System.out.println("median(s) of " + wantedInformation + " is/are : ");
 
-	public ArrayList<RefuleTank> orderByLiters() {
-		ArrayList<RefuleTank> orderedLiters = new ArrayList<>();
+        for (RefuelTank refuelTank : statisticsCalculator.medianRefuelTank(this.refuelTanks, wantedInformation)) {
+            System.out.println(refuelTank);
+        }
+    }
 
-		return orderedLiters;
-	}
+    public void printAverage(InformationType wantedInformation) {
+        System.out.println("average " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.meanRefuelTank(this.refuelTanks, wantedInformation) + "\n");
+    }
 
-	public ArrayList<RefuleTank> orderByKmpl() {
-		ArrayList<RefuleTank> orderedKmpl = new ArrayList<>();
+    public void printMode(InformationType wantedInformation) {
+        System.out.println("Modal value(s) for " + wantedInformation + " is/are : ");
+        for (Double mostCommonValue : statisticsCalculator.modeRefuelTank(this.refuelTanks,wantedInformation)) {
+            System.out.println(mostCommonValue);
+        }
+    }
 
-		return orderedKmpl;
-	}
+    public void printTotalValue(InformationType wantedInformation) {
+        System.out.println("total " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.totalValueRefuleTank(this.refuelTanks, wantedInformation));
+    }
 
-	public ArrayList<RefuleTank> orderByKilometers() {
-		ArrayList<RefuleTank> orderedKilometers = new ArrayList<>();
+    public void printVariance(InformationType wantedInformation) {
+        System.out.println("variance of " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.populationVarianceRefuelTank(this.refuelTanks, wantedInformation));
+    }
 
-		return orderedKilometers;
-	}
+    public void printStandardDeviation(InformationType wantedInformation) {
+        System.out.println("variance of " + wantedInformation + " is : ");
+        System.out.println(statisticsCalculator.populationStandardDeviationRefuelTank(this.refuelTanks, wantedInformation));
+    }
 
-	public void printRepairJobs(){
+    public void printRefuelTanks() {
+        for (RefuelTank refuelTank : refuelTanks) {
+            System.out.println(refuelTank);
+        }
+    }
 
-	}
+    public void printRepairJobs() {
 
-	public void save() {
+    }
 
-	}
+    //methods to order list in diffrerent ways
 
-	public void load() {
-		this.refuleTanks = new ArrayList<>();
-		this.repairJobs = new ArrayList<>();
-	}
+    public void orderBy(InformationType wantedInformation) {
+        switch (wantedInformation) {
+            case LITERS:
+                refuelTanks.sort(new LitersComparator());
+                break;
+            case REFUEL_PRICE:
+                refuelTanks.sort(new TotalPriceComparator());
+                break;
+            case KILOMETERS_DRIVEN:
+                refuelTanks.sort(new KilometersComparator());
+                break;
+            case LITER_PRICE:
+                refuelTanks.sort(new LiterPriceComparator());
+                break;
+            case KILOMETERS_PER_LITER:
+                refuelTanks.sort(new KmplComparator());
+                break;
+            case REFUEL_NUMBER:
+                refuelTanks.sort(new RefuelNumberComparator());
+                break;
+        }
+    }
 
+    //save and load functionalities
+    //todo: add proper saving functionality
+    public void save() {
+
+    }
+
+    //todo: add proper loading functionality
+
+    public void load() {
+        this.refuelTanks = new ArrayList<>();
+        this.repairJobs = new ArrayList<>();
+
+        refuelTanks.add(new RefuelTank(3, 58474, 34.70,5, LocalDate.of(2023, Month.SEPTEMBER, 11)));
+        refuelTanks.add(new RefuelTank(2, 58130, 21.45,5, LocalDate.of(2023, Month.SEPTEMBER, 6)));
+        refuelTanks.add(new RefuelTank(4, 58727, 10.50,1, LocalDate.of(2023, Month.SEPTEMBER, 15)));
+        refuelTanks.add(new RefuelTank(5, 58822, 20.02,7, LocalDate.of(2023, Month.SEPTEMBER, 19)));
+        refuelTanks.add(new RefuelTank(6, 59149, 25.92,1, LocalDate.of(2023, Month.SEPTEMBER, 24)));
+        refuelTanks.add(new RefuelTank(7, 59525, 34.28,9, LocalDate.of(2023, Month.OCTOBER, 6)));
+        refuelTanks.add(new RefuelTank(8, 59645, 8.62, 10, LocalDate.of(2023, Month.OCTOBER, 7)));
+//        refuelTanks.add(new RefuelTank(9, 59693, 8.37, 16.48, LocalDate.of(2023, Month.NOVEMBER, 16)));
+//        refuelTanks.add(new RefuelTank(10, 60032, 24.43, 49.82, LocalDate.of(2023, Month.NOVEMBER, 17)));
+
+//        ruelTanks.add(new RefuelTank(2, 58130, 21.45, 42.52, LocalDate.of(2023, Month.SEPTEMBER, 6)));
+//        refuelTanks.add(new RefuelTank(3, 58474, 34.70, 64.13, LocalDate.of(2023, Month.SEPTEMBER, 11)));
+//        refuelTanks.add(new RefuelTank(4, 58727, 10.50, 20.00, LocalDate.of(2023, Month.SEPTEMBER, 15)));
+//        refuelTanks.add(new RefuelTank(5, 58822, 20.02, 40.60, LocalDate.of(2023, Month.SEPTEMBER, 19)));
+//        refuelTanks.add(new RefuelTank(6, 59149, 25.92, 52.92, LocalDate.of(2023, Month.SEPTEMBER, 24)));
+//        refuelTanks.add(new RefuelTank(7, 59525, 34.28, 72.64, LocalDate.of(2023, Month.OCTOBER, 6)));
+//        refuelTanks.add(new RefuelTank(8, 59645, 8.62, 21.65, LocalDate.of(2023, Month.OCTOBER, 7)));
+//        refuelTanks.add(new RefuelTank(9, 59693, 8.37, 16.48, LocalDate.of(2023, Month.NOVEMBER, 16)));
+//        refuelTanks.add(new RefuelTank(10, 60032, 24.43, 49.82, LocalDate.of(2023, Month.NOVEMBER, 17)));
+//        refuelTanks.add(new RefuelTank(11, 60278, 24.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
+//        refuelTanks.add(new RefuelTank(12, 60578, 23.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
+//        refuelTanks.add(new RefuelTank(13, 60878, 7.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
+//        refuelTanks.add(new RefuelTank(14, 61278, 3.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
+//        refuelTanks.add(new RefuelTank(15, 61378, 3.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
+    }
 }
