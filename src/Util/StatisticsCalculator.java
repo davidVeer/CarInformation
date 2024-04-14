@@ -17,7 +17,8 @@ import java.util.*;
  * total value,
  * population standard deviation,
  * population variance.
- * </p><p>
+ * </p>
+ * <p>
  * InformationType overview (anything in the InformationType Enum):
  * amount of liters tanked,
  * price of the tank,
@@ -26,9 +27,6 @@ import java.util.*;
  * fuel economy (km/l),
  * refuel number (sequential numbering of amount of refuels).
  * </p>
- *
- *
- *
  * @author David van der Veer
  * @version 1.0
  */
