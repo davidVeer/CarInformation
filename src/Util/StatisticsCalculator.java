@@ -71,21 +71,22 @@ public class StatisticsCalculator {
      * todo: make method return a single double as the median
      *
      * @author David van der Veer
-     * @return median RefuelTanks
+     * @return median value
      */
-    public ArrayList<RefuelTank> medianRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        ArrayList<RefuelTank> medianRefuelTanks = new ArrayList<>();
+    public double medianRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        double median;
 
         orderListByType(refuelTanks, wantedInformation);
-        RefuelTank STANDARD_MEDIAN = refuelTanks.get(refuelTanks.size() / 2);
-        RefuelTank EVEN_SECONDARY_MEDIAN = refuelTanks.get((refuelTanks.size() / 2) - 1);
+        double STANDARD_MEDIAN = refuelTanks.get(refuelTanks.size() / 2).getType(wantedInformation);
+        double EVEN_SECONDARY_MEDIAN = refuelTanks.get((refuelTanks.size() / 2) - 1).getType(wantedInformation);
 
-        medianRefuelTanks.add(STANDARD_MEDIAN);
+        median = STANDARD_MEDIAN;
         if (refuelTanks.size() % 2 == 0) {
-            medianRefuelTanks.add(EVEN_SECONDARY_MEDIAN);
+            median += EVEN_SECONDARY_MEDIAN;
+            median /= 2;
         }
 
-        return medianRefuelTanks;
+        return median;
     }
 
     /**
