@@ -6,21 +6,21 @@ import java.time.LocalDate;
 
 public class RefuelTank {
 
-    private int refuelNumber;
+    private final int refuelNumber;
 
-    private LocalDate date;
+    private final LocalDate date;
 
-    private int odometer;
+    private final int odometer;
 
-    private double liters;
+    private final double liters;
 
-    private double totalPrice;
+    private final double totalPrice;
 
     private int kilometersDriven;
 
-    private double literPrice;
+    private final double literPrice;
 
-    private double kmpl;
+    private double kilometersPerLiter;
 
 
     public RefuelTank(int refuelNumber, int odometer, double liters, double totalPrice, LocalDate date) {
@@ -30,7 +30,7 @@ public class RefuelTank {
         this.totalPrice = totalPrice;
         this.date = date;
         this.kilometersDriven = -1;
-        this.kmpl = -1.0;
+        this.kilometersPerLiter = -1.0;
         this.literPrice = calculateLiterPrice();
     }
 
@@ -47,7 +47,7 @@ public class RefuelTank {
     //setter for kilometers driven (which also sets kilometers per liters)
     public void setKilometersDriven(int kilometersDriven) {
         this.kilometersDriven = kilometersDriven;
-        this.kmpl = calculateLpkm();
+        this.kilometersPerLiter = calculateLpkm();
     }
 
 
@@ -80,8 +80,8 @@ public class RefuelTank {
         return literPrice;
     }
 
-    public double getKmpl() {
-        return kmpl;
+    public double getKilometersPerLiter() {
+        return kilometersPerLiter;
     }
 
     // toString
@@ -95,7 +95,7 @@ public class RefuelTank {
                         "liters : l " + this.liters + "\n" +
                         "totalPrice : €" + this.totalPrice + "\n" +
                         "kilometersDriven : km " + this.kilometersDriven + "\n" +
-                        "kilometers per liter : 1/" + this.kmpl + "\n" +
+                        "kilometers per liter : 1/" + this.kilometersPerLiter + "\n" +
                         "literPrice : €" + this.literPrice + "\n";
     }
 
@@ -110,7 +110,7 @@ public class RefuelTank {
             case LITER_PRICE:
                 return this.literPrice;
             case KILOMETERS_PER_LITER:
-                return this.kmpl;
+                return this.kilometersPerLiter;
             case REFUEL_NUMBER:
                 return this.refuelNumber;
         }

@@ -8,7 +8,7 @@ public class KmplComparator
 {
 
 	public int compare(RefuelTank rt1, RefuelTank rt2) {
-		return Double.compare(rt1.getKmpl(), rt2.getKmpl());
+		return Double.compare(rt1.getKilometersPerLiter(), rt2.getKilometersPerLiter());
 	}
 
 }
