@@ -67,6 +67,29 @@ public class StatisticsCalculator {
     }
 
     /**
+     * this method calculates the mean value in a set using the formula: μ = Σ ( X[i] ) / n
+     * <p>
+     * this simply stated is the total value divided by the number of items in the set
+     * </p>
+     *
+     * @author David van der Veer
+     * @return mean (average)
+     */
+    public double meanRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        double total = 0.0;
+        double MEAN;
+
+        for (RefuelTank refuelTank : refuelTanks) {
+            double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
+
+            total += REFUEL_TANK_TYPE_VALUE;
+        }
+        MEAN = total / refuelTanks.size();
+
+        return MEAN;
+    }
+
+    /**
      * this method finds the median RefuelTanks in a sorted set of RefuelTanks
      * todo: make method return a single double as the median
      *
@@ -134,29 +157,6 @@ public class StatisticsCalculator {
         MODE_VALUES = mostCommonValues;
 
         return MODE_VALUES;
-    }
-
-    /**
-     * this method calculates the mean value in a set using the formula: μ = Σ ( X[i] ) / n
-     * <p>
-     * this simply stated is the total value divided by the number of items in the set
-     * </p>
-     *
-     * @author David van der Veer
-     * @return mean (average)
-     */
-    public double meanRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        double total = 0.0;
-        double MEAN;
-
-        for (RefuelTank refuelTank : refuelTanks) {
-            double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
-
-            total += REFUEL_TANK_TYPE_VALUE;
-        }
-        MEAN = total / refuelTanks.size();
-
-        return MEAN;
     }
 
     /**
@@ -246,14 +246,15 @@ public class StatisticsCalculator {
     }
 
     /**
-     * this method sorts a list by the InformationType specified in the parameter.
+     * this method sorts a list by the InformationType specified in the parameter and removes any negative or 0 objects.
      * it's a helper method that is used multiple times in the class for calculations that require
      * a sorted and assending list. the lists are sorted using custom comparators that can be found in /comparators.
      * this practical method can potentially be used elsewhere (in different classes)
      *
      * @author David van der Veer
      */
-    private void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
         switch (wantedInformation) {
             case LITERS:
                 refuelTanks.sort(new LitersComparator());
@@ -273,6 +274,9 @@ public class StatisticsCalculator {
         }
     }
 
+    public void removeNegatives(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation){
+        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) > 0);
+    }
     /**
      * this method creates a frequency table (HashMap) of every step along with its frequency as long
      * as the step has a frequency higher than 0.
