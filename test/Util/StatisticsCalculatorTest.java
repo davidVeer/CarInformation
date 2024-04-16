@@ -8,12 +8,22 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StatisticsCalculatorTest {
     StatisticsCalculator calculator = new StatisticsCalculator();
     ArrayList<RefuelTank> testTanks = new ArrayList<>();
+    ArrayList<InformationType> testTypes = new ArrayList<>(Arrays.asList(
+            InformationType.REFUEL_NUMBER,
+            InformationType.REFUEL_PRICE,
+            InformationType.KILOMETERS_DRIVEN,
+            InformationType.LITERS,
+            InformationType.KILOMETERS_PER_LITER,
+            InformationType.LITER_PRICE
+    ));
     CarData testData;
 
     @org.junit.jupiter.api.Test
@@ -29,9 +39,7 @@ class StatisticsCalculatorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void negativeNumbers(){
-        ArrayList<InformationType> testTypes = new ArrayList<>();
-
+    void negativeNumbers() {
         // tank 1 has values of : kilometersDriven = 0.0, literPrice = 0.3968, km/l = 0.0
         RefuelTank TEST_TANK_1 = new RefuelTank(-1, -100, -10, -25.2, LocalDate.of(2024, Month.SEPTEMBER, 3));
         // tank 2 has values of : kilometersDriven = -140, literPrice = 0.3968, km/l = 0.0
@@ -48,13 +56,6 @@ class StatisticsCalculatorTest {
         testTanks.add(TEST_TANK_4);
         testTanks.add(TEST_TANK_5);
 
-        testTypes.add(InformationType.REFUEL_NUMBER);
-        testTypes.add(InformationType.REFUEL_PRICE);
-        testTypes.add(InformationType.KILOMETERS_DRIVEN);
-        testTypes.add(InformationType.LITERS);
-        testTypes.add(InformationType.KILOMETERS_PER_LITER);
-        testTypes.add(InformationType.LITER_PRICE);
-
         try {
             for (RefuelTank testTank : testTanks) {
                 for (InformationType testType : testTypes) {
@@ -62,11 +63,15 @@ class StatisticsCalculatorTest {
                         throw new IllegalArgumentException("items cannot equal or be less then 0");
                 }
             }
-        }
-        catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             fail();
         }
+
+    }
+
+
+    void filetersInvalidNumbers() {
 
     }
 
@@ -89,91 +94,78 @@ class StatisticsCalculatorTest {
         testTanks.add(TEST_TANK_3);
         testTanks.add(TEST_TANK_4);
         testTanks.add(TEST_TANK_5);
-        testData = new CarData(testTanks);
 
-        InformationType testType = InformationType.REFUEL_NUMBER;
+        testData = new CarData(testTanks);
+        HashMap<InformationType, RefuelTank> expectedOutcome = new HashMap<>();
+        expectedOutcome.put(InformationType.REFUEL_NUMBER, TEST_TANK_5);
+        expectedOutcome.put(InformationType.REFUEL_PRICE, TEST_TANK_1);
+        expectedOutcome.put(InformationType.KILOMETERS_DRIVEN, TEST_TANK_5);
+        expectedOutcome.put(InformationType.LITERS, TEST_TANK_5);
+        expectedOutcome.put(InformationType.KILOMETERS_PER_LITER, TEST_TANK_4);
+        expectedOutcome.put(InformationType.LITER_PRICE, TEST_TANK_4);
 
         try {
-            for (int i = 0; i < 5; i++) {
-                RefuelTank HIGHEST_VALUE_REFUEL_TANK;
-                double HIGHEST_TYPE_DATA;
+            for (InformationType testType : testTypes) {
+                RefuelTank CALCULATED_HIGHEST_REFUEL_TANK = calculator.highestRefuelTank(testTanks, testType);
+                RefuelTank highestValueRefuelTank = expectedOutcome.get(testType);
+                double highestTypeData = highestValueRefuelTank.getType(testType);
 
-                switch (testType) {
-                    case REFUEL_NUMBER:
-                        HIGHEST_VALUE_REFUEL_TANK = TEST_TANK_5;
-                        HIGHEST_TYPE_DATA = HIGHEST_VALUE_REFUEL_TANK.getType(testType);
-
-                        if (calculator.highestRefuelTank(testTanks, testType).equals(HIGHEST_VALUE_REFUEL_TANK)) {
-                            testType = InformationType.LITERS;
-                            continue;
-                        }
-                        throw new IllegalArgumentException("the highest refuel number should be " + HIGHEST_TYPE_DATA +
-                                " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
-
-                    case LITERS:
-                        HIGHEST_VALUE_REFUEL_TANK = TEST_TANK_5;
-                        HIGHEST_TYPE_DATA = HIGHEST_VALUE_REFUEL_TANK.getType(testType);
-
-                        if (calculator.highestRefuelTank(testTanks, testType).equals(HIGHEST_VALUE_REFUEL_TANK)) {
-                            testType = InformationType.REFUEL_PRICE;
-                            continue;
-                        }
-                        throw new IllegalArgumentException("the highest liters should be " + HIGHEST_TYPE_DATA +
-                                " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
-
-                    case REFUEL_PRICE:
-                        HIGHEST_VALUE_REFUEL_TANK = TEST_TANK_1;
-                        HIGHEST_TYPE_DATA = HIGHEST_VALUE_REFUEL_TANK.getType(testType);
-
-                        if (calculator.highestRefuelTank(testTanks, testType).equals(HIGHEST_VALUE_REFUEL_TANK)) {
-                            testType = InformationType.LITER_PRICE;
-                            continue;
-                        }
-                        throw new IllegalArgumentException("the highest refuel price should be " + HIGHEST_TYPE_DATA +
-                                " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
-
-                    case LITER_PRICE:
-                        HIGHEST_VALUE_REFUEL_TANK = TEST_TANK_4;
-                        HIGHEST_TYPE_DATA = HIGHEST_VALUE_REFUEL_TANK.getType(testType);
-
-                        if (calculator.highestRefuelTank(testTanks, testType).equals(HIGHEST_VALUE_REFUEL_TANK)) {
-                            testType = InformationType.KILOMETERS_DRIVEN;
-                            continue;
-                        }
-                        throw new IllegalArgumentException("the highest liter price should be " + HIGHEST_TYPE_DATA +
-                                " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
-
-                    case KILOMETERS_DRIVEN:
-                        HIGHEST_VALUE_REFUEL_TANK = TEST_TANK_5;
-                        HIGHEST_TYPE_DATA = HIGHEST_VALUE_REFUEL_TANK.getType(testType);
-
-                        if (calculator.highestRefuelTank(testTanks, testType).equals(HIGHEST_VALUE_REFUEL_TANK)) {
-                            testType = InformationType.KILOMETERS_PER_LITER;
-                            continue;
-                        }
-                        throw new IllegalArgumentException("the highest km driven should be " + HIGHEST_TYPE_DATA +
-                                " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
-
-                    case KILOMETERS_PER_LITER:
-                        HIGHEST_VALUE_REFUEL_TANK = TEST_TANK_5;
-                        HIGHEST_TYPE_DATA = HIGHEST_VALUE_REFUEL_TANK.getType(testType);
-
-                        if (calculator.highestRefuelTank(testTanks, testType).equals(HIGHEST_VALUE_REFUEL_TANK)) {
-                            continue;
-                        }
-                        throw new IllegalArgumentException("the highest km/l should be " + HIGHEST_TYPE_DATA +
-                                " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
-                }
+                if (!CALCULATED_HIGHEST_REFUEL_TANK.equals(highestValueRefuelTank))
+                    throw new IllegalArgumentException("the highest " + testType + " should be " + highestTypeData +
+                            " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
             }
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             fail();
         }
+
 
     }
 
     @org.junit.jupiter.api.Test
     void highestFarAppartNumbers() {
+        testTanks.clear();
+        // tank 1 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_1 = new RefuelTank(54, 5004, 16.54, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 2 has values of : kilometersDriven = 3034, literPrice = 2.0666, km/l = 10.0
+        RefuelTank TEST_TANK_2 = new RefuelTank(22, 8038, 302.25, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 3 has values of : kilometersDriven = -4864 (invalid), literPrice = 2.101, km/l = -78.7 (invalid)
+        RefuelTank TEST_TANK_3 = new RefuelTank(17, 3174, 61.80, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 4 has values of : kilometersDriven = 2214, literPrice = 2.366, km/l = 14.6
+        RefuelTank TEST_TANK_4 = new RefuelTank(68, 5388, 152.12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 5 has values of : kilometersDriven = 201, literPrice = 2.0710, km/l = 19.2
+        RefuelTank TEST_TANK_5 = new RefuelTank(48, 5589, 10.45, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+
+        testTanks.add(TEST_TANK_1);
+        testTanks.add(TEST_TANK_2);
+        testTanks.add(TEST_TANK_3);
+        testTanks.add(TEST_TANK_4);
+        testTanks.add(TEST_TANK_5);
+
+        testData = new CarData(testTanks);
+        HashMap<InformationType, RefuelTank> expectedOutcome = new HashMap<>();
+        expectedOutcome.put(InformationType.REFUEL_NUMBER, TEST_TANK_4);
+        expectedOutcome.put(InformationType.REFUEL_PRICE, TEST_TANK_1);
+        expectedOutcome.put(InformationType.KILOMETERS_DRIVEN, TEST_TANK_2);
+        expectedOutcome.put(InformationType.LITERS, TEST_TANK_2);
+        expectedOutcome.put(InformationType.KILOMETERS_PER_LITER, TEST_TANK_5);
+        expectedOutcome.put(InformationType.LITER_PRICE, TEST_TANK_5);
+
+        try {
+            for (InformationType testType : testTypes) {
+                RefuelTank CALCULATED_HIGHEST_REFUEL_TANK = calculator.highestRefuelTank(testTanks, testType);
+                RefuelTank highestValueRefuelTank = expectedOutcome.get(testType);
+                double highestTypeData = highestValueRefuelTank.getType(testType);
+
+                if (!CALCULATED_HIGHEST_REFUEL_TANK.equals(highestValueRefuelTank))
+                    throw new IllegalArgumentException("the highest " + testType + " should be " + highestTypeData +
+                            " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
+            }
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
+            fail();
+        }
+
     }
 
     @org.junit.jupiter.api.Test

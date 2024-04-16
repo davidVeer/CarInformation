@@ -271,6 +271,8 @@ public class StatisticsCalculator {
             case KILOMETERS_PER_LITER:
                 refuelTanks.sort(new KmplComparator());
                 break;
+            case REFUEL_NUMBER:
+                refuelTanks.sort(new RefuelNumberComparator());
         }
     }
 
