@@ -28,9 +28,10 @@ class StatisticsCalculatorTest {
 
     @org.junit.jupiter.api.Test
     void testEmptyList() {
-        testTanks = new ArrayList<>();
-        testData = new CarData(testTanks);
+
         try {
+            testTanks = new ArrayList<>();
+            testData = new CarData(testTanks);
             calculator.highestRefuelTank(testTanks, InformationType.LITERS);
         } catch (NullPointerException ex) {
             return;
@@ -39,39 +40,36 @@ class StatisticsCalculatorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void negativeNumbers() {
-        // tank 1 has values of : kilometersDriven = 0.0, literPrice = 0.3968, km/l = 0.0
-        RefuelTank TEST_TANK_1 = new RefuelTank(-1, -100, -10, -25.2, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 2 has values of : kilometersDriven = -140, literPrice = 0.3968, km/l = 0.0
-        RefuelTank TEST_TANK_2 = new RefuelTank(-2, -240, -15.5, -30.46, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 3 has values of : kilometersDriven = -120, literPrice = 0.3968, km/l = 0.0
-        RefuelTank TEST_TANK_3 = new RefuelTank(-3, -360, -12.95, -27.83, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 4 has values of : kilometersDriven = -86, literPrice = 0.3968, km/l = 0.0
-        RefuelTank TEST_TANK_4 = new RefuelTank(-4, -446, -8.12, -19.52, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 5 has values of : kilometersDriven = -546, literPrice = 0.3968, km/l = 0.0
-        RefuelTank TEST_TANK_5 = new RefuelTank(-5, -992, -30.6, 56.99, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        testTanks.add(TEST_TANK_1);
-        testTanks.add(TEST_TANK_2);
-        testTanks.add(TEST_TANK_3);
-        testTanks.add(TEST_TANK_4);
-        testTanks.add(TEST_TANK_5);
+    void filtersInvalidNumbers() {
+            // tank 1 has values of : kilometersDriven = 0.0, literPrice = 0.3968, km/l = 0.0
+            RefuelTank TEST_TANK_1 = new RefuelTank(1, -100, -10, -25.2, LocalDate.of(2024, Month.SEPTEMBER, 3));
+            // tank 2 has values of : kilometersDriven = 340, literPrice = 0.3968, km/l = 0.0
+            RefuelTank TEST_TANK_2 = new RefuelTank(2, 240, 15.5, 30.46, LocalDate.of(2024, Month.SEPTEMBER, 3));
+            // tank 3 has values of : kilometersDriven = -480, literPrice = -0.3968, km/l = 0.0
+            RefuelTank TEST_TANK_3 = new RefuelTank(3, -360, -12.95, 27.83, LocalDate.of(2024, Month.SEPTEMBER, 3));
+            // tank 4 has values of : kilometersDriven = -86, literPrice = 0.3968, km/l = 0.0
+            RefuelTank TEST_TANK_4 = new RefuelTank(4, -446, 8.12, 19.52, LocalDate.of(2024, Month.SEPTEMBER, 3));
+            // tank 5 has values of : kilometersDriven = -546, literPrice = 0.3968, km/l = 0.0
+            RefuelTank TEST_TANK_5 = new RefuelTank(5, -992, -30.6, 56.99, LocalDate.of(2024, Month.SEPTEMBER, 3));
+            testTanks.add(TEST_TANK_1);
+            testTanks.add(TEST_TANK_2);
+            testTanks.add(TEST_TANK_3);
+            testTanks.add(TEST_TANK_4);
+            testTanks.add(TEST_TANK_5);
 
-        try {
-            for (RefuelTank testTank : testTanks) {
+            try {
                 for (InformationType testType : testTypes) {
-                    if (testTank.getType(testType) <= 0)
-                        throw new IllegalArgumentException("items cannot equal or be less then 0");
+                    calculator.orderListByType(testTanks,testType);
+                    for (RefuelTank testTank : testTanks) {
+                        throw new IllegalArgumentException("items cannot equal or be less then 0 but "+ testType +
+                                " from tank number: " + testTank.getType(InformationType.REFUEL_NUMBER) +
+                                " is: "  + testTank.getType(testType));
+                    }
                 }
+            } catch (IllegalArgumentException ex) {
+                System.out.println(ex.getMessage());
+                fail();
             }
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
-            fail();
-        }
-
-    }
-
-
-    void filetersInvalidNumbers() {
 
         }
 
