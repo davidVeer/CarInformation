@@ -47,7 +47,8 @@ The application will have the following statistical features:
 ## notes
 ### general 
 keep class diagrams up to date and versioned in separate version subdirectories in class diagram directory 
-(/version1_0, /version2_0 etc.). include a .txt file with why and how it was changed to for better understanding.
+(/version1_0, version1_5, /version2_0 etc.). include a .txt file with why and how it was changed
+to better analyse and improve future class diagrams.
 
 ### GUI
 wireframe for GUI should be built and designed clearly so no mistakes in interpretation can occur and 
@@ -67,3 +68,4 @@ figure out how the formatting and functionality (list?, one long string?, hashMa
 - Reorder Enum to be in the same order to be in the same order as the refuel tank (consistency)
 - CarData should have a getter for the calculator
 - a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
+- remove 0 catch in calculateLowest method (these will be caught in the orderByType)
