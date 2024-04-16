@@ -64,3 +64,4 @@ cant use a negative amount of fuel, or drive a negative amount of kilometers etc
 this should be linked to an attribute which should only be able to be changed if updated (observer pattern with fileIO) 
 - ordering a list should be done through the calculator rather than both in the calculator and CarData itself
 - reorder Enum to be in the same order to be in the same order as the refuel tank (consistency)
+- CarData should have a getter for the calculator

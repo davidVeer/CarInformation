@@ -33,6 +33,12 @@ public class CarData {
 
     //todo: add testcode here if necessary, remove before commit to main (version-release)
 
+    public CarData(ArrayList<RefuelTank> customTanks){
+        refuelTanks = customTanks;
+        kilometerDrivenInitialiser();
+        statisticsCalculator = new StatisticsCalculator();
+    }
+
     public void printAsArray(InformationType wantedInformation) {
         System.out.print("\n");
         System.out.print("{ ");
