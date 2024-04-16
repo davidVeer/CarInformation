@@ -73,7 +73,7 @@ class StatisticsCalculatorTest {
 
     void filetersInvalidNumbers() {
 
-    }
+        }
 
     @org.junit.jupiter.api.Test
     void highestCloseNumbers() {
@@ -112,28 +112,26 @@ class StatisticsCalculatorTest {
 
                 if (!CALCULATED_HIGHEST_REFUEL_TANK.equals(highestValueRefuelTank))
                     throw new IllegalArgumentException("the highest " + testType + " should be " + highestTypeData +
-                            " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
+                            " but is: " + CALCULATED_HIGHEST_REFUEL_TANK.getType(testType));
             }
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             fail();
         }
-
-
     }
 
     @org.junit.jupiter.api.Test
     void highestFarAppartNumbers() {
         testTanks.clear();
-        // tank 1 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
+        // tank 1 has values of : kilometersDriven = 0.0, literPrice = 1.910, km/l = 0.0
         RefuelTank TEST_TANK_1 = new RefuelTank(54, 5004, 16.54, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 2 has values of : kilometersDriven = 3034, literPrice = 2.0666, km/l = 10.0
+        // tank 2 has values of : kilometersDriven = 3034, literPrice = 0.103, km/l = 10.0
         RefuelTank TEST_TANK_2 = new RefuelTank(22, 8038, 302.25, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 3 has values of : kilometersDriven = -4864 (invalid), literPrice = 2.101, km/l = -78.7 (invalid)
+        // tank 3 has values of : kilometersDriven = -4864 (invalid), literPrice = 0.496, km/l = -78.7 (invalid)
         RefuelTank TEST_TANK_3 = new RefuelTank(17, 3174, 61.80, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 4 has values of : kilometersDriven = 2214, literPrice = 2.366, km/l = 14.6
+        // tank 4 has values of : kilometersDriven = 2214, literPrice = 0.187, km/l = 14.6
         RefuelTank TEST_TANK_4 = new RefuelTank(68, 5388, 152.12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 5 has values of : kilometersDriven = 201, literPrice = 2.0710, km/l = 19.2
+        // tank 5 has values of : kilometersDriven = 201, literPrice = 3.014, km/l = 19.2
         RefuelTank TEST_TANK_5 = new RefuelTank(48, 5589, 10.45, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
 
         testTanks.add(TEST_TANK_1);
@@ -159,7 +157,97 @@ class StatisticsCalculatorTest {
 
                 if (!CALCULATED_HIGHEST_REFUEL_TANK.equals(highestValueRefuelTank))
                     throw new IllegalArgumentException("the highest " + testType + " should be " + highestTypeData +
-                            " but is: " + calculator.highestRefuelTank(testTanks, testType).getType(testType));
+                            " but is: " + CALCULATED_HIGHEST_REFUEL_TANK.getType(testType));
+            }
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
+            fail();
+        }
+    }
+
+    @org.junit.jupiter.api.Test
+    void lowestCloseNumbers() {
+        testTanks.clear();
+        // tank 1 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_1 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 2 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_2 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 3 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_3 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 4 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
+        RefuelTank TEST_TANK_4 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 5 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_5 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+
+        testTanks.add(TEST_TANK_1);
+        testTanks.add(TEST_TANK_2);
+        testTanks.add(TEST_TANK_3);
+        testTanks.add(TEST_TANK_4);
+        testTanks.add(TEST_TANK_5);
+
+        testData = new CarData(testTanks);
+        HashMap<InformationType, RefuelTank> expectedOutcome = new HashMap<>();
+        expectedOutcome.put(InformationType.REFUEL_NUMBER, TEST_TANK_1);
+        expectedOutcome.put(InformationType.REFUEL_PRICE, TEST_TANK_4);
+        expectedOutcome.put(InformationType.KILOMETERS_DRIVEN, TEST_TANK_3);
+        expectedOutcome.put(InformationType.LITERS, TEST_TANK_4);
+        expectedOutcome.put(InformationType.KILOMETERS_PER_LITER, TEST_TANK_3);
+        expectedOutcome.put(InformationType.LITER_PRICE, TEST_TANK_2);
+
+        try {
+            for (InformationType testType : testTypes) {
+                RefuelTank CALCULATED_LOWEST_REFUEL_TANK = calculator.lowestRefuelTank(testTanks, testType);
+                RefuelTank highestValueRefuelTank = expectedOutcome.get(testType);
+                double highestTypeData = highestValueRefuelTank.getType(testType);
+
+                if (!CALCULATED_LOWEST_REFUEL_TANK.equals(highestValueRefuelTank))
+                    throw new IllegalArgumentException("the lowest " + testType + " should be " + highestTypeData +
+                            " but is: " + CALCULATED_LOWEST_REFUEL_TANK.getType(testType));
+            }
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
+            fail();
+        }
+    }
+
+    @org.junit.jupiter.api.Test
+    void lowestFarAppartNumbers(){
+        testTanks.clear();
+        // tank 1 has values of : kilometersDriven = 0.0, literPrice = 1.910, km/l = 0.0
+        RefuelTank TEST_TANK_1 = new RefuelTank(54, 5004, 16.54, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 2 has values of : kilometersDriven = 3034, literPrice = 0.103, km/l = 10.0
+        RefuelTank TEST_TANK_2 = new RefuelTank(22, 8038, 302.25, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 3 has values of : kilometersDriven = -4864 (invalid), literPrice = 0.496, km/l = -78.7 (invalid)
+        RefuelTank TEST_TANK_3 = new RefuelTank(17, 3174, 61.80, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 4 has values of : kilometersDriven = 2214, literPrice = 0.187, km/l = 14.6
+        RefuelTank TEST_TANK_4 = new RefuelTank(68, 5388, 152.12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 5 has values of : kilometersDriven = 201, literPrice = 3.014, km/l = 19.2
+        RefuelTank TEST_TANK_5 = new RefuelTank(48, 5589, 10.45, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+
+        testTanks.add(TEST_TANK_1);
+        testTanks.add(TEST_TANK_2);
+        testTanks.add(TEST_TANK_3);
+        testTanks.add(TEST_TANK_4);
+        testTanks.add(TEST_TANK_5);
+
+        testData = new CarData(testTanks);
+        HashMap<InformationType, RefuelTank> expectedOutcome = new HashMap<>();
+        expectedOutcome.put(InformationType.REFUEL_NUMBER, TEST_TANK_3);
+        expectedOutcome.put(InformationType.REFUEL_PRICE, TEST_TANK_4);
+        expectedOutcome.put(InformationType.KILOMETERS_DRIVEN, TEST_TANK_5);
+        expectedOutcome.put(InformationType.LITERS, TEST_TANK_5);
+        expectedOutcome.put(InformationType.KILOMETERS_PER_LITER, TEST_TANK_2);
+        expectedOutcome.put(InformationType.LITER_PRICE, TEST_TANK_2);
+
+        try {
+            for (InformationType testType : testTypes) {
+                RefuelTank CALCULATED_LOWEST_REFUEL_TANK = calculator.lowestRefuelTank(testTanks, testType);
+                RefuelTank highestValueRefuelTank = expectedOutcome.get(testType);
+                double highestTypeData = highestValueRefuelTank.getType(testType);
+
+                if (!CALCULATED_LOWEST_REFUEL_TANK.equals(highestValueRefuelTank))
+                    throw new IllegalArgumentException("the highest " + testType + " should be " + highestTypeData +
+                            " but is: " + CALCULATED_LOWEST_REFUEL_TANK.getType(testType));
             }
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
@@ -168,9 +256,6 @@ class StatisticsCalculatorTest {
 
     }
 
-    @org.junit.jupiter.api.Test
-    void highestMixedNumbers() {
 
-    }
 
 }

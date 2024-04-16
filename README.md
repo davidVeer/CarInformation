@@ -66,3 +66,4 @@ figure out how the formatting and functionality (list?, one long string?, hashMa
 - Ordering a list should be done through the calculator rather than both in the calculator and CarData itself
 - Reorder Enum to be in the same order to be in the same order as the refuel tank (consistency)
 - CarData should have a getter for the calculator
+- a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
