@@ -20,14 +20,14 @@ The application will have the following statistical features:
   <br />
 
 - calculations
--[ ] getting highest values
--[ ] getting lowest values
--[ ] getting/ calculating median values
--[ ] calculating mean/average values
--[ ] calculating mode values (can return multiple values)
--[ ] calculating total (population) values
--[ ] calculating (population) standard deviation
--[ ] calculating (population) variance  
+- [ ] getting highest values
+- [ ] getting lowest values
+- [ ] getting/ calculating median values
+- [ ] calculating mean/average values
+- [ ] calculating mode values (can return multiple values)
+- [ ] calculating total (population) values
+- [ ] calculating (population) standard deviation
+- [ ] calculating (population) variance  
   <br />
 
 - FileIO
