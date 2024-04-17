@@ -261,5 +261,149 @@ class StatisticsCalculatorTest {
 
     }
 
+    @org.junit.jupiter.api.Test
+    void medianSmallLiSt(){
+        testTanks.clear();
+        // tank 1 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_1 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 2 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_2 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 3 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_3 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 4 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
+        RefuelTank TEST_TANK_4 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 5 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_5 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+
+        testTanks.add(TEST_TANK_1);
+        testTanks.add(TEST_TANK_2);
+        testTanks.add(TEST_TANK_3);
+        testTanks.add(TEST_TANK_4);
+        testTanks.add(TEST_TANK_5);
+
+        testData = new CarData(testTanks);
+        HashMap<InformationType, Double> expectedOutcomes = new HashMap<>();
+        expectedOutcomes.put(InformationType.REFUEL_NUMBER, 3.0);
+        expectedOutcomes.put(InformationType.REFUEL_PRICE, 31.0);
+        expectedOutcomes.put(InformationType.KILOMETERS_DRIVEN, 12.5);
+        expectedOutcomes.put(InformationType.LITERS, 15.0);
+        expectedOutcomes.put(InformationType.KILOMETERS_PER_LITER, 1.787);
+        expectedOutcomes.put(InformationType.LITER_PRICE, 2.079);
+
+
+        for (InformationType testType : testTypes) {
+            double EXPECTED_OUTCOME = expectedOutcomes.get(testType);
+            double CALCULATED_OUTCOME = Math.round(calculator.medianRefuelTank(testTanks, testType) * 1000) / 1000.0;
+
+            if (CALCULATED_OUTCOME != EXPECTED_OUTCOME)
+                try {
+                    throw new Exception("median for " + testType + " should be: " + EXPECTED_OUTCOME + " but is: " + CALCULATED_OUTCOME);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    fail();
+                }
+        }
+
+    }
+
+    void medianLargeList() {
+        testTanks.clear();
+        // tank 1 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_1 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 2 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_2 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 3 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_3 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 4 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
+        RefuelTank TEST_TANK_4 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 5 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_5 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+
+        // tank 6 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_6 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 7 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_7 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 8 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_8 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 9 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
+        RefuelTank TEST_TANK_9 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 10 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_10 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+
+        // tank 11 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_11 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 12 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_12 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 13 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_13 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 14 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
+        RefuelTank TEST_TANK_14 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 15 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_15 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+
+        // tank 16 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_16 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 17 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_17 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 18 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_18 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 19 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
+        RefuelTank TEST_TANK_19 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 20 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_20 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+
+        testTanks.add(TEST_TANK_1);
+        testTanks.add(TEST_TANK_2);
+        testTanks.add(TEST_TANK_3);
+        testTanks.add(TEST_TANK_4);
+        testTanks.add(TEST_TANK_5);
+        testTanks.add(TEST_TANK_6);
+        testTanks.add(TEST_TANK_7);
+        testTanks.add(TEST_TANK_8);
+        testTanks.add(TEST_TANK_9);
+        testTanks.add(TEST_TANK_10);
+        testTanks.add(TEST_TANK_11);
+        testTanks.add(TEST_TANK_12);
+        testTanks.add(TEST_TANK_13);
+        testTanks.add(TEST_TANK_14);
+        testTanks.add(TEST_TANK_15);
+        testTanks.add(TEST_TANK_16);
+        testTanks.add(TEST_TANK_17);
+        testTanks.add(TEST_TANK_18);
+        testTanks.add(TEST_TANK_19);
+        testTanks.add(TEST_TANK_20);
+
+        testData = new CarData(testTanks);
+        HashMap<InformationType, Double> expectedOutcomes = new HashMap<>();
+        expectedOutcomes.put(InformationType.REFUEL_NUMBER, 3.0);
+        expectedOutcomes.put(InformationType.REFUEL_PRICE, 31.0);
+        expectedOutcomes.put(InformationType.KILOMETERS_DRIVEN, 12.5);
+        expectedOutcomes.put(InformationType.LITERS, 15.0);
+        expectedOutcomes.put(InformationType.KILOMETERS_PER_LITER, 1.787);
+        expectedOutcomes.put(InformationType.LITER_PRICE, 2.079);
+
+
+        for (InformationType testType : testTypes) {
+            double EXPECTED_OUTCOME = expectedOutcomes.get(testType);
+            double CALCULATED_OUTCOME = Math.round(calculator.medianRefuelTank(testTanks, testType) * 1000) / 1000.0;
+
+            if (CALCULATED_OUTCOME != EXPECTED_OUTCOME)
+                try {
+                    throw new Exception("median for " + testType + " should be: " + EXPECTED_OUTCOME + " but is: " + CALCULATED_OUTCOME);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    fail();
+                }
+        }
+    }
+    /*
+getting/ calculating median values
+calculating total (population) values
+calculating mean/average values
+calculating mode values (can return multiple values)
+calculating (population) standard deviation
+calculating (population) variance
+     */
+
 
 }
