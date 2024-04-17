@@ -254,7 +254,6 @@ public class StatisticsCalculator {
      * @author David van der Veer
      */
     public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
         switch (wantedInformation) {
             case LITERS:
                 refuelTanks.sort(new LitersComparator());
@@ -274,10 +273,6 @@ public class StatisticsCalculator {
             case REFUEL_NUMBER:
                 refuelTanks.sort(new RefuelNumberComparator());
         }
-    }
-
-    public void removeNegatives(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation){
-        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) > 0);
     }
     /**
      * this method creates a frequency table (HashMap) of every step along with its frequency as long

@@ -2,9 +2,7 @@ package Util;
 
 import Data.CarData;
 import Data.RefuelTank;
-import org.junit.Assert;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -41,37 +39,46 @@ class StatisticsCalculatorTest {
 
     @org.junit.jupiter.api.Test
     void filtersInvalidNumbers() {
-            // tank 1 has values of : kilometersDriven = 0.0, literPrice = 0.3968, km/l = 0.0
-            RefuelTank TEST_TANK_1 = new RefuelTank(1, -100, -10, -25.2, LocalDate.of(2024, Month.SEPTEMBER, 3));
-            // tank 2 has values of : kilometersDriven = 340, literPrice = 0.3968, km/l = 0.0
-            RefuelTank TEST_TANK_2 = new RefuelTank(2, 240, 15.5, 30.46, LocalDate.of(2024, Month.SEPTEMBER, 3));
-            // tank 3 has values of : kilometersDriven = -480, literPrice = -0.3968, km/l = 0.0
-            RefuelTank TEST_TANK_3 = new RefuelTank(3, -360, -12.95, 27.83, LocalDate.of(2024, Month.SEPTEMBER, 3));
-            // tank 4 has values of : kilometersDriven = -86, literPrice = 0.3968, km/l = 0.0
-            RefuelTank TEST_TANK_4 = new RefuelTank(4, -446, 8.12, 19.52, LocalDate.of(2024, Month.SEPTEMBER, 3));
-            // tank 5 has values of : kilometersDriven = -546, literPrice = 0.3968, km/l = 0.0
-            RefuelTank TEST_TANK_5 = new RefuelTank(5, -992, -30.6, 56.99, LocalDate.of(2024, Month.SEPTEMBER, 3));
-            testTanks.add(TEST_TANK_1);
-            testTanks.add(TEST_TANK_2);
-            testTanks.add(TEST_TANK_3);
-            testTanks.add(TEST_TANK_4);
-            testTanks.add(TEST_TANK_5);
+        testTanks.clear();
+        // tank 1 has values of : kilometersDriven = 0.0, literPrice = 0.3968, km/l = 0.0
+        RefuelTank TEST_TANK_1 = new RefuelTank(1, -100, -10, -25.2, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 2 has values of : kilometersDriven = 340, literPrice = 0.3968, km/l = 0.0
+        RefuelTank TEST_TANK_2 = new RefuelTank(2, 240, 15.5, 30.46, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 3 has values of : kilometersDriven = -480, literPrice = -0.3968, km/l = 0.0
+        RefuelTank TEST_TANK_3 = new RefuelTank(3, -360, -12.95, 27.83, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 4 has values of : kilometersDriven = -86, literPrice = 0.3968, km/l = 0.0
+        RefuelTank TEST_TANK_4 = new RefuelTank(4, -446, 8.12, 19.52, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 5 has values of : kilometersDriven = -546, literPrice = 0.3968, km/l = 0.0
+        RefuelTank TEST_TANK_5 = new RefuelTank(5, -992, -30.6, 56.99, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        testTanks.add(TEST_TANK_1);
+        testTanks.add(TEST_TANK_2);
+        testTanks.add(TEST_TANK_3);
+        testTanks.add(TEST_TANK_4);
+        testTanks.add(TEST_TANK_5);
 
-            try {
-                for (InformationType testType : testTypes) {
-                    calculator.orderListByType(testTanks,testType);
-                    for (RefuelTank testTank : testTanks) {
-                        throw new IllegalArgumentException("items cannot equal or be less then 0 but "+ testType +
-                                " from tank number: " + testTank.getType(InformationType.REFUEL_NUMBER) +
-                                " is: "  + testTank.getType(testType));
-                    }
-                }
-            } catch (IllegalArgumentException ex) {
-                System.out.println(ex.getMessage());
-                fail();
+        try {
+            for (InformationType testType : testTypes) {
+                calculator.orderListByType(testTanks, testType);
+                do_0_Check(testType);
             }
-
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
+            fail();
         }
+
+    }
+
+    private void do_0_Check(InformationType testType) {
+        for (RefuelTank testTank : testTanks) {
+            double ITEM_TO_CHECK = testTank.getType(testType);
+            String ERROR_MESSAGE = "items cannot equal or be less then 0 but " + testType +
+                " from tank number: " + testTank.getType(InformationType.REFUEL_NUMBER) +
+                " is: " + testTank.getType(testType);
+
+            if (ITEM_TO_CHECK <= 0)
+                throw new IllegalArgumentException(ERROR_MESSAGE);
+        }
+    }
 
     @org.junit.jupiter.api.Test
     void highestCloseNumbers() {
@@ -209,7 +216,7 @@ class StatisticsCalculatorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void lowestFarAppartNumbers(){
+    void lowestFarAppartNumbers() {
         testTanks.clear();
         // tank 1 has values of : kilometersDriven = 0.0, literPrice = 1.910, km/l = 0.0
         RefuelTank TEST_TANK_1 = new RefuelTank(54, 5004, 16.54, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
@@ -253,7 +260,6 @@ class StatisticsCalculatorTest {
         }
 
     }
-
 
 
 }
