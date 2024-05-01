@@ -310,47 +310,47 @@ class StatisticsCalculatorTest {
         testTanks.clear();
         // tank 1 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
         RefuelTank TEST_TANK_1 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 2 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
-        RefuelTank TEST_TANK_2 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 3 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
-        RefuelTank TEST_TANK_3 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 4 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
-        RefuelTank TEST_TANK_4 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 5 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
-        RefuelTank TEST_TANK_5 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 2 has values of : kilometersDriven = 20, literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_2 = new RefuelTank(2, 120, 2.00, 4.50, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 3 has values of : kilometersDriven = 15, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_3 = new RefuelTank(3, 135, 1.23, 3.04, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 4 has values of : kilometersDriven = 35, literPrice = -, km/l = -
+        RefuelTank TEST_TANK_4 = new RefuelTank(4, 170, -1, 5.00, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 5 has values of : kilometersDriven = 8, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_5 = new RefuelTank(5, 178, 0.65, 1.20, LocalDate.of(2024, Month.SEPTEMBER, 3));
 
-        // tank 6 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
-        RefuelTank TEST_TANK_6 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 7 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
-        RefuelTank TEST_TANK_7 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 8 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
-        RefuelTank TEST_TANK_8 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 9 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
-        RefuelTank TEST_TANK_9 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 10 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
-        RefuelTank TEST_TANK_10 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 6 has values of : kilometersDriven = 23, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_6 = new RefuelTank(6, 201, 2.32, 5.17, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 7 has values of : kilometersDriven = -1 , literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_7 = new RefuelTank(7, -1, 5.31, 10.98, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 8 has values of : kilometersDriven = -1, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_8 = new RefuelTank(8, 350, 2.92, 7.32, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 9 has values of : kilometersDriven = 210, literPrice = 2.366, km/l = 1.25
+        RefuelTank TEST_TANK_9 = new RefuelTank(9, 560, 12.00, 27.21, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 10 has values of : kilometersDriven = 10, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_10 = new RefuelTank(10, 570, 1.03, 2.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
 
-        // tank 11 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
-        RefuelTank TEST_TANK_11 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 12 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
-        RefuelTank TEST_TANK_12 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 13 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
-        RefuelTank TEST_TANK_13 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 11 has values of : kilometersDriven = 10, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_11 = new RefuelTank(11, 580, 0.87, 1.52, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 12 has values of : kilometersDriven = -1, literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_12 = new RefuelTank(12, -1, -1, -1, LocalDate.of(1, 1, 1));
+        // tank 13 has values of : kilometersDriven = -1, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_13 = new RefuelTank(13, 625, 2.45, 4.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
         // tank 14 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
-        RefuelTank TEST_TANK_14 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 15 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
-        RefuelTank TEST_TANK_15 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        RefuelTank TEST_TANK_14 = new RefuelTank(14, 640, 1.34, 2.71, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 15 has values of : kilometersDriven = 20, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_15 = new RefuelTank(15, 660, 1.76, 3.00, LocalDate.of(2024, Month.SEPTEMBER, 3));
 
-        // tank 16 has values of : kilometersDriven = 0.0, literPrice = 2.0789, km/l = 0.0
-        RefuelTank TEST_TANK_16 = new RefuelTank(1, 100, 15.20, 31.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 17 has values of : kilometersDriven = 10, literPrice = 2.0666, km/l = 0.66666
-        RefuelTank TEST_TANK_17 = new RefuelTank(2, 110, 15.00, 31, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 18 has values of : kilometersDriven = 5, literPrice = 2.101, km/l = 0.342
-        RefuelTank TEST_TANK_18 = new RefuelTank(3, 115, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 19 has values of : kilometersDriven = 15, literPrice = 2.366, km/l = 1.25
-        RefuelTank TEST_TANK_19 = new RefuelTank(4, 130, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
-        // tank 20 has values of : kilometersDriven = 17, literPrice = 2.0710, km/l = 1.12
-        RefuelTank TEST_TANK_20 = new RefuelTank(5, 147, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 16 has values of : kilometersDriven = 8, literPrice = 2.0789, km/l = 0.0
+        RefuelTank TEST_TANK_16 = new RefuelTank(16, 668, 0.7, 1.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 17 has values of : kilometersDriven = 5, literPrice = 2.0666, km/l = 0.66666
+        RefuelTank TEST_TANK_17 = new RefuelTank(17, 673, 0.3, 0.6, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 18 has values of : kilometersDriven = 19, literPrice = 2.101, km/l = 0.342
+        RefuelTank TEST_TANK_18 = new RefuelTank(18, 692, 14.6, 30.68, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 19 has values of : kilometersDriven = 58, literPrice = 2.366, km/l = 1.25
+        RefuelTank TEST_TANK_19 = new RefuelTank(19, 750, 12, 28.4, LocalDate.of(2024, Month.SEPTEMBER, 3));
+        // tank 20 has values of : kilometersDriven = 50, literPrice = 2.0710, km/l = 1.12
+        RefuelTank TEST_TANK_20 = new RefuelTank(20, 800, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
 
         testTanks.add(TEST_TANK_1);
         testTanks.add(TEST_TANK_2);
