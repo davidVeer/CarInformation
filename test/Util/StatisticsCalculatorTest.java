@@ -31,9 +31,13 @@ class StatisticsCalculatorTest {
 
         try {
             for (InformationType testType : testTypes) {
+                testForEmptyList();
+                filtersInvalidNumbers();
+
                 calculator.orderListByType(testTanks, testType);
                 RefuelTank VALUE_OF_LAST_INDEX = testTanks.get(testTanks.size() - 1);
                 RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
+
 
                 if (VALUE_OF_LAST_INDEX != CALCULATED_HIGHEST_VALUE) {
                     throw new IllegalArgumentException(
@@ -53,6 +57,9 @@ class StatisticsCalculatorTest {
 
         try {
             for (InformationType testType : testTypes) {
+                testForEmptyList();
+                filtersInvalidNumbers();
+
                 calculator.orderListByType(testTanks, testType);
                 RefuelTank VALUE_OF_FIRST_INDEX = testTanks.get(0);
                 RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
@@ -117,17 +124,6 @@ class StatisticsCalculatorTest {
         }
         fail();
     }
-    private void check_0(InformationType testType) {
-        for (RefuelTank testTank : testTanks) {
-            double ITEM_TO_CHECK = testTank.getType(testType);
-            String ERROR_MESSAGE = "items cannot equal or be less then 0 but " + testType +
-                    " from tank number: " + testTank.getType(InformationType.REFUEL_NUMBER) +
-                    " is: " + testTank.getType(testType);
-
-            if (ITEM_TO_CHECK <= 0)
-                throw new IllegalArgumentException(ERROR_MESSAGE);
-        }
-    }
     void filtersInvalidNumbers() {
         try {
             for (InformationType testType : testTypes) {
@@ -137,6 +133,18 @@ class StatisticsCalculatorTest {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             fail();
+        }
+
+    }
+    private void check_0(InformationType testType) {
+        for (RefuelTank testTank : testTanks) {
+            double ITEM_TO_CHECK = testTank.getType(testType);
+            String ERROR_MESSAGE = "items cannot equal or be less then 0 but " + testType +
+                    " from tank number: " + testTank.getType(InformationType.REFUEL_NUMBER) +
+                    " is: " + testTank.getType(testType);
+
+            if (ITEM_TO_CHECK <= 0)
+                throw new IllegalArgumentException(ERROR_MESSAGE);
         }
     }
 
@@ -157,8 +165,7 @@ class StatisticsCalculatorTest {
 
             previousTank = currentTank;
         }
-        testForEmptyList();
-        filtersInvalidNumbers();
+
     }
 
     /*
