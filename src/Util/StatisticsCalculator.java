@@ -1,7 +1,7 @@
 package Util;
 
 import Data.RefuelTank;
-import Comparators.*;
+import Util.Comparators.*;
 
 import java.util.*;
 
@@ -67,25 +67,49 @@ public class StatisticsCalculator {
     }
 
     /**
+     * this method calculates the mean value in a set using the formula: μ = Σ ( X[i] ) / n
+     * <p>
+     * this simply stated is the total value divided by the number of items in the set
+     * </p>
+     *
+     * @author David van der Veer
+     * @return mean (average)
+     */
+    public double meanRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        double total = 0.0;
+        double MEAN;
+
+        for (RefuelTank refuelTank : refuelTanks) {
+            double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
+
+            total += REFUEL_TANK_TYPE_VALUE;
+        }
+        MEAN = total / refuelTanks.size();
+
+        return MEAN;
+    }
+
+    /**
      * this method finds the median RefuelTanks in a sorted set of RefuelTanks
      * todo: make method return a single double as the median
      *
      * @author David van der Veer
-     * @return median RefuelTanks
+     * @return median value
      */
-    public ArrayList<RefuelTank> medianRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        ArrayList<RefuelTank> medianRefuelTanks = new ArrayList<>();
+    public double medianRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        double median;
 
         orderListByType(refuelTanks, wantedInformation);
-        RefuelTank STANDARD_MEDIAN = refuelTanks.get(refuelTanks.size() / 2);
-        RefuelTank EVEN_SECONDARY_MEDIAN = refuelTanks.get((refuelTanks.size() / 2) - 1);
+        double STANDARD_MEDIAN = refuelTanks.get(refuelTanks.size() / 2).getType(wantedInformation);
+        double EVEN_SECONDARY_MEDIAN = refuelTanks.get((refuelTanks.size() / 2) - 1).getType(wantedInformation);
 
-        medianRefuelTanks.add(STANDARD_MEDIAN);
+        median = STANDARD_MEDIAN;
         if (refuelTanks.size() % 2 == 0) {
-            medianRefuelTanks.add(EVEN_SECONDARY_MEDIAN);
+            median += EVEN_SECONDARY_MEDIAN;
+            median /= 2;
         }
 
-        return medianRefuelTanks;
+        return median;
     }
 
     /**
@@ -133,29 +157,6 @@ public class StatisticsCalculator {
         MODE_VALUES = mostCommonValues;
 
         return MODE_VALUES;
-    }
-
-    /**
-     * this method calculates the mean value in a set using the formula: μ = Σ ( X[i] ) / n
-     * <p>
-     * this simply stated is the total value divided by the number of items in the set
-     * </p>
-     *
-     * @author David van der Veer
-     * @return mean (average)
-     */
-    public double meanRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        double total = 0.0;
-        double MEAN;
-
-        for (RefuelTank refuelTank : refuelTanks) {
-            double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
-
-            total += REFUEL_TANK_TYPE_VALUE;
-        }
-        MEAN = total / refuelTanks.size();
-
-        return MEAN;
     }
 
     /**
@@ -245,14 +246,14 @@ public class StatisticsCalculator {
     }
 
     /**
-     * this method sorts a list by the InformationType specified in the parameter.
+     * this method sorts a list by the InformationType specified in the parameter and removes any negative or 0 objects.
      * it's a helper method that is used multiple times in the class for calculations that require
      * a sorted and assending list. the lists are sorted using custom comparators that can be found in /comparators.
      * this practical method can potentially be used elsewhere (in different classes)
      *
      * @author David van der Veer
      */
-    private void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         switch (wantedInformation) {
             case LITERS:
                 refuelTanks.sort(new LitersComparator());
@@ -269,9 +270,10 @@ public class StatisticsCalculator {
             case KILOMETERS_PER_LITER:
                 refuelTanks.sort(new KmplComparator());
                 break;
+            case REFUEL_NUMBER:
+                refuelTanks.sort(new RefuelNumberComparator());
         }
     }
-
     /**
      * this method creates a frequency table (HashMap) of every step along with its frequency as long
      * as the step has a frequency higher than 0.

@@ -2,7 +2,7 @@ package Data;
 
 import Util.InformationType;
 import Util.StatisticsCalculator;
-import Comparators.*;
+import Util.Comparators.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -33,8 +33,19 @@ public class CarData {
 
     //todo: add testcode here if necessary, remove before commit to main (version-release)
 
-    public void printIndex(int index) {
-        System.out.println(refuelTanks.get(index));
+    public CarData(ArrayList<RefuelTank> customTanks){
+        refuelTanks = customTanks;
+        kilometerDrivenInitialiser();
+        statisticsCalculator = new StatisticsCalculator();
+    }
+
+    public void printAsArray(InformationType wantedInformation) {
+        System.out.print("\n");
+        System.out.print("{ ");
+        for (RefuelTank refuelTank : refuelTanks) {
+            System.out.print( ", "+ refuelTank.getType(wantedInformation));
+        }
+        System.out.print(" }");
     }
 
     public void printHighest(InformationType wantedInformation) {
@@ -48,11 +59,8 @@ public class CarData {
     }
 
     public void printMedians(InformationType wantedInformation) {
-        System.out.println("median(s) of " + wantedInformation + " is/are : ");
-
-        for (RefuelTank refuelTank : statisticsCalculator.medianRefuelTank(this.refuelTanks, wantedInformation)) {
-            System.out.println(refuelTank);
-        }
+        System.out.println("median for " + wantedInformation + " is/are : ");
+        System.out.println(statisticsCalculator.medianRefuelTank(this.refuelTanks, wantedInformation));
     }
 
     public void printAverage(InformationType wantedInformation) {
@@ -78,7 +86,7 @@ public class CarData {
     }
 
     public void printStandardDeviation(InformationType wantedInformation) {
-        System.out.println("variance of " + wantedInformation + " is : ");
+        System.out.println("standard deviation of " + wantedInformation + " is : ");
         System.out.println(statisticsCalculator.populationStandardDeviationRefuelTank(this.refuelTanks, wantedInformation));
     }
 
@@ -129,29 +137,12 @@ public class CarData {
         this.refuelTanks = new ArrayList<>();
         this.repairJobs = new ArrayList<>();
 
-        refuelTanks.add(new RefuelTank(3, 58474, 34.70,5, LocalDate.of(2023, Month.SEPTEMBER, 11)));
-        refuelTanks.add(new RefuelTank(2, 58130, 21.45,5, LocalDate.of(2023, Month.SEPTEMBER, 6)));
-        refuelTanks.add(new RefuelTank(4, 58727, 10.50,1, LocalDate.of(2023, Month.SEPTEMBER, 15)));
-        refuelTanks.add(new RefuelTank(5, 58822, 20.02,7, LocalDate.of(2023, Month.SEPTEMBER, 19)));
-        refuelTanks.add(new RefuelTank(6, 59149, 25.92,1, LocalDate.of(2023, Month.SEPTEMBER, 24)));
-        refuelTanks.add(new RefuelTank(7, 59525, 34.28,9, LocalDate.of(2023, Month.OCTOBER, 6)));
-        refuelTanks.add(new RefuelTank(8, 59645, 8.62, 10, LocalDate.of(2023, Month.OCTOBER, 7)));
-//        refuelTanks.add(new RefuelTank(9, 59693, 8.37, 16.48, LocalDate.of(2023, Month.NOVEMBER, 16)));
-//        refuelTanks.add(new RefuelTank(10, 60032, 24.43, 49.82, LocalDate.of(2023, Month.NOVEMBER, 17)));
-
-//        ruelTanks.add(new RefuelTank(2, 58130, 21.45, 42.52, LocalDate.of(2023, Month.SEPTEMBER, 6)));
-//        refuelTanks.add(new RefuelTank(3, 58474, 34.70, 64.13, LocalDate.of(2023, Month.SEPTEMBER, 11)));
-//        refuelTanks.add(new RefuelTank(4, 58727, 10.50, 20.00, LocalDate.of(2023, Month.SEPTEMBER, 15)));
-//        refuelTanks.add(new RefuelTank(5, 58822, 20.02, 40.60, LocalDate.of(2023, Month.SEPTEMBER, 19)));
-//        refuelTanks.add(new RefuelTank(6, 59149, 25.92, 52.92, LocalDate.of(2023, Month.SEPTEMBER, 24)));
-//        refuelTanks.add(new RefuelTank(7, 59525, 34.28, 72.64, LocalDate.of(2023, Month.OCTOBER, 6)));
-//        refuelTanks.add(new RefuelTank(8, 59645, 8.62, 21.65, LocalDate.of(2023, Month.OCTOBER, 7)));
-//        refuelTanks.add(new RefuelTank(9, 59693, 8.37, 16.48, LocalDate.of(2023, Month.NOVEMBER, 16)));
-//        refuelTanks.add(new RefuelTank(10, 60032, 24.43, 49.82, LocalDate.of(2023, Month.NOVEMBER, 17)));
-//        refuelTanks.add(new RefuelTank(11, 60278, 24.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
-//        refuelTanks.add(new RefuelTank(12, 60578, 23.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
-//        refuelTanks.add(new RefuelTank(13, 60878, 7.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
-//        refuelTanks.add(new RefuelTank(14, 61278, 3.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
-//        refuelTanks.add(new RefuelTank(15, 61378, 3.80, 46.15, LocalDate.of(2023, Month.NOVEMBER, 22)));
+        refuelTanks.add(new RefuelTank(2, 2, 4, 1, LocalDate.of(2023, Month.SEPTEMBER, 6)));
+        refuelTanks.add(new RefuelTank(3, 10, 4, 1, LocalDate.of(2023, Month.SEPTEMBER, 11)));
+        refuelTanks.add(new RefuelTank(4, 3, 30, 1, LocalDate.of(2023, Month.SEPTEMBER, 15)));
+        refuelTanks.add(new RefuelTank(5, 4, 9, 1, LocalDate.of(2023, Month.SEPTEMBER, 19)));
+        refuelTanks.add(new RefuelTank(6, 4, 7, 1, LocalDate.of(2023, Month.SEPTEMBER, 24)));
+        refuelTanks.add(new RefuelTank(7, 4, 1, 1, LocalDate.of(2023, Month.OCTOBER, 6)));
+        refuelTanks.add(new RefuelTank(8, 2, 10, 1, LocalDate.of(2023, Month.OCTOBER, 7)));
     }
 }
