@@ -396,13 +396,87 @@ class StatisticsCalculatorTest {
                 }
         }
     }
+
+
+    public RefuelTank generateRandomRefuelTank(RefuelTank previousTank) {
+        RefuelTank generatedTestTank;
+        int REFUEL_NUMBER = previousTank.getRefuelNumber() + 1;
+        int RANDOM_ODOMETER = (int) (previousTank.getOdometer() - 500 + (Math.random() * 1500));
+        double RANDOM_LITERS = -10 + (Math.random() * 80);
+        double RANDOM_PRICE = -80 + (Math.random() * 320);
+        LocalDate RANDOM_DATE = LocalDate.of(2005, Month.SEPTEMBER, 3);
+
+
+        generatedTestTank = new RefuelTank(
+                REFUEL_NUMBER,
+                RANDOM_ODOMETER,
+                RANDOM_LITERS,
+                RANDOM_PRICE,
+                RANDOM_DATE);
+
+        return generatedTestTank;
+    }
+    void testForEmptyList() {
+        try {
+            testTanks = new ArrayList<>();
+            testData = new CarData(testTanks);
+            calculator.highestRefuelTank(testTanks, InformationType.LITERS);
+        } catch (NullPointerException ex) {
+            return;
+        }
+        fail();
+    }
+    private void check_0(InformationType testType) {
+        for (RefuelTank testTank : testTanks) {
+            double ITEM_TO_CHECK = testTank.getType(testType);
+            String ERROR_MESSAGE = "items cannot equal or be less then 0 but " + testType +
+                    " from tank number: " + testTank.getType(InformationType.REFUEL_NUMBER) +
+                    " is: " + testTank.getType(testType);
+
+            if (ITEM_TO_CHECK <= 0)
+                throw new IllegalArgumentException(ERROR_MESSAGE);
+        }
+    }
+    void filtersInvalidNumbers() {
+        try {
+            for (InformationType testType : testTypes) {
+                calculator.orderListByType(testTanks, testType);
+                check_0(testType);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            fail();
+        }
+    }
+
+    void standardSetup() {
+        int RANDOM_LENGTH = (int) (Math.random() * 50);
+        RefuelTank previousTank = new RefuelTank(
+                0,
+                0,
+                0,
+                0,
+                LocalDate.of(2005, Month.SEPTEMBER, 3)
+        );
+
+        testTanks.clear();
+        for (int i = 0; i < RANDOM_LENGTH; i++) {
+            RefuelTank currentTank = generateRandomRefuelTank(previousTank);
+            testTanks.add(currentTank);
+
+            previousTank = currentTank;
+        }
+        testForEmptyList();
+        filtersInvalidNumbers();
+    }
+
     /*
-getting/ calculating median values
-calculating total (population) values
-calculating mean/average values
-calculating mode values (can return multiple values)
-calculating (population) standard deviation
-calculating (population) variance
+    getting/ calculating median values
+    calculating total (population) values
+    calculating mean/average values
+    calculating mode values (can return multiple values)
+    calculating (population) standard deviation
+    calculating (population) variance
      */
 
 
