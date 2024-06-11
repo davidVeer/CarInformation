@@ -2,6 +2,8 @@ package Util;
 
 import Data.CarData;
 import Data.RefuelTank;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -24,53 +26,45 @@ class StatisticsCalculatorTest {
     ));
     CarData testData;
 
+    @Test
+    void testForEmptyList() {
+        testTanks.clear();
+
+        try {
+            testTanks = new ArrayList<>();
+            testData = new CarData(testTanks);
+            calculator.highestRefuelTank(testTanks, InformationType.LITERS);
+        } catch (NullPointerException ex) {
+            return;
+        }
+        fail();
+    }
 
     @org.junit.jupiter.api.Test
     void highestNumbers() {
         standardSetup();
 
-        try {
-            for (InformationType testType : testTypes) {
-                testForEmptyList();
-                filtersInvalidNumbers();
+        for (InformationType testType : testTypes) {
+            calculator.orderListByType(testTanks, testType);
+            RefuelTank VALUE_OF_LAST_INDEX = testTanks.get(testTanks.size() - 1);
+            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
 
-                calculator.orderListByType(testTanks, testType);
-                RefuelTank VALUE_OF_LAST_INDEX = testTanks.get(testTanks.size() - 1);
-                RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
-
-
-                if (VALUE_OF_LAST_INDEX != CALCULATED_HIGHEST_VALUE) {
-                    throw new IllegalArgumentException(
-                            "the highest " + testType + " should be " + VALUE_OF_LAST_INDEX +
-                            " but is: " + CALCULATED_HIGHEST_VALUE.getType(testType));
-                }
-            }
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
-            fail();
+            assertEquals(VALUE_OF_LAST_INDEX, CALCULATED_HIGHEST_VALUE);
         }
+
     }
 
     @org.junit.jupiter.api.Test
     void lowestNumbers() {
         standardSetup();
 
-        try {
-            for (InformationType testType : testTypes) {
-                testForEmptyList();
-                filtersInvalidNumbers();
 
-                calculator.orderListByType(testTanks, testType);
-                RefuelTank VALUE_OF_FIRST_INDEX = testTanks.get(0);
-                RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
+        for (InformationType testType : testTypes) {
+            calculator.orderListByType(testTanks, testType);
+            RefuelTank VALUE_OF_FIRST_INDEX = testTanks.get(0);
+            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
 
-                if (VALUE_OF_FIRST_INDEX != CALCULATED_HIGHEST_VALUE) {
-                    fail();
-                }
-            }
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
-            fail();
+            assertEquals(VALUE_OF_FIRST_INDEX, CALCULATED_HIGHEST_VALUE);
         }
     }
 
@@ -92,16 +86,7 @@ class StatisticsCalculatorTest {
 
         return generatedTestTank;
     }
-    void testForEmptyList() {
-        try {
-            testTanks = new ArrayList<>();
-            testData = new CarData(testTanks);
-            calculator.highestRefuelTank(testTanks, InformationType.LITERS);
-        } catch (NullPointerException ex) {
-            return;
-        }
-        fail();
-    }
+
     void filtersInvalidNumbers() {
         try {
             for (InformationType testType : testTypes) {
@@ -114,6 +99,7 @@ class StatisticsCalculatorTest {
         }
 
     }
+
     private void check_0(InformationType testType) {
         for (RefuelTank testTank : testTanks) {
             double ITEM_TO_CHECK = testTank.getType(testType);
