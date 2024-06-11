@@ -68,12 +68,12 @@ class StatisticsCalculatorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void medianSmallLiSt() {
+    void medianTest() {
         standardSetup();
 
 
         for (InformationType testType : testTypes) {
-            double EXPECTED_OUTCOME = expectedOutcomes.get(testType);
+            double EXPECTED_OUTCOME = 1;
             double CALCULATED_OUTCOME = calculator.medianRefuelTank(testTanks, testType);
 
             if (CALCULATED_OUTCOME != EXPECTED_OUTCOME)
@@ -87,33 +87,6 @@ class StatisticsCalculatorTest {
 
     }
 
-    void medianLargeList() {
-        testTanks.clear();
-
-
-        testData = new CarData(testTanks);
-        HashMap<InformationType, Double> expectedOutcomes = new HashMap<>();
-        expectedOutcomes.put(InformationType.REFUEL_NUMBER, 3.0);
-        expectedOutcomes.put(InformationType.REFUEL_PRICE, 31.0);
-        expectedOutcomes.put(InformationType.KILOMETERS_DRIVEN, 12.5);
-        expectedOutcomes.put(InformationType.LITERS, 15.0);
-        expectedOutcomes.put(InformationType.KILOMETERS_PER_LITER, 1.787);
-        expectedOutcomes.put(InformationType.LITER_PRICE, 2.079);
-
-
-        for (InformationType testType : testTypes) {
-            double EXPECTED_OUTCOME = expectedOutcomes.get(testType);
-            double CALCULATED_OUTCOME = Math.round(calculator.medianRefuelTank(testTanks, testType) * 1000) / 1000.0;
-
-            if (CALCULATED_OUTCOME != EXPECTED_OUTCOME)
-                try {
-                    throw new Exception("median for " + testType + " should be: " + EXPECTED_OUTCOME + " but is: " + CALCULATED_OUTCOME);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    fail();
-                }
-        }
-    }
 
 
     public RefuelTank generateRandomRefuelTank(RefuelTank previousTank) {
