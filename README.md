@@ -70,5 +70,5 @@ figure out how the formatting and functionality (list?, one long string?, hashMa
 - a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
 - remove 0 catch in calculateLowest method (these will be caught in the orderByType)
 - set kilometers driven to -1 if one of the two odometer readings is -1
-- change Calculation parrameter "RefuelTanks" to "values" and add a getValues() method that extracts all the InformationType
+- change Calculation parameter "RefuelTanks" to "values" and add a getValues() method that extracts all the InformationType
   values and puts them in an array of doubles. this might also minimise the use of custom comparators.
