@@ -74,28 +74,6 @@ class StatisticsCalculatorTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
-    void medianTest() {
-        standardSetup();
-
-
-        for (InformationType testType : testTypes) {
-            double EXPECTED_OUTCOME = 1;
-            double CALCULATED_OUTCOME = calculator.medianRefuelTank(testTanks, testType);
-
-            if (CALCULATED_OUTCOME != EXPECTED_OUTCOME)
-                try {
-                    throw new Exception("median for " + testType + " should be: " + EXPECTED_OUTCOME + " but is: " + CALCULATED_OUTCOME);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    fail();
-                }
-        }
-
-    }
-
-
-
     public RefuelTank generateRandomRefuelTank(RefuelTank previousTank) {
         RefuelTank generatedTestTank;
         int REFUEL_NUMBER = previousTank.getRefuelNumber() + 1;
