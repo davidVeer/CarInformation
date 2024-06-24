@@ -286,6 +286,8 @@ public class StatisticsCalculator {
             case REFUEL_NUMBER:
                 refuelTanks.sort(new RefuelNumberComparator());
         }
+
+        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
     }
     /**
      * this method creates a frequency table (HashMap) of every step along with its frequency as long
