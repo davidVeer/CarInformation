@@ -47,7 +47,7 @@ class StatisticsCalculatorTest {
         for (InformationType testType : testTypes) {
             calculator.orderListByType(testTanks, testType);
             RefuelTank VALUE_OF_LAST_INDEX = testTanks.get(testTanks.size() - 1);
-            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
+            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testType);
 
             assertEquals(VALUE_OF_LAST_INDEX, CALCULATED_HIGHEST_VALUE);
         }
@@ -62,7 +62,7 @@ class StatisticsCalculatorTest {
         for (InformationType testType : testTypes) {
             calculator.orderListByType(testTanks, testType);
             RefuelTank VALUE_OF_FIRST_INDEX = testTanks.get(0);
-            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
+            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testType);
 
             assertEquals(VALUE_OF_FIRST_INDEX, CALCULATED_HIGHEST_VALUE);
         }
