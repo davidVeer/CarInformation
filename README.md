@@ -59,16 +59,16 @@ figure out how the formatting and functionality (list?, one long string?, hashMa
 
 ## test notes
 ### test 1 (statistics calculator)
-- Statistics calculator should have an isValid or something to check
+-[ ] Statistics calculator should have an isValid or something to check
   whether it can use a measurement in the calculations (figure out concrete max and min value for every type,
   make sure the values can be applied to modern cars). Filter the invalid values out of the calculation list
-- Statistics calculator should have a constructor with the original refuel tanks as parameter, 
-  this should be linked to an attribute which should only be able to be changed if updated (observer pattern with fileIO) 
-- Ordering a list should be done through the calculator rather than both in the calculator and CarData itself
-- Reorder Enum to be in the same order to be in the same order as the refuel tank (consistency)
-- CarData should have a getter for the calculator
-- a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
-- remove 0 catch in calculateLowest method (these will be caught in the orderByType)
-- set kilometers driven to -1 if one of the two odometer readings is -1
-- change Calculation parameter "RefuelTanks" to "values" and add a getValues() method that extracts all the InformationType
+-[ ] Statistics calculator should have a constructor with the original refuel tanks as parameter, 
+  this should be linked to an attribute which should only be able to be changed if updated (observer pattern with fileIO)
+-[ ] Ordering a list should be done through the calculator rather than both in the calculator and CarData itself
+-[ ] Reorder Enum to be in the same order to be in the same order as the refuel tank (consistency)
+-[ ] CarData should have a getter for the calculator
+-[ ] a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
+-[ ] remove 0 catch in calculateLowest method (these will be caught in the orderByType)
+-[ ] set kilometers driven to -1 if one of the two odometer readings is -1
+-[ ] change Calculation parrameter "RefuelTanks" to "values" and add a getValues() method that extracts all the InformationType
   values and puts them in an array of doubles. this might also minimise the use of custom comparators.

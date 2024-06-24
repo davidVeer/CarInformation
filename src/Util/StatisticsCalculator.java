@@ -3,6 +3,7 @@ package Util;
 import Data.RefuelTank;
 import Util.Comparators.*;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -28,9 +29,14 @@ import java.util.*;
  * refuel number (sequential numbering of amount of refuels).
  * </p>
  * @author David van der Veer
- * @version 1.0
+ * @version 1.1
  */
 public class StatisticsCalculator {
+
+    ArrayList<RefuelTank> originalList;
+    public StatisticsCalculator(ArrayList<RefuelTank> tankList){
+        this.originalList = tankList;
+    }
 
     /**
      * this method finds the last value of provided InformationType in a list sorted by that InformationType
@@ -38,7 +44,8 @@ public class StatisticsCalculator {
      * @author David van der Veer
      * @return lowest non zero RefuelTank
      */
-    public RefuelTank highestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public RefuelTank highestRefuelTank(InformationType wantedInformation) {
+        ArrayList<RefuelTank> refuelTanks = originalList;
         RefuelTank HIGHEST;
 
         orderListByType(refuelTanks, wantedInformation);
@@ -53,7 +60,8 @@ public class StatisticsCalculator {
      * @author David van der Veer
      * @return lowest non zero RefuelTank
      */
-    public RefuelTank lowestRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public RefuelTank lowestRefuelTank(InformationType wantedInformation) {
+        ArrayList<RefuelTank> refuelTanks = originalList;
         int lowestNonZeroIndex = 0;
         RefuelTank LOWEST_NON_ZERO;
 
@@ -75,7 +83,8 @@ public class StatisticsCalculator {
      * @author David van der Veer
      * @return mean (average)
      */
-    public double meanRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public double meanRefuelTank(InformationType wantedInformation) {
+        ArrayList<RefuelTank> refuelTanks = originalList;
         double total = 0.0;
         double MEAN;
 
@@ -96,7 +105,8 @@ public class StatisticsCalculator {
      * @author David van der Veer
      * @return median value
      */
-    public double medianRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public double medianRefuelTank(InformationType wantedInformation) {
+        ArrayList<RefuelTank> refuelTanks = originalList;
         double median;
 
         orderListByType(refuelTanks, wantedInformation);
@@ -119,7 +129,8 @@ public class StatisticsCalculator {
      * @author David van der Veer
      * @return mode value(s)
      */
-    public ArrayList<Double> modeRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public ArrayList<Double> modeRefuelTank(InformationType wantedInformation) {
+        ArrayList<RefuelTank> refuelTanks = originalList;
         ArrayList<Double> mostCommonValues = new ArrayList<>(Collections.singletonList(0.0));
         int mostCommonFrequency = 0;
         HashMap<Double, Integer> frequencyTable;
@@ -168,7 +179,8 @@ public class StatisticsCalculator {
      * @author David van der Veer
      * @return total value
      */
-    public double totalValueRefuleTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public double totalValueRefuleTank(InformationType wantedInformation) {
+        ArrayList<RefuelTank> refuelTanks = originalList;
         double totalValue = 0.0;
 
         if (
@@ -200,8 +212,9 @@ public class StatisticsCalculator {
      * @author David van der Veer
      * @return population standard deviation
      */
-    public double populationStandardDeviationRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        double SAMPLE_MEAN = meanRefuelTank(refuelTanks,wantedInformation);
+    public double populationStandardDeviationRefuelTank(InformationType wantedInformation) {
+        ArrayList<RefuelTank> refuelTanks = originalList;
+        double SAMPLE_MEAN = meanRefuelTank(wantedInformation);
         double SET_SIZE = refuelTanks.size();
         double sumOfEntries = 0.0;
         double STANDARD_DEVIATION;
@@ -236,9 +249,9 @@ public class StatisticsCalculator {
      * @author David van der Veer
      * @return population variance
      */
-    public double populationVarianceRefuelTank(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation){
+    public double populationVarianceRefuelTank(InformationType wantedInformation){
         double VARIANCE;
-        double STANDARD_DEVIATION = populationStandardDeviationRefuelTank(refuelTanks,wantedInformation);
+        double STANDARD_DEVIATION = populationStandardDeviationRefuelTank(wantedInformation);
 
         VARIANCE = Math.pow(STANDARD_DEVIATION , 2);
 
@@ -273,6 +286,8 @@ public class StatisticsCalculator {
             case REFUEL_NUMBER:
                 refuelTanks.sort(new RefuelNumberComparator());
         }
+
+        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
     }
     /**
      * this method creates a frequency table (HashMap) of every step along with its frequency as long
