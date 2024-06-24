@@ -7,7 +7,7 @@ public class Main {
 //        GuiMain.main(args);
         CarData carData = new CarData();
 
-        InformationType testType = InformationType.LITERS;
+        InformationType testType = InformationType.KILOMETERS_DRIVEN;
 
         carData.orderBy(testType);
         carData.printRefuelTanks();

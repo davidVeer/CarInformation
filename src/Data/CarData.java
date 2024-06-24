@@ -29,9 +29,13 @@ public class CarData {
 
     private void kilometerDrivenInitialiser() {
         RefuelTank previousRefuel = refuelTanks.get(0);
+        int deltaKilometers;
 
         for (RefuelTank refuelTank : refuelTanks) {
-            int deltaKilometers = refuelTank.getOdometer() - previousRefuel.getOdometer();
+            if (previousRefuel.getOdometer() < 1)
+                deltaKilometers = -1;
+            else
+                deltaKilometers = refuelTank.getOdometer() - previousRefuel.getOdometer();
             refuelTank.setKilometersDriven(deltaKilometers);
             previousRefuel = refuelTank;
         }
