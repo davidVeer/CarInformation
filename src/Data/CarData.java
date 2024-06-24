@@ -17,10 +17,16 @@ public class CarData {
     public CarData() {
         load();
         kilometerDrivenInitialiser();
-        statisticsCalculator = new StatisticsCalculator();
+        statisticsCalculator = new StatisticsCalculator(this.refuelTanks);
     }
 
+    public CarData(ArrayList<RefuelTank> customTanks){
+        refuelTanks = customTanks;
+        kilometerDrivenInitialiser();
+        statisticsCalculator = new StatisticsCalculator(this.refuelTanks);
+    }
     //initialiser for kilometers driven
+
     private void kilometerDrivenInitialiser() {
         RefuelTank previousRefuel = refuelTanks.get(0);
 
@@ -33,12 +39,6 @@ public class CarData {
 
     //todo: add testcode here if necessary, remove before commit to main (version-release)
 
-    public CarData(ArrayList<RefuelTank> customTanks){
-        refuelTanks = customTanks;
-        kilometerDrivenInitialiser();
-        statisticsCalculator = new StatisticsCalculator();
-    }
-
     public void printAsArray(InformationType wantedInformation) {
         System.out.print("\n");
         System.out.print("{ ");
@@ -50,44 +50,44 @@ public class CarData {
 
     public void printHighest(InformationType wantedInformation) {
         System.out.println("highest " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.highestRefuelTank(this.refuelTanks, wantedInformation));
+        System.out.println(statisticsCalculator.highestRefuelTank(wantedInformation));
     }
 
     public void printLowest(InformationType wantedInformation) {
         System.out.println("lowest " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.lowestRefuelTank(this.refuelTanks, wantedInformation));
+        System.out.println(statisticsCalculator.lowestRefuelTank(wantedInformation));
     }
 
     public void printMedians(InformationType wantedInformation) {
         System.out.println("median for " + wantedInformation + " is/are : ");
-        System.out.println(statisticsCalculator.medianRefuelTank(this.refuelTanks, wantedInformation));
+        System.out.println(statisticsCalculator.medianRefuelTank(wantedInformation));
     }
 
     public void printAverage(InformationType wantedInformation) {
         System.out.println("average " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.meanRefuelTank(this.refuelTanks, wantedInformation) + "\n");
+        System.out.println(statisticsCalculator.meanRefuelTank(wantedInformation) + "\n");
     }
 
     public void printMode(InformationType wantedInformation) {
         System.out.println("Modal value(s) for " + wantedInformation + " is/are : ");
-        for (Double mostCommonValue : statisticsCalculator.modeRefuelTank(this.refuelTanks,wantedInformation)) {
+        for (Double mostCommonValue : statisticsCalculator.modeRefuelTank(wantedInformation)) {
             System.out.println(mostCommonValue);
         }
     }
 
     public void printTotalValue(InformationType wantedInformation) {
         System.out.println("total " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.totalValueRefuleTank(this.refuelTanks, wantedInformation));
+        System.out.println(statisticsCalculator.totalValueRefuleTank(wantedInformation));
     }
 
     public void printVariance(InformationType wantedInformation) {
         System.out.println("variance of " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.populationVarianceRefuelTank(this.refuelTanks, wantedInformation));
+        System.out.println(statisticsCalculator.populationVarianceRefuelTank(wantedInformation));
     }
 
     public void printStandardDeviation(InformationType wantedInformation) {
         System.out.println("standard deviation of " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.populationStandardDeviationRefuelTank(this.refuelTanks, wantedInformation));
+        System.out.println(statisticsCalculator.populationStandardDeviationRefuelTank(wantedInformation));
     }
 
     public void printRefuelTanks() {

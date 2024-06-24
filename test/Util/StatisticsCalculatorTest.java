@@ -12,7 +12,7 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StatisticsCalculatorTest {
-    StatisticsCalculator calculator = new StatisticsCalculator();
+    StatisticsCalculator calculator = new StatisticsCalculator(new ArrayList<RefuelTank>());
     ArrayList<RefuelTank> testTanks = new ArrayList<>();
     ArrayList<InformationType> testTypes = new ArrayList<>(Arrays.asList(
             InformationType.REFUEL_NUMBER,
@@ -30,7 +30,7 @@ class StatisticsCalculatorTest {
         try {
             testTanks = new ArrayList<>();
             testData = new CarData(testTanks);
-            calculator.highestRefuelTank(testTanks, InformationType.LITERS);
+            calculator.highestRefuelTank(InformationType.LITERS);
         } catch (NullPointerException ex) {
             return;
         }
@@ -111,7 +111,7 @@ class StatisticsCalculatorTest {
 
         try {
             for (InformationType testType : testTypes) {
-                RefuelTank CALCULATED_HIGHEST_REFUEL_TANK = calculator.highestRefuelTank(testTanks, testType);
+                RefuelTank CALCULATED_HIGHEST_REFUEL_TANK = calculator.highestRefuelTank(testType);
                 RefuelTank highestValueRefuelTank = expectedOutcome.get(testType);
                 double highestTypeData = highestValueRefuelTank.getType(testType);
 
@@ -156,7 +156,7 @@ class StatisticsCalculatorTest {
 
         try {
             for (InformationType testType : testTypes) {
-                RefuelTank CALCULATED_HIGHEST_REFUEL_TANK = calculator.highestRefuelTank(testTanks, testType);
+                RefuelTank CALCULATED_HIGHEST_REFUEL_TANK = calculator.highestRefuelTank(testType);
                 RefuelTank highestValueRefuelTank = expectedOutcome.get(testType);
                 double highestTypeData = highestValueRefuelTank.getType(testType);
 
@@ -201,7 +201,7 @@ class StatisticsCalculatorTest {
 
         try {
             for (InformationType testType : testTypes) {
-                RefuelTank CALCULATED_LOWEST_REFUEL_TANK = calculator.lowestRefuelTank(testTanks, testType);
+                RefuelTank CALCULATED_LOWEST_REFUEL_TANK = calculator.lowestRefuelTank(testType);
                 RefuelTank highestValueRefuelTank = expectedOutcome.get(testType);
                 double highestTypeData = highestValueRefuelTank.getType(testType);
 
@@ -246,7 +246,7 @@ class StatisticsCalculatorTest {
 
         try {
             for (InformationType testType : testTypes) {
-                RefuelTank CALCULATED_LOWEST_REFUEL_TANK = calculator.lowestRefuelTank(testTanks, testType);
+                RefuelTank CALCULATED_LOWEST_REFUEL_TANK = calculator.lowestRefuelTank(testType);
                 RefuelTank highestValueRefuelTank = expectedOutcome.get(testType);
                 double highestTypeData = highestValueRefuelTank.getType(testType);
 
@@ -293,7 +293,7 @@ class StatisticsCalculatorTest {
 
         for (InformationType testType : testTypes) {
             double EXPECTED_OUTCOME = expectedOutcomes.get(testType);
-            double CALCULATED_OUTCOME = Math.round(calculator.medianRefuelTank(testTanks, testType) * 1000) / 1000.0;
+            double CALCULATED_OUTCOME = Math.round(calculator.medianRefuelTank(testType) * 1000) / 1000.0;
 
             if (CALCULATED_OUTCOME != EXPECTED_OUTCOME)
                 try {
@@ -352,6 +352,9 @@ class StatisticsCalculatorTest {
         // tank 20 has values of : kilometersDriven = 50, literPrice = 2.0710, km/l = 1.12
         RefuelTank TEST_TANK_20 = new RefuelTank(20, 800, 15.21, 31.5, LocalDate.of(2024, Month.SEPTEMBER, 3));
 
+
+        // ordered kilometers driven list
+        // {5,8,8,10,10,15,15,19,20,20,23,35,50,59,210} list size : 15 (median index 7 = 19)
         testTanks.add(TEST_TANK_1);
         testTanks.add(TEST_TANK_2);
         testTanks.add(TEST_TANK_3);
@@ -377,7 +380,7 @@ class StatisticsCalculatorTest {
         HashMap<InformationType, Double> expectedOutcomes = new HashMap<>();
         expectedOutcomes.put(InformationType.REFUEL_NUMBER, 3.0);
         expectedOutcomes.put(InformationType.REFUEL_PRICE, 31.0);
-        expectedOutcomes.put(InformationType.KILOMETERS_DRIVEN, 12.5);
+        expectedOutcomes.put(InformationType.KILOMETERS_DRIVEN, 19.0);
         expectedOutcomes.put(InformationType.LITERS, 15.0);
         expectedOutcomes.put(InformationType.KILOMETERS_PER_LITER, 1.787);
         expectedOutcomes.put(InformationType.LITER_PRICE, 2.079);
@@ -385,7 +388,7 @@ class StatisticsCalculatorTest {
 
         for (InformationType testType : testTypes) {
             double EXPECTED_OUTCOME = expectedOutcomes.get(testType);
-            double CALCULATED_OUTCOME = Math.round(calculator.medianRefuelTank(testTanks, testType) * 1000) / 1000.0;
+            double CALCULATED_OUTCOME = Math.round(calculator.medianRefuelTank(testType) * 1000) / 1000.0;
 
             if (CALCULATED_OUTCOME != EXPECTED_OUTCOME)
                 try {
