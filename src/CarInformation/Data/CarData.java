@@ -18,7 +18,6 @@ public class CarData {
         refuelTanks = customTanks;
         kilometerDrivenInitialiser();
     }
-    //initialiser for kilometers driven
 
     private void kilometerDrivenInitialiser() {
         RefuelTank previousRefuel = refuelTanks.get(0);
