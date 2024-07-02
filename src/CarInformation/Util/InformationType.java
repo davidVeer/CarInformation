@@ -1,4 +1,4 @@
-package Util;
+package CarInformation.Util;
 
 public enum InformationType {
     LITERS,

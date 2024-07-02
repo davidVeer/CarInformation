@@ -1,7 +1,7 @@
-package Util;
+package CarInformation.Util;
 
-import Data.RefuelTank;
-import Util.Comparators.*;
+import CarInformation.Data.RefuelTank;
+import CarInformation.Util.Comparators.*;
 
 import java.lang.reflect.Array;
 import java.util.*;

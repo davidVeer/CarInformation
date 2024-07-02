@@ -1,6 +1,6 @@
-package Util.Comparators;
+package CarInformation.Util.Comparators;
 
-import Data.RefuelTank;
+import CarInformation.Data.RefuelTank;
 import java.util.Comparator;
 
 public class LitersComparator

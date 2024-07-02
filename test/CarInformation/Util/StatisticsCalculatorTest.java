@@ -1,7 +1,7 @@
-package Util;
+package CarInformation.Util;
 
-import Data.CarData;
-import Data.RefuelTank;
+import CarInformation.Data.CarData;
+import CarInformation.Data.RefuelTank;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,8 @@
-package Data;
+package CarInformation.Data;
 
-import Util.InformationType;
-import Util.StatisticsCalculator;
-import Util.Comparators.*;
+import CarInformation.Util.Comparators.*;
+import CarInformation.Util.InformationType;
+import CarInformation.Util.StatisticsCalculator;
 
 import java.time.LocalDate;
 import java.time.Month;

@@ -1,6 +1,6 @@
-import Data.CarData;
+import CarInformation.Data.CarData;
 
-import Util.InformationType;
+import CarInformation.Util.InformationType;
 
 public class Main {
     public static void main(String[] args) {

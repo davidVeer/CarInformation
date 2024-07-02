@@ -49,6 +49,7 @@ The application will have the following statistical features:
 keep class diagrams up to date and versioned in separate version subdirectories in class diagram directory 
 (/version1_0, version1_5, /version2_0 etc.). include a .txt file with why and how it was changed
 to better analyse and improve future class diagrams.
+figure out a way to decrease code duplication for comparators
 
 ### GUI
 wireframe for GUI should be built and designed clearly so no mistakes in interpretation can occur and 
