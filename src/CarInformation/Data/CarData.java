@@ -1,6 +1,5 @@
 package CarInformation.Data;
 
-import CarInformation.Util.Comparators.*;
 import CarInformation.Util.InformationType;
 import CarInformation.Util.StatisticsCalculator;
 
@@ -97,35 +96,6 @@ public class CarData {
     public void printRefuelTanks() {
         for (RefuelTank refuelTank : refuelTanks) {
             System.out.println(refuelTank);
-        }
-    }
-
-    public void printRepairJobs() {
-
-    }
-
-    //methods to order list in diffrerent ways
-
-    public void orderBy(InformationType wantedInformation) {
-        switch (wantedInformation) {
-            case LITERS:
-                refuelTanks.sort(new LitersComparator());
-                break;
-            case REFUEL_PRICE:
-                refuelTanks.sort(new TotalPriceComparator());
-                break;
-            case KILOMETERS_DRIVEN:
-                refuelTanks.sort(new KilometersComparator());
-                break;
-            case LITER_PRICE:
-                refuelTanks.sort(new LiterPriceComparator());
-                break;
-            case KILOMETERS_PER_LITER:
-                refuelTanks.sort(new KmplComparator());
-                break;
-            case REFUEL_NUMBER:
-                refuelTanks.sort(new RefuelNumberComparator());
-                break;
         }
     }
 
