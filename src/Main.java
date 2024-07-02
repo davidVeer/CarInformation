@@ -8,16 +8,5 @@ public class Main {
         CarData carData = new CarData();
 
         InformationType testType = InformationType.KILOMETERS_DRIVEN;
-        carData.printRefuelTanks();
-
-        carData.printHighest(testType);
-        carData.printLowest(testType);
-        carData.printMedians(testType);
-        carData.printAverage(testType);
-        carData.printMode(testType);
-        carData.printTotalValue(testType);
-        carData.printStandardDeviation(testType);
-        carData.printVariance(testType);
-        carData.printAsArray(testType);
     }
 }

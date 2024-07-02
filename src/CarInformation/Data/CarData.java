@@ -1,8 +1,5 @@
 package CarInformation.Data;
 
-import CarInformation.Util.InformationType;
-import CarInformation.Util.StatisticsCalculator;
-
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -11,18 +8,15 @@ public class CarData {
 
     private ArrayList<RefuelTank> refuelTanks;
     private ArrayList<RepairJob> repairJobs;
-    private final StatisticsCalculator statisticsCalculator;
 
     public CarData() {
         load();
         kilometerDrivenInitialiser();
-        statisticsCalculator = new StatisticsCalculator(this.refuelTanks);
     }
 
     public CarData(ArrayList<RefuelTank> customTanks){
         refuelTanks = customTanks;
         kilometerDrivenInitialiser();
-        statisticsCalculator = new StatisticsCalculator(this.refuelTanks);
     }
     //initialiser for kilometers driven
 
@@ -37,65 +31,6 @@ public class CarData {
                 deltaKilometers = refuelTank.getOdometer() - previousRefuel.getOdometer();
             refuelTank.setKilometersDriven(deltaKilometers);
             previousRefuel = refuelTank;
-        }
-    }
-
-    //todo: add testcode here if necessary, remove before commit to main (version-release)
-
-    public void printAsArray(InformationType wantedInformation) {
-        System.out.print("\n");
-        System.out.print("{ ");
-        for (RefuelTank refuelTank : refuelTanks) {
-            System.out.print( ", "+ refuelTank.getType(wantedInformation));
-        }
-        System.out.print(" }");
-    }
-
-    public void printHighest(InformationType wantedInformation) {
-        System.out.println("highest " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.highestRefuelTank(wantedInformation));
-    }
-
-    public void printLowest(InformationType wantedInformation) {
-        System.out.println("lowest " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.lowestRefuelTank(wantedInformation));
-    }
-
-    public void printMedians(InformationType wantedInformation) {
-        System.out.println("median for " + wantedInformation + " is/are : ");
-        System.out.println(statisticsCalculator.medianRefuelTank(wantedInformation));
-    }
-
-    public void printAverage(InformationType wantedInformation) {
-        System.out.println("average " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.meanRefuelTank(wantedInformation) + "\n");
-    }
-
-    public void printMode(InformationType wantedInformation) {
-        System.out.println("Modal value(s) for " + wantedInformation + " is/are : ");
-        for (Double mostCommonValue : statisticsCalculator.modeRefuelTank(wantedInformation)) {
-            System.out.println(mostCommonValue);
-        }
-    }
-
-    public void printTotalValue(InformationType wantedInformation) {
-        System.out.println("total " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.totalValueRefuleTank(wantedInformation));
-    }
-
-    public void printVariance(InformationType wantedInformation) {
-        System.out.println("variance of " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.populationVarianceRefuelTank(wantedInformation));
-    }
-
-    public void printStandardDeviation(InformationType wantedInformation) {
-        System.out.println("standard deviation of " + wantedInformation + " is : ");
-        System.out.println(statisticsCalculator.populationStandardDeviationRefuelTank(wantedInformation));
-    }
-
-    public void printRefuelTanks() {
-        for (RefuelTank refuelTank : refuelTanks) {
-            System.out.println(refuelTank);
         }
     }
 
@@ -119,4 +54,13 @@ public class CarData {
         refuelTanks.add(new RefuelTank(7, 4, 1, 1, LocalDate.of(2023, Month.OCTOBER, 6)));
         refuelTanks.add(new RefuelTank(8, 2, 10, 1, LocalDate.of(2023, Month.OCTOBER, 7)));
     }
+
+    public ArrayList<RefuelTank> getRefuelTanks() {
+        return refuelTanks;
+    }
+
+    public ArrayList<RepairJob> getRepairJobs() {
+        return repairJobs;
+    }
+
 }
