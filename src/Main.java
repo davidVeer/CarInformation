@@ -1,46 +1,20 @@
-import Data.CarData;
+import CarInformation.Data.CarData;
 
-import Util.InformationType;
+import CarInformation.Data.RefuelTank;
+import CarInformation.Util.InformationType;
+import CarInformation.Util.StatisticsCalculator;
 
 public class Main {
     public static void main(String[] args) {
-//        GuiMain.main(args);
         CarData carData = new CarData();
 
-        InformationType testType = InformationType.LITERS;
+        InformationType testType = InformationType.KILOMETERS_DRIVEN;
+        StatisticsCalculator calculator = new StatisticsCalculator(carData.getRefuelTanks());
 
-        carData.orderBy(testType);
-        carData.printRefuelTanks();
+        for (RefuelTank refuelTank : carData.getRefuelTanks()) {
+            System.out.println(refuelTank);
+        }
 
-        //highest and lowest test
-
-        carData.orderBy(InformationType.REFUEL_NUMBER);
-        carData.printHighest(testType);
-
-        carData.orderBy(InformationType.REFUEL_NUMBER);
-        carData.printLowest(testType);
-
-        //median test
-
-        carData.orderBy(InformationType.REFUEL_NUMBER);
-        carData.printMedians(testType);
-
-        carData.orderBy(InformationType.REFUEL_NUMBER);
-        carData.printAverage(testType);
-
-        carData.orderBy(InformationType.REFUEL_NUMBER);
-        carData.printMode(testType);
-
-        carData.orderBy(InformationType.REFUEL_NUMBER);
-        carData.printTotalValue(testType);
-
-        carData.orderBy(InformationType.REFUEL_NUMBER);
-        carData.printStandardDeviation(testType);
-
-        carData.orderBy(InformationType.REFUEL_NUMBER);
-        carData.printVariance(testType);
-
-        carData.orderBy(testType);
-        carData.printAsArray(testType);
+        System.out.println(calculator.lowestRefuelTank(testType));
     }
 }

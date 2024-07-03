@@ -1,6 +1,6 @@
-package Util.Comparators;
+package CarInformation.Util.Comparators;
 
-import Data.RepairJob;
+import CarInformation.Data.RepairJob;
 import java.util.Comparator;
 
 public class RepairJobComparator

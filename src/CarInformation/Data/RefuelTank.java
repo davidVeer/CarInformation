@@ -1,6 +1,6 @@
-package Data;
+package CarInformation.Data;
 
-import Util.InformationType;
+import CarInformation.Util.InformationType;
 
 import java.time.LocalDate;
 

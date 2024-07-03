@@ -1,7 +1,7 @@
-package Util;
+package CarInformation.Util;
 
-import Data.CarData;
-import Data.RefuelTank;
+import CarInformation.Data.CarData;
+import CarInformation.Data.RefuelTank;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StatisticsCalculatorTest {
-    StatisticsCalculator calculator = new StatisticsCalculator(new ArrayList<RefuelTank>());
+    StatisticsCalculator calculator;
     ArrayList<RefuelTank> testTanks = new ArrayList<>();
     ArrayList<InformationType> testTypes = new ArrayList<>(Arrays.asList(
             InformationType.REFUEL_NUMBER,
@@ -24,20 +24,15 @@ class StatisticsCalculatorTest {
             InformationType.KILOMETERS_PER_LITER,
             InformationType.LITER_PRICE
     ));
-    CarData testData;
 
     @Test
-    void testForEmptyList() {
-        testTanks.clear();
-
+    void testForEmptyInitialisation() {
         try {
-            testTanks = new ArrayList<>();
-            testData = new CarData(testTanks);
-            calculator.highestRefuelTank(InformationType.LITERS);
-        } catch (NullPointerException ex) {
-            return;
+            calculator = new StatisticsCalculator(new CarData(new ArrayList<>()).getRefuelTanks());
+            fail();
+        } catch (NullPointerException ex){
+            System.out.println(ex.getMessage());
         }
-        fail();
     }
 
     @org.junit.jupiter.api.Test
@@ -47,7 +42,7 @@ class StatisticsCalculatorTest {
         for (InformationType testType : testTypes) {
             calculator.orderListByType(testTanks, testType);
             RefuelTank VALUE_OF_LAST_INDEX = testTanks.get(testTanks.size() - 1);
-            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
+            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testType);
 
             assertEquals(VALUE_OF_LAST_INDEX, CALCULATED_HIGHEST_VALUE);
         }
@@ -62,7 +57,7 @@ class StatisticsCalculatorTest {
         for (InformationType testType : testTypes) {
             calculator.orderListByType(testTanks, testType);
             RefuelTank VALUE_OF_FIRST_INDEX = testTanks.get(0);
-            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testTanks, testType);
+            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testType);
 
             assertEquals(VALUE_OF_FIRST_INDEX, CALCULATED_HIGHEST_VALUE);
         }

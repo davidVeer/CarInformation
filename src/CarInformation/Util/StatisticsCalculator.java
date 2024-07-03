@@ -1,9 +1,8 @@
-package Util;
+package CarInformation.Util;
 
-import Data.RefuelTank;
-import Util.Comparators.*;
+import CarInformation.Data.RefuelTank;
+import CarInformation.Util.Comparators.*;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -33,9 +32,11 @@ import java.util.*;
  */
 public class StatisticsCalculator {
 
-    ArrayList<RefuelTank> originalList;
+    private ArrayList<RefuelTank> originalList;
     public StatisticsCalculator(ArrayList<RefuelTank> tankList){
         this.originalList = tankList;
+        if (this.originalList.isEmpty())
+            throw new NullPointerException();
     }
 
     /**
@@ -62,16 +63,13 @@ public class StatisticsCalculator {
      */
     public RefuelTank lowestRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
-        int lowestNonZeroIndex = 0;
-        RefuelTank LOWEST_NON_ZERO;
+        RefuelTank LOWEST;
 
         orderListByType(refuelTanks, wantedInformation);
-        while (refuelTanks.get(lowestNonZeroIndex).getType(wantedInformation) == 0) {
-            lowestNonZeroIndex++;
-        }
-        LOWEST_NON_ZERO = refuelTanks.get(lowestNonZeroIndex);
 
-        return LOWEST_NON_ZERO;
+        LOWEST = refuelTanks.get(0);
+
+        return LOWEST;
     }
 
     /**
@@ -259,37 +257,6 @@ public class StatisticsCalculator {
     }
 
     /**
-     * this method sorts a list by the InformationType specified in the parameter and removes any negative or 0 objects.
-     * it's a helper method that is used multiple times in the class for calculations that require
-     * a sorted and assending list. the lists are sorted using custom comparators that can be found in /comparators.
-     * this practical method can potentially be used elsewhere (in different classes)
-     *
-     * @author David van der Veer
-     */
-    public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        switch (wantedInformation) {
-            case LITERS:
-                refuelTanks.sort(new LitersComparator());
-                break;
-            case REFUEL_PRICE:
-                refuelTanks.sort(new TotalPriceComparator());
-                break;
-            case KILOMETERS_DRIVEN:
-                refuelTanks.sort(new KilometersComparator());
-                break;
-            case LITER_PRICE:
-                refuelTanks.sort(new LiterPriceComparator());
-                break;
-            case KILOMETERS_PER_LITER:
-                refuelTanks.sort(new KmplComparator());
-                break;
-            case REFUEL_NUMBER:
-                refuelTanks.sort(new RefuelNumberComparator());
-        }
-
-        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
-    }
-    /**
      * this method creates a frequency table (HashMap) of every step along with its frequency as long
      * as the step has a frequency higher than 0.
      *
@@ -317,6 +284,18 @@ public class StatisticsCalculator {
         }
 
         return frequencies;
+    }
+    /**
+     * this method sorts a list by the InformationType specified in the parameter and removes any negative or 0 objects.
+     * it's a helper method that is used multiple times in the class for calculations that require
+     * a sorted and assending list. the lists are sorted using custom comparators that can be found in /comparators.
+     * this practical method can potentially be used elsewhere (in different classes)
+     *
+     * @author David van der Veer
+     */
+    public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        refuelTanks.sort(new RefuelDataComparator(wantedInformation));
+        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
     }
 
 }

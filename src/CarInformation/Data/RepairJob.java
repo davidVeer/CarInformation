@@ -1,4 +1,4 @@
-package Data;
+package CarInformation.Data;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
