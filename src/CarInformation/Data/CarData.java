@@ -20,18 +20,26 @@ public class CarData {
     }
 
     private void kilometerDrivenInitialiser() {
+        try {
+            if (refuelTanks.isEmpty())
+                throw new NullPointerException();
+        } catch (NullPointerException exception){
+            System.out.println("the list is empty");
+            return;
+        }
+
         RefuelTank previousRefuel = refuelTanks.get(0);
         int deltaKilometers;
 
         for (RefuelTank refuelTank : refuelTanks) {
             if (previousRefuel.getOdometer() <= 0 ||
-                previousRefuel.getOdometer() > refuelTank.getOdometer() ||
-                refuelTank.getOdometer() - previousRefuel.getOdometer() == 0
+                    refuelTank.getOdometer() - previousRefuel.getOdometer() <= 0
             )
                 deltaKilometers = -1;
 
             else
                 deltaKilometers = refuelTank.getOdometer() - previousRefuel.getOdometer();
+
             refuelTank.setKilometersDriven(deltaKilometers);
             previousRefuel = refuelTank;
         }

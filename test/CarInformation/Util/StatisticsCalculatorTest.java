@@ -14,7 +14,7 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StatisticsCalculatorTest {
-    StatisticsCalculator calculator = new StatisticsCalculator(new ArrayList<RefuelTank>());
+    StatisticsCalculator calculator;
     ArrayList<RefuelTank> testTanks = new ArrayList<>();
     ArrayList<InformationType> testTypes = new ArrayList<>(Arrays.asList(
             InformationType.REFUEL_NUMBER,
@@ -24,20 +24,15 @@ class StatisticsCalculatorTest {
             InformationType.KILOMETERS_PER_LITER,
             InformationType.LITER_PRICE
     ));
-    CarData testData;
 
     @Test
-    void testForEmptyList() {
-        testTanks.clear();
-
+    void testForEmptyInitialisation() {
         try {
-            testTanks = new ArrayList<>();
-            testData = new CarData(testTanks);
-            calculator.highestRefuelTank(InformationType.LITERS);
-        } catch (NullPointerException ex) {
-            return;
+            calculator = new StatisticsCalculator(new CarData(new ArrayList<>()).getRefuelTanks());
+            fail();
+        } catch (NullPointerException ex){
+            System.out.println(ex.getMessage());
         }
-        fail();
     }
 
     @org.junit.jupiter.api.Test
