@@ -24,8 +24,12 @@ public class CarData {
         int deltaKilometers;
 
         for (RefuelTank refuelTank : refuelTanks) {
-            if (previousRefuel.getOdometer() <= 0 || previousRefuel.getOdometer() > refuelTank.getOdometer())
+            if (previousRefuel.getOdometer() <= 0 ||
+                previousRefuel.getOdometer() > refuelTank.getOdometer() ||
+                refuelTank.getOdometer() - previousRefuel.getOdometer() == 0
+            )
                 deltaKilometers = -1;
+
             else
                 deltaKilometers = refuelTank.getOdometer() - previousRefuel.getOdometer();
             refuelTank.setKilometersDriven(deltaKilometers);
@@ -47,8 +51,8 @@ public class CarData {
 
         refuelTanks.add(new RefuelTank(2, 2, 4, 1, LocalDate.of(2023, Month.SEPTEMBER, 6)));
         refuelTanks.add(new RefuelTank(3, 10, 4, 1, LocalDate.of(2023, Month.SEPTEMBER, 11)));
-        refuelTanks.add(new RefuelTank(4, 3, 30, 1, LocalDate.of(2023, Month.SEPTEMBER, 15)));
-        refuelTanks.add(new RefuelTank(5, 4, 9, 1, LocalDate.of(2023, Month.SEPTEMBER, 19)));
+        refuelTanks.add(new RefuelTank(4, 4, 30, 1, LocalDate.of(2023, Month.SEPTEMBER, 15)));
+        refuelTanks.add(new RefuelTank(5, 2, 9, 1, LocalDate.of(2023, Month.SEPTEMBER, 19)));
         refuelTanks.add(new RefuelTank(6, 4, 7, 1, LocalDate.of(2023, Month.SEPTEMBER, 24)));
         refuelTanks.add(new RefuelTank(7, 4, 1, 1, LocalDate.of(2023, Month.OCTOBER, 6)));
         refuelTanks.add(new RefuelTank(8, 2, 10, 1, LocalDate.of(2023, Month.OCTOBER, 7)));
