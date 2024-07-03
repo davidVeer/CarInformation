@@ -8,7 +8,7 @@ import java.util.Comparator;
 public class DataComparator
     implements Comparator<RefuelTank>
 {
-    private InformationType type;
+    private final InformationType type;
 
     public DataComparator(InformationType type) {
         this.type = type;
