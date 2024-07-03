@@ -24,7 +24,7 @@ public class CarData {
         int deltaKilometers;
 
         for (RefuelTank refuelTank : refuelTanks) {
-            if (previousRefuel.getOdometer() < 1)
+            if (previousRefuel.getOdometer() <= 0 || previousRefuel.getOdometer() > refuelTank.getOdometer())
                 deltaKilometers = -1;
             else
                 deltaKilometers = refuelTank.getOdometer() - previousRefuel.getOdometer();
