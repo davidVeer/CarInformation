@@ -3,7 +3,6 @@ package CarInformation.Util;
 import CarInformation.Data.RefuelTank;
 import CarInformation.Util.Comparators.*;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -266,26 +265,7 @@ public class StatisticsCalculator {
      * @author David van der Veer
      */
     public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        switch (wantedInformation) {
-            case LITERS:
-                refuelTanks.sort(new LitersComparator());
-                break;
-            case REFUEL_PRICE:
-                refuelTanks.sort(new TotalPriceComparator());
-                break;
-            case KILOMETERS_DRIVEN:
-                refuelTanks.sort(new KilometersComparator());
-                break;
-            case LITER_PRICE:
-                refuelTanks.sort(new LiterPriceComparator());
-                break;
-            case KILOMETERS_PER_LITER:
-                refuelTanks.sort(new KmplComparator());
-                break;
-            case REFUEL_NUMBER:
-                refuelTanks.sort(new RefuelNumberComparator());
-        }
-
+        refuelTanks.sort(new RefuelDataComparator(wantedInformation));
         refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
     }
     /**

@@ -5,12 +5,12 @@ import CarInformation.Util.InformationType;
 
 import java.util.Comparator;
 
-public class DataComparator
+public class RefuelDataComparator
     implements Comparator<RefuelTank>
 {
     private final InformationType type;
 
-    public DataComparator(InformationType type) {
+    public RefuelDataComparator(InformationType type) {
         this.type = type;
     }
 
