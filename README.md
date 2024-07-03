@@ -59,9 +59,9 @@ figure out how the formatting and functionality (list?, one long string?, hashMa
 
 ## test notes
 ### test 1 (statistics calculator)
-- [x] Ordering a list should be done through the calculator rather than both in the calculator and CarData itself
-- [x] Reorder Enum to be in the same order as the refuel tank (consistency)
-- [x] CarData should not contain calculations (should only be used as data storage)
+- [ ] Ordering a list should be done through the calculator rather than both in the calculator and CarData itself
+- [ ] Reorder Enum to be in the same order as the refuel tank (consistency)
+- [ ] CarData should not contain calculations (should only be used as data storage)
 - [ ] Statistics calculator should have an isValid or something to check
   whether it can use a measurement in the calculations (figure out concrete max and min value for every type,
   make sure the values can be applied to modern cars). Filter the invalid values out of the calculation list
