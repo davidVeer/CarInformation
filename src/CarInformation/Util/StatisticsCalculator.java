@@ -32,7 +32,7 @@ import java.util.*;
  */
 public class StatisticsCalculator {
 
-    ArrayList<RefuelTank> originalList;
+    private ArrayList<RefuelTank> originalList;
     public StatisticsCalculator(ArrayList<RefuelTank> tankList){
         this.originalList = tankList;
         if (this.originalList.isEmpty())
@@ -257,18 +257,6 @@ public class StatisticsCalculator {
     }
 
     /**
-     * this method sorts a list by the InformationType specified in the parameter and removes any negative or 0 objects.
-     * it's a helper method that is used multiple times in the class for calculations that require
-     * a sorted and assending list. the lists are sorted using custom comparators that can be found in /comparators.
-     * this practical method can potentially be used elsewhere (in different classes)
-     *
-     * @author David van der Veer
-     */
-    public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
-        refuelTanks.sort(new RefuelDataComparator(wantedInformation));
-        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
-    }
-    /**
      * this method creates a frequency table (HashMap) of every step along with its frequency as long
      * as the step has a frequency higher than 0.
      *
@@ -296,6 +284,18 @@ public class StatisticsCalculator {
         }
 
         return frequencies;
+    }
+    /**
+     * this method sorts a list by the InformationType specified in the parameter and removes any negative or 0 objects.
+     * it's a helper method that is used multiple times in the class for calculations that require
+     * a sorted and assending list. the lists are sorted using custom comparators that can be found in /comparators.
+     * this practical method can potentially be used elsewhere (in different classes)
+     *
+     * @author David van der Veer
+     */
+    public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        refuelTanks.sort(new RefuelDataComparator(wantedInformation));
+        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
     }
 
 }
