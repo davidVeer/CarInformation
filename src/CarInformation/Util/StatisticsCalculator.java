@@ -64,16 +64,13 @@ public class StatisticsCalculator {
      */
     public RefuelTank lowestRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
-        int lowestNonZeroIndex = 0;
-        RefuelTank LOWEST_NON_ZERO;
+        RefuelTank LOWEST;
 
         orderListByType(refuelTanks, wantedInformation);
-        while (refuelTanks.get(lowestNonZeroIndex).getType(wantedInformation) == 0) {
-            lowestNonZeroIndex++;
-        }
-        LOWEST_NON_ZERO = refuelTanks.get(lowestNonZeroIndex);
 
-        return LOWEST_NON_ZERO;
+        LOWEST = refuelTanks.get(0);
+
+        return LOWEST;
     }
 
     /**
