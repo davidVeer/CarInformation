@@ -30,19 +30,15 @@ The application will have the following statistical features:
 - [ ] calculating (population) variance  
   <br />
 
-- FileIO
+- saving functionality/ file IO
 - [ ] save function which writes all refuel tanks to a file (object output stream?)
 - [ ] load function which loads in all saved data
 - [ ] refresh function (recalls load function)  
+- [ ] CarData class should be a Subject that calls its observers to update if something changes.
+- [ ] Statistics calculator should have a constructor with the original refuel tanks as parameter,
+  this should be linked to an attribute which should only be able to be change if updated (through observer pattern)
   <br />
 
-- GUI
-- [ ] showing latest measurement on startup
-- [ ] table showing every measurement (can be ordered in different ways)
-- [ ] tab showing statistics
-- [ ] C.R.U.D buttons for new repair job and refuel tank
-- [ ] save and load will be done automatically (attempt observer pattern)
-- [ ] tab containing different repair job notes (this should be developed and thought out further)
 
 ## notes
 ### general 
@@ -65,13 +61,6 @@ figure out how the formatting and functionality (list?, one long string?, hashMa
 - [ ] a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
 - [ ] remove 0 catch in calculateLowest method (these will be caught in the orderByType)
 - [ ] set kilometers driven to -1 if one of the two odometer readings is -1
-
-
 - [ ] Statistics calculator should have an isValid or something to check
   whether it can use a measurement in the calculations (figure out concrete max and min value for every type,
   make sure the values can be applied to modern cars). Filter the invalid values out of the calculation list
-- [ ] CarData class should be a Subject that calls its observers to update if something changes.
-- [ ] Statistics calculator should have a constructor with the original refuel tanks as parameter,
-  this should be linked to an attribute which should only be able to be change if updated (through observer pattern)
-- [ ] change Calculation parameter "RefuelTanks" to "values" and add a getValues() method that extracts all the InformationType
-  values and puts them in an array of doubles. this might also minimise the use of custom comparators.
