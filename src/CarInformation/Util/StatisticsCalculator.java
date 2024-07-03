@@ -36,6 +36,8 @@ public class StatisticsCalculator {
     ArrayList<RefuelTank> originalList;
     public StatisticsCalculator(ArrayList<RefuelTank> tankList){
         this.originalList = tankList;
+        if (this.originalList.isEmpty())
+            throw new NullPointerException();
     }
 
     /**
