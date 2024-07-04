@@ -45,7 +45,6 @@ The application will have the following statistical features:
 - keep class diagrams up to date and versioned in separate version subdirectories in class diagram directory 
 (/version1_0, version1_5, /version2_0 etc.). include a .txt file with why and how it was changed
 to better analyse and improve future class diagrams.
-- figure out a way to decrease code duplication for comparators
 
 ### GUI
  - the GUI will be scrapped as I want to turn this into an app for ease of use. 
@@ -55,12 +54,31 @@ figure out how the formatting and functionality (list?, one long string?, hashMa
 
 ## test notes
 ### test 1 (statistics calculator)
+right off the bat I found some pretty glaring issues with code structure and functionality that I barely got to test the 
+actual calculation part of the code. I did start writing tests but this was a lot of copy-paste code which I wanted to avoid
+so for the next test I will research how to create more solid tests.
+
+below are some things I wanted fix before starting to actually write definitive tests, along with some actual bugs I
+somehow managed to find through my still very crude tests.
+
 - [ ] Ordering a list should be done through the calculator rather than both in the calculator and CarData itself
 - [ ] Reorder Enum to be in the same order as the refuel tank (consistency)
-- [ ] CarData should not contain calculations (should only be used as data storage)
+- [ ] CarData should not contain calculations (should only be used as data storage) 
 - [ ] a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
 - [ ] remove 0 catch in calculateLowest method (these will be caught in the orderByType)
 - [ ] set kilometers driven to -1 if one of the two odometer readings is -1
 - [ ] Statistics calculator should have an isValid or something to check
   whether it can use a measurement in the calculations (figure out concrete max and min value for every type,
   make sure the values can be applied to modern cars). Filter the invalid values out of the calculation list
+- [ ] figure out a way to decrease code duplication for comparators
+- [ ] calculator should make use of an "original" list which all methods use to calculate their statistic
+
+### test 2 (statistics calculator)
+overall started with more solid code to test however figuring out a way to write solid tests was difficult.
+I wanted to work with randomly generated data that would work reliably when testing code. generating the data was
+the easy part but figuring out a way to write a test without reusing the code it's designed to test is more difficult.
+
+- at first, I found a bug where the calculator would remove items from the original list it received which turned out to
+be an initialisation error or my part (I didn't know how to properly initialize one arraylist using another)
+
+here are some bullet points to improve for the next test or iteration of the class.
