@@ -48,7 +48,7 @@ public class StatisticsCalculator {
      * @author David van der Veer
      */
     public RefuelTank highestRefuelTank(InformationType wantedInformation) {
-        ArrayList<RefuelTank> refuelTanks = originalList;
+        ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         RefuelTank HIGHEST;
 
         refuelTanks = orderListByType(refuelTanks, wantedInformation);
@@ -64,7 +64,7 @@ public class StatisticsCalculator {
      * @author David van der Veer
      */
     public RefuelTank lowestRefuelTank(InformationType wantedInformation) {
-        ArrayList<RefuelTank> refuelTanks = originalList;
+        ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         RefuelTank LOWEST;
 
         refuelTanks = orderListByType(refuelTanks, wantedInformation);
@@ -84,7 +84,7 @@ public class StatisticsCalculator {
      * @author David van der Veer
      */
     public double meanRefuelTank(InformationType wantedInformation) {
-        ArrayList<RefuelTank> refuelTanks = originalList;
+        ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         double total = 0.0;
         double MEAN;
 
@@ -106,7 +106,7 @@ public class StatisticsCalculator {
      * @author David van der Veer
      */
     public double medianRefuelTank(InformationType wantedInformation) {
-        ArrayList<RefuelTank> refuelTanks = originalList;
+        ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         double median;
 
         refuelTanks = orderListByType(refuelTanks, wantedInformation);
@@ -130,7 +130,7 @@ public class StatisticsCalculator {
      * @author David van der Veer
      */
     public ArrayList<Double> modeRefuelTank(InformationType wantedInformation) {
-        ArrayList<RefuelTank> refuelTanks = originalList;
+        ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         ArrayList<Double> mostCommonValues = new ArrayList<>(Collections.singletonList(0.0));
         int mostCommonFrequency = 0;
         HashMap<Double, Integer> frequencyTable;
@@ -180,7 +180,7 @@ public class StatisticsCalculator {
      * @author David van der Veer
      */
     public double totalValueRefuleTank(InformationType wantedInformation) {
-        ArrayList<RefuelTank> refuelTanks = originalList;
+        ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         double totalValue = 0.0;
 
         if (

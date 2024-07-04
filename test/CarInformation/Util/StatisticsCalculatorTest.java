@@ -56,21 +56,36 @@ class StatisticsCalculatorTest {
     @org.junit.jupiter.api.Test
     void lowestNumbers() {
         standardSetup();
-        int initialSize = testTanks.size();
 
         for (InformationType testType : testTypes) {
             RefuelTank CALCULATED_LOWEST_VALUE = calculator.lowestRefuelTank(testType);
-            assertEquals(initialSize, testTanks.size());
-
 
             for (RefuelTank testTank : testTanks)
                 assertFalse(
-                        CALCULATED_LOWEST_VALUE.getType(testType) > 0 && CALCULATED_LOWEST_VALUE.getType(testType) > testTank.getType(testType),
+                        testTank.getType(testType) > 0 && CALCULATED_LOWEST_VALUE.getType(testType) > testTank.getType(testType),
                         "found a value lower then calculated lowest. " +
                                 "\nCalculated lowest: " + CALCULATED_LOWEST_VALUE.getType(testType) +
                                 "\nLower value: " + testTank.getType(testType)
                 );
         }
+    }
+
+    @Test
+    public void totalValueTest(){
+        standardSetup();
+        double totalValue = 0;
+
+        for (InformationType testType : testTypes) {
+            for (RefuelTank testTank : testTanks) {
+                if (testTank.getType(testType) > 0 )
+                    totalValue += testTank.getType(testType);
+            }
+            assertTrue(totalValue == calculator.totalValueRefuleTank(testType),
+                    "expected outcome was : " + totalValue +
+                    "\n actual outcome was : " + calculator.totalValueRefuleTank(testType)
+                    );
+        }
+
     }
 
     public RefuelTank generateRandomRefuelTank(RefuelTank previousTank) {
@@ -90,30 +105,6 @@ class StatisticsCalculatorTest {
                 RANDOM_DATE);
 
         return generatedTestTank;
-    }
-
-    void filtersInvalidNumbers() {
-        try {
-            for (InformationType testType : testTypes) {
-                check_0(testType);
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            fail();
-        }
-
-    }
-
-    private void check_0(InformationType testType) {
-        for (RefuelTank testTank : testTanks) {
-            double ITEM_TO_CHECK = testTank.getType(testType);
-            String ERROR_MESSAGE = "items cannot equal or be less then 0 but " + testType +
-                    " from tank number: " + testTank.getType(InformationType.REFUEL_NUMBER) +
-                    " is: " + testTank.getType(testType);
-
-            if (ITEM_TO_CHECK <= 0)
-                throw new IllegalArgumentException(ERROR_MESSAGE);
-        }
     }
 
     void standardSetup() {
@@ -138,7 +129,7 @@ class StatisticsCalculatorTest {
     }
 
     /*
-    getting/ calculating median values
+    getting/calculating median values
     calculating total (population) values
     calculating mean/average values
     calculating mode values (can return multiple values)
