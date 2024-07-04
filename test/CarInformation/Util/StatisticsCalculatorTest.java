@@ -38,28 +38,38 @@ class StatisticsCalculatorTest {
     @org.junit.jupiter.api.Test
     void highestNumbers() {
         standardSetup();
+        int initialSize = testTanks.size();
 
         for (InformationType testType : testTypes) {
-            calculator.orderListByType(testTanks, testType);
-            RefuelTank VALUE_OF_LAST_INDEX = testTanks.get(testTanks.size() - 1);
             RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testType);
+            assertEquals(initialSize, testTanks.size());
 
-            assertEquals(VALUE_OF_LAST_INDEX, CALCULATED_HIGHEST_VALUE);
+            for (RefuelTank testTank : testTanks)
+                assertFalse(CALCULATED_HIGHEST_VALUE.getType(testType) < testTank.getType(testType),
+                        "found a value higher then calculated highest. " +
+                                "\nCalculated Highest: " + CALCULATED_HIGHEST_VALUE.getType(testType) +
+                                "\nHigher value: " + testTank.getType(testType)
+                        );
         }
-
     }
 
     @org.junit.jupiter.api.Test
     void lowestNumbers() {
         standardSetup();
-
+        int initialSize = testTanks.size();
 
         for (InformationType testType : testTypes) {
-            calculator.orderListByType(testTanks, testType);
-            RefuelTank VALUE_OF_FIRST_INDEX = testTanks.get(0);
-            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testType);
+            RefuelTank CALCULATED_LOWEST_VALUE = calculator.lowestRefuelTank(testType);
+            assertEquals(initialSize, testTanks.size());
 
-            assertEquals(VALUE_OF_FIRST_INDEX, CALCULATED_HIGHEST_VALUE);
+
+            for (RefuelTank testTank : testTanks)
+                assertFalse(
+                        CALCULATED_LOWEST_VALUE.getType(testType) > 0 && CALCULATED_LOWEST_VALUE.getType(testType) > testTank.getType(testType),
+                        "found a value lower then calculated lowest. " +
+                                "\nCalculated lowest: " + CALCULATED_LOWEST_VALUE.getType(testType) +
+                                "\nLower value: " + testTank.getType(testType)
+                );
         }
     }
 
@@ -85,7 +95,6 @@ class StatisticsCalculatorTest {
     void filtersInvalidNumbers() {
         try {
             for (InformationType testType : testTypes) {
-                calculator.orderListByType(testTanks, testType);
                 check_0(testType);
             }
         } catch (Exception ex) {
@@ -108,7 +117,7 @@ class StatisticsCalculatorTest {
     }
 
     void standardSetup() {
-        int RANDOM_LENGTH = (int) (Math.random() * 50);
+        int RANDOM_LENGTH = 10 + (int) (Math.random() * 50);
         RefuelTank previousTank = new RefuelTank(
                 0,
                 0,
@@ -125,6 +134,7 @@ class StatisticsCalculatorTest {
             previousTank = currentTank;
         }
 
+        calculator = new StatisticsCalculator(new CarData(testTanks).getRefuelTanks());
     }
 
     /*

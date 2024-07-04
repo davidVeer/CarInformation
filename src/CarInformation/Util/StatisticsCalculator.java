@@ -27,13 +27,15 @@ import java.util.*;
  * fuel economy (km/l),
  * refuel number (sequential numbering of amount of refuels).
  * </p>
+ *
  * @author David van der Veer
  * @version 1.1
  */
 public class StatisticsCalculator {
 
-    private ArrayList<RefuelTank> originalList;
-    public StatisticsCalculator(ArrayList<RefuelTank> tankList){
+    private final ArrayList<RefuelTank> originalList;
+
+    public StatisticsCalculator(ArrayList<RefuelTank> tankList) {
         this.originalList = tankList;
         if (this.originalList.isEmpty())
             throw new NullPointerException();
@@ -42,14 +44,14 @@ public class StatisticsCalculator {
     /**
      * this method finds the last value of provided InformationType in a list sorted by that InformationType
      *
-     * @author David van der Veer
      * @return lowest non zero RefuelTank
+     * @author David van der Veer
      */
     public RefuelTank highestRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
         RefuelTank HIGHEST;
 
-        orderListByType(refuelTanks, wantedInformation);
+        refuelTanks = orderListByType(refuelTanks, wantedInformation);
         HIGHEST = refuelTanks.get(refuelTanks.size() - 1);
 
         return HIGHEST;
@@ -58,14 +60,14 @@ public class StatisticsCalculator {
     /**
      * this method finds the first non 0 value of provided InformationType in a list sorted by that InformationType
      *
-     * @author David van der Veer
      * @return lowest non zero RefuelTank
+     * @author David van der Veer
      */
     public RefuelTank lowestRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
         RefuelTank LOWEST;
 
-        orderListByType(refuelTanks, wantedInformation);
+        refuelTanks = orderListByType(refuelTanks, wantedInformation);
 
         LOWEST = refuelTanks.get(0);
 
@@ -78,8 +80,8 @@ public class StatisticsCalculator {
      * this simply stated is the total value divided by the number of items in the set
      * </p>
      *
-     * @author David van der Veer
      * @return mean (average)
+     * @author David van der Veer
      */
     public double meanRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
@@ -100,14 +102,14 @@ public class StatisticsCalculator {
      * this method finds the median RefuelTanks in a sorted set of RefuelTanks
      * todo: make method return a single double as the median
      *
-     * @author David van der Veer
      * @return median value
+     * @author David van der Veer
      */
     public double medianRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
         double median;
 
-        orderListByType(refuelTanks, wantedInformation);
+        refuelTanks = orderListByType(refuelTanks, wantedInformation);
         double STANDARD_MEDIAN = refuelTanks.get(refuelTanks.size() / 2).getType(wantedInformation);
         double EVEN_SECONDARY_MEDIAN = refuelTanks.get((refuelTanks.size() / 2) - 1).getType(wantedInformation);
 
@@ -124,8 +126,8 @@ public class StatisticsCalculator {
      * this method calculates the mean by first creating a frequency table and subsequently comparing every frequency
      * and finding which one(s) are the highest.
      *
-     * @author David van der Veer
      * @return mode value(s)
+     * @author David van der Veer
      */
     public ArrayList<Double> modeRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
@@ -135,7 +137,7 @@ public class StatisticsCalculator {
         ArrayList<Double> MODE_VALUES;
         double STEP_SIZE;
 
-        orderListByType(refuelTanks, wantedInformation);
+        refuelTanks = orderListByType(refuelTanks, wantedInformation);
 
         switch (wantedInformation) {
             case LITER_PRICE:
@@ -174,17 +176,17 @@ public class StatisticsCalculator {
      * basically this means adding up every value in the set to get a total
      * </p>
      *
-     * @author David van der Veer
      * @return total value
+     * @author David van der Veer
      */
     public double totalValueRefuleTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
         double totalValue = 0.0;
 
         if (
-                wantedInformation.equals(InformationType.LITER_PRICE) ||
-                wantedInformation.equals(InformationType.KILOMETERS_PER_LITER) ||
-                wantedInformation.equals(InformationType.REFUEL_NUMBER)
+            wantedInformation.equals(InformationType.LITER_PRICE) ||
+            wantedInformation.equals(InformationType.KILOMETERS_PER_LITER) ||
+            wantedInformation.equals(InformationType.REFUEL_NUMBER)
         )
             return Double.NEGATIVE_INFINITY;
 
@@ -205,10 +207,10 @@ public class StatisticsCalculator {
      * source: "Standard Deviation Formula, Statistics, Variance, Sample and Population Mean",
      * by: The Organic Chemistry Tutor (12 feb 2017),
      * YouTube : <a href="https://www.youtube.com/watch?v=deIQeQzPK08">...</a>
-     *  <p/>
+     * <p/>
      *
-     * @author David van der Veer
      * @return population standard deviation
+     * @author David van der Veer
      */
     public double populationStandardDeviationRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
@@ -223,7 +225,7 @@ public class StatisticsCalculator {
 
             sumOfEntries += ENTRY;
         }
-        STANDARD_DEVIATION = Math.sqrt(sumOfEntries/SET_SIZE);
+        STANDARD_DEVIATION = Math.sqrt(sumOfEntries / SET_SIZE);
 
         return STANDARD_DEVIATION;
     }
@@ -244,14 +246,14 @@ public class StatisticsCalculator {
      * YouTube : <a href="https://www.youtube.com/watch?v=deIQeQzPK08">...</a>
      * </p>
      *
-     * @author David van der Veer
      * @return population variance
+     * @author David van der Veer
      */
-    public double populationVarianceRefuelTank(InformationType wantedInformation){
+    public double populationVarianceRefuelTank(InformationType wantedInformation) {
         double VARIANCE;
         double STANDARD_DEVIATION = populationStandardDeviationRefuelTank(wantedInformation);
 
-        VARIANCE = Math.pow(STANDARD_DEVIATION , 2);
+        VARIANCE = Math.pow(STANDARD_DEVIATION, 2);
 
         return VARIANCE;
     }
@@ -260,8 +262,8 @@ public class StatisticsCalculator {
      * this method creates a frequency table (HashMap) of every step along with its frequency as long
      * as the step has a frequency higher than 0.
      *
-     * @author David van der Veer
      * @return frequency table
+     * @author David van der Veer
      */
     private HashMap<Double, Integer> calculateFrequencyByStep(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation, double STEP_SIZE) {
         HashMap<Double, Integer> frequencies = new HashMap<>();
@@ -276,8 +278,7 @@ public class StatisticsCalculator {
                 int CURRENT_FREQUENCY = frequencies.get(STEP);
 
                 updatedFrequency = CURRENT_FREQUENCY + 1;
-            }
-            else
+            } else
                 updatedFrequency = 1;
 
             frequencies.put(STEP, updatedFrequency);
@@ -285,6 +286,7 @@ public class StatisticsCalculator {
 
         return frequencies;
     }
+
     /**
      * this method sorts a list by the InformationType specified in the parameter and removes any negative or 0 objects.
      * it's a helper method that is used multiple times in the class for calculations that require
@@ -293,9 +295,10 @@ public class StatisticsCalculator {
      *
      * @author David van der Veer
      */
-    public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public ArrayList<RefuelTank> orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         refuelTanks.sort(new RefuelDataComparator(wantedInformation));
         refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
-    }
 
+        return refuelTanks;
+    }
 }
