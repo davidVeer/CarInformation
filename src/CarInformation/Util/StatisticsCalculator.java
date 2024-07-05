@@ -85,7 +85,7 @@ public class StatisticsCalculator {
      */
     public double totalValueRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
-        double totalValue = 0.0;
+        double totalValue = Double.NaN;
 
 
         filterInvalidValues(refuelTanks, wantedInformation);
@@ -99,7 +99,10 @@ public class StatisticsCalculator {
         for (RefuelTank refuelTank : refuelTanks) {
             double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
 
-            totalValue += REFUEL_TANK_TYPE_VALUE;
+            if (refuelTank.equals(refuelTanks.get(0)))
+                totalValue = REFUEL_TANK_TYPE_VALUE;
+            else
+                totalValue += REFUEL_TANK_TYPE_VALUE;
         }
 
 

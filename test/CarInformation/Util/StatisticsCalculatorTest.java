@@ -112,7 +112,7 @@ class StatisticsCalculatorTest {
                 testType.equals(InformationType.KILOMETERS_PER_LITER) ||
                 testType.equals(InformationType.REFUEL_NUMBER)
         )
-            assertEquals(Double.NEGATIVE_INFINITY, calculator.totalValueRefuelTank(testType));
+            assertEquals(Double.NEGATIVE_INFINITY, CALCULATED_TOTAL_VALUE);
         else
             assertTrue(CALCULATION_DELTA < 0.000001,
                     "\nType being tested : " + testType +
