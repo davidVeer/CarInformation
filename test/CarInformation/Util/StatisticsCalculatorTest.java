@@ -226,7 +226,40 @@ class StatisticsCalculatorTest {
 
         testTanks.clear();
         for (int i = 0; i < RANDOM_LENGTH; i++) {
-            RefuelTank currentTank = generateRandomRefuelTank(previousTank);
+            RefuelTank currentTank = generateRandomMixedRefuelTank(previousTank);
+            testTanks.add(currentTank);
+
+            previousTank = currentTank;
+        }
+
+        calculator = new StatisticsCalculator(new CarData(testTanks).getRefuelTanks());
+    }
+
+    void standardSetup(String validity) {
+        int RANDOM_LENGTH = 10 + (int) (Math.random() * 50);
+        RefuelTank previousTank = new RefuelTank(
+                0,
+                0,
+                0,
+                0,
+                LocalDate.of(2005, Month.SEPTEMBER, 3)
+        );
+
+        testTanks.clear();
+        for (int i = 0; i < RANDOM_LENGTH; i++) {
+            RefuelTank currentTank;
+
+            switch (validity) {
+                case "negative":
+                    currentTank = generateRandomAllNegativeRefuelTank(previousTank);
+                    break;
+                case "positive":
+                    currentTank = generateRandomAllPositiveRefuelTank(previousTank);
+                    break;
+                default:
+                    currentTank = generateRandomMixedRefuelTank(previousTank);
+                    break;
+            }
             testTanks.add(currentTank);
 
             previousTank = currentTank;
