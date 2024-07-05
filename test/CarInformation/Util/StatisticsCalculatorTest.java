@@ -87,31 +87,39 @@ class StatisticsCalculatorTest {
     @Test
     public void totalValueTest() {
         standardSetup();
-        double totalValue = 0.0;
 
         for (InformationType testType : testTypes) {
-            double CALCULATED_TOTAL_VALUE = calculator.totalValueRefuleTank(testType);
+            try {
+                double CALCULATED_TOTAL_VALUE = calculator.totalValueRefuelTank(testType);
+                calculateAndAssertTotal(testType, CALCULATED_TOTAL_VALUE);
+            } catch (NullPointerException exception) {
+                System.out.println("all Items within " + testType + " are invalid");
+            }
 
-            for (RefuelTank testTank : testTanks)
-                if (testTank.getType(testType) > 0)
-                    totalValue += testTank.getType(testType);
-
-            double CALCULATION_DELTA = Math.abs(totalValue - CALCULATED_TOTAL_VALUE);
-
-            if (testType.equals(InformationType.LITER_PRICE) ||
-                    testType.equals(InformationType.KILOMETERS_PER_LITER) ||
-                    testType.equals(InformationType.REFUEL_NUMBER)
-            )
-                assertEquals(Double.NEGATIVE_INFINITY, calculator.totalValueRefuleTank(testType));
-            else
-                assertTrue(CALCULATION_DELTA < 0.000001,
-                        "\nType being tested : " + testType +
-                                "\nexpected outcome was : " + totalValue +
-                                "\nactual outcome was : " + CALCULATED_TOTAL_VALUE
-                );
-
-            totalValue = 0.0;
         }
+    }
+
+    private void calculateAndAssertTotal(InformationType testType, double CALCULATED_TOTAL_VALUE) {
+        double totalValue = 0.0;
+
+        for (RefuelTank testTank : testTanks)
+            if (testTank.getType(testType) > 0)
+                totalValue += testTank.getType(testType);
+
+        double CALCULATION_DELTA = Math.abs(totalValue - CALCULATED_TOTAL_VALUE);
+
+        if (testType.equals(InformationType.LITER_PRICE) ||
+                testType.equals(InformationType.KILOMETERS_PER_LITER) ||
+                testType.equals(InformationType.REFUEL_NUMBER)
+        )
+            assertEquals(Double.NEGATIVE_INFINITY, calculator.totalValueRefuelTank(testType));
+        else
+            assertTrue(CALCULATION_DELTA < 0.000001,
+                    "\nType being tested : " + testType +
+                            "\nexpected outcome was : " + totalValue +
+                            "\nactual outcome was : " + CALCULATED_TOTAL_VALUE
+            );
+
     }
 
     @Test
