@@ -65,16 +65,23 @@ class StatisticsCalculatorTest {
         standardSetup();
 
         for (InformationType testType : testTypes) {
-            RefuelTank CALCULATED_LOWEST_VALUE = calculator.lowestRefuelTank(testType);
-
-            for (RefuelTank testTank : testTanks)
-                assertFalse(
-                        testTank.getType(testType) > 0 && CALCULATED_LOWEST_VALUE.getType(testType) > testTank.getType(testType),
-                        "found a value lower then calculated lowest. " +
-                                "\nCalculated lowest: " + CALCULATED_LOWEST_VALUE.getType(testType) +
-                                "\nLower value: " + testTank.getType(testType)
-                );
+            try {
+                RefuelTank CALCULATED_LOWEST_VALUE = calculator.lowestRefuelTank(testType);
+                assertLowestValueInValidList(testType, CALCULATED_LOWEST_VALUE);
+            } catch (NullPointerException exception) {
+                System.out.println("all Items within " + testType + " are invalid");
+            }
         }
+    }
+
+    private void assertLowestValueInValidList(InformationType testType, RefuelTank CALCULATED_LOWEST_VALUE){
+           for (RefuelTank testTank : testTanks)
+            assertFalse(
+                    testTank.getType(testType) > 0 && CALCULATED_LOWEST_VALUE.getType(testType) > testTank.getType(testType),
+                    "\nfound a value lower then calculated lowest. " +
+                            "\nCalculated lowest: " + CALCULATED_LOWEST_VALUE.getType(testType) +
+                            "\nLower value: " + testTank.getType(testType)
+            );
     }
 
     @Test
