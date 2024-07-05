@@ -34,7 +34,6 @@ import java.util.*;
 public class StatisticsCalculator {
     private final ArrayList<RefuelTank> originalList;
 
-
     public StatisticsCalculator(ArrayList<RefuelTank> tankList) {
         this.originalList = tankList;
         if (this.originalList.isEmpty())
@@ -51,8 +50,9 @@ public class StatisticsCalculator {
         ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         RefuelTank HIGHEST;
 
-        orderListByType(refuelTanks, wantedInformation);
-        HIGHEST = refuelTanks.get(refuelTanks.size() - 1);
+
+            orderListByType(refuelTanks, wantedInformation);
+            HIGHEST = refuelTanks.get(refuelTanks.size() - 1);
 
         return HIGHEST;
     }
@@ -68,8 +68,8 @@ public class StatisticsCalculator {
         RefuelTank LOWEST;
 
         orderListByType(refuelTanks, wantedInformation);
-
         LOWEST = refuelTanks.get(0);
+
 
         return LOWEST;
     }
@@ -83,9 +83,10 @@ public class StatisticsCalculator {
      * @return total value
      * @author David van der Veer
      */
-    public double totalValueRefuleTank(InformationType wantedInformation) {
+    public double totalValueRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         double totalValue = 0.0;
+
 
         filterInvalidValues(refuelTanks, wantedInformation);
         if (
@@ -100,6 +101,7 @@ public class StatisticsCalculator {
 
             totalValue += REFUEL_TANK_TYPE_VALUE;
         }
+
 
         return totalValue;
     }
@@ -118,6 +120,7 @@ public class StatisticsCalculator {
         double total = 0.0;
         double MEAN;
 
+
         filterInvalidValues(refuelTanks, wantedInformation);
         for (RefuelTank refuelTank : refuelTanks) {
             double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
@@ -131,7 +134,6 @@ public class StatisticsCalculator {
 
     /**
      * this method finds the median RefuelTanks in a sorted set of RefuelTanks
-     * todo: make method return a single double as the median
      *
      * @return median value
      * @author David van der Veer
@@ -150,6 +152,7 @@ public class StatisticsCalculator {
             median /= 2;
         }
 
+
         return median;
     }
 
@@ -167,6 +170,7 @@ public class StatisticsCalculator {
         HashMap<Double, Integer> frequencyTable;
         ArrayList<Double> MODE_VALUES;
         double STEP_SIZE;
+
 
         orderListByType(refuelTanks, wantedInformation);
 
@@ -197,6 +201,7 @@ public class StatisticsCalculator {
             }
         }
         MODE_VALUES = mostCommonValues;
+
 
         return MODE_VALUES;
     }
@@ -299,10 +304,18 @@ public class StatisticsCalculator {
      */
     public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         refuelTanks.sort(new RefuelDataComparator(wantedInformation));
-        filterInvalidValues(refuelTanks,wantedInformation);
+        filterInvalidValues(refuelTanks, wantedInformation);
     }
 
+    /**
+     * this method removes items from the arraylist if the value of the InformationType within that item is (less than) 0.
+     *
+     * @throws NullPointerException if all values in the arraylist were invalid
+     * @author David van der Veer
+     */
     private void filterInvalidValues(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
+        if (refuelTanks.isEmpty())
+            throw new NullPointerException("all values were invalid");
     }
 }
