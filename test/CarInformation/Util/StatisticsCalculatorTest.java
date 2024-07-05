@@ -76,11 +76,13 @@ class StatisticsCalculatorTest {
         double totalValue = 0.0;
 
         for (InformationType testType : testTypes) {
+            double CALCULATED_TOTAL_VALUE = calculator.totalValueRefuleTank(testType);
+
             for (RefuelTank testTank : testTanks)
                 if (testTank.getType(testType) > 0)
                     totalValue += testTank.getType(testType);
 
-            double CALCULATION_DELTA = Math.abs(totalValue - calculator.totalValueRefuleTank(testType));
+            double CALCULATION_DELTA = Math.abs(totalValue - CALCULATED_TOTAL_VALUE);
 
             if (testType.equals(InformationType.LITER_PRICE) ||
                     testType.equals(InformationType.KILOMETERS_PER_LITER) ||
@@ -91,10 +93,39 @@ class StatisticsCalculatorTest {
                 assertTrue(CALCULATION_DELTA < 0.000001,
                         "\nType being tested : " + testType +
                                 "\nexpected outcome was : " + totalValue +
-                                "\nactual outcome was : " + calculator.totalValueRefuleTank(testType)
+                                "\nactual outcome was : " + CALCULATED_TOTAL_VALUE
                 );
 
             totalValue = 0.0;
+        }
+    }
+
+    @Test
+    public void meanTest(){
+        standardSetup();
+        double totalValue = 0.0;
+        int amountOfEntries = 0;
+
+        for (InformationType testType : testTypes) {
+            double CALCULATED_MEAN = calculator.meanRefuelTank(testType);
+
+            for (RefuelTank testTank : testTanks)
+                if (testTank.getType(testType) > 0) {
+                    totalValue += testTank.getType(testType);
+                    amountOfEntries++;
+                }
+            double PREDICTED_MEAN = totalValue/amountOfEntries;
+            double CALCULATION_DELTA = Math.abs(PREDICTED_MEAN - CALCULATED_MEAN);
+
+            assertTrue(CALCULATION_DELTA < 0.000001,
+                    "\nType being tested : " + testType +
+                            "\nexpected outcome was : " + PREDICTED_MEAN +
+                            "\nactual outcome was : " + CALCULATED_MEAN
+            );
+
+
+            totalValue = 0.0;
+            amountOfEntries = 0;
         }
     }
 
@@ -140,7 +171,6 @@ class StatisticsCalculatorTest {
 
     /*
     getting/calculating median values
-    calculating total (population) values
     calculating mean/average values
     calculating mode values (can return multiple values)
     calculating (population) standard deviation

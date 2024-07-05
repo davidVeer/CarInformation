@@ -87,7 +87,7 @@ public class StatisticsCalculator {
         ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         double totalValue = 0.0;
 
-        orderListByType(refuelTanks,wantedInformation);
+        filterInvalidValues(refuelTanks, wantedInformation);
         if (
                 wantedInformation.equals(InformationType.LITER_PRICE) ||
                         wantedInformation.equals(InformationType.KILOMETERS_PER_LITER) ||
@@ -118,6 +118,7 @@ public class StatisticsCalculator {
         double total = 0.0;
         double MEAN;
 
+        filterInvalidValues(refuelTanks, wantedInformation);
         for (RefuelTank refuelTank : refuelTanks) {
             double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
 
@@ -139,7 +140,7 @@ public class StatisticsCalculator {
         ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         double median;
 
-        refuelTanks = orderListByType(refuelTanks, wantedInformation);
+        orderListByType(refuelTanks, wantedInformation);
         double STANDARD_MEDIAN = refuelTanks.get(refuelTanks.size() / 2).getType(wantedInformation);
         double EVEN_SECONDARY_MEDIAN = refuelTanks.get((refuelTanks.size() / 2) - 1).getType(wantedInformation);
 
@@ -167,7 +168,7 @@ public class StatisticsCalculator {
         ArrayList<Double> MODE_VALUES;
         double STEP_SIZE;
 
-        refuelTanks = orderListByType(refuelTanks, wantedInformation);
+        orderListByType(refuelTanks, wantedInformation);
 
         switch (wantedInformation) {
             case LITER_PRICE:
@@ -296,10 +297,12 @@ public class StatisticsCalculator {
      *
      * @author David van der Veer
      */
-    public ArrayList<RefuelTank> orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+    public void orderListByType(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
         refuelTanks.sort(new RefuelDataComparator(wantedInformation));
-        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
+        filterInvalidValues(refuelTanks,wantedInformation);
+    }
 
-        return refuelTanks;
+    private void filterInvalidValues(ArrayList<RefuelTank> refuelTanks, InformationType wantedInformation) {
+        refuelTanks.removeIf(refuelTank -> refuelTank.getType(wantedInformation) < 0);
     }
 }
