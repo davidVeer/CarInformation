@@ -51,8 +51,17 @@ class StatisticsCalculatorTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
-    void lowestNumbers() {
+    private void assertHighestNumberInValidList(InformationType testType, RefuelTank CALCULATED_HIGHEST_VALUE){
+        for (RefuelTank testTank : testTanks)
+            assertFalse(CALCULATED_HIGHEST_VALUE.getType(testType) < testTank.getType(testType),
+                    "found a value higher then calculated highest. " +
+                            "\nCalculated Highest: " + CALCULATED_HIGHEST_VALUE.getType(testType) +
+                            "\nHigher value: " + testTank.getType(testType)
+            );
+    }
+
+    @Test
+    void lowestNumbersTest() {
         standardSetup();
 
         for (InformationType testType : testTypes) {
