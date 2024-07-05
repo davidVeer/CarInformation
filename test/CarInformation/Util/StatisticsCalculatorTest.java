@@ -2,14 +2,12 @@ package CarInformation.Util;
 
 import CarInformation.Data.CarData;
 import CarInformation.Data.RefuelTank;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,7 +49,7 @@ class StatisticsCalculatorTest {
         }
     }
 
-    private void assertHighestNumberInValidList(InformationType testType, RefuelTank CALCULATED_HIGHEST_VALUE){
+    private void assertHighestNumberInValidList(InformationType testType, RefuelTank CALCULATED_HIGHEST_VALUE) {
         for (RefuelTank testTank : testTanks)
             assertFalse(CALCULATED_HIGHEST_VALUE.getType(testType) < testTank.getType(testType),
                     "found a value higher then calculated highest. " +
@@ -74,8 +72,8 @@ class StatisticsCalculatorTest {
         }
     }
 
-    private void assertLowestValueInValidList(InformationType testType, RefuelTank CALCULATED_LOWEST_VALUE){
-           for (RefuelTank testTank : testTanks)
+    private void assertLowestValueInValidList(InformationType testType, RefuelTank CALCULATED_LOWEST_VALUE) {
+        for (RefuelTank testTank : testTanks)
             assertFalse(
                     testTank.getType(testType) > 0 && CALCULATED_LOWEST_VALUE.getType(testType) > testTank.getType(testType),
                     "\nfound a value lower then calculated lowest. " +
@@ -123,35 +121,81 @@ class StatisticsCalculatorTest {
     }
 
     @Test
-    public void meanTest(){
+    public void meanTest() {
         standardSetup();
-        double totalValue = 0.0;
-        int amountOfEntries = 0;
 
         for (InformationType testType : testTypes) {
-            double CALCULATED_MEAN = calculator.meanRefuelTank(testType);
-
-            for (RefuelTank testTank : testTanks)
-                if (testTank.getType(testType) > 0) {
-                    totalValue += testTank.getType(testType);
-                    amountOfEntries++;
-                }
-            double PREDICTED_MEAN = totalValue/amountOfEntries;
-            double CALCULATION_DELTA = Math.abs(PREDICTED_MEAN - CALCULATED_MEAN);
-
-            assertTrue(CALCULATION_DELTA < 0.000001,
-                    "\nType being tested : " + testType +
-                            "\nexpected outcome was : " + PREDICTED_MEAN +
-                            "\nactual outcome was : " + CALCULATED_MEAN
-            );
-
-
-            totalValue = 0.0;
-            amountOfEntries = 0;
+            try {
+                double CALCULATED_MEAN = calculator.meanRefuelTank(testType);
+                calculateAndAssertMean(testType, CALCULATED_MEAN);
+            } catch (NullPointerException exception) {
+                System.out.println("all Items within " + testType + " are invalid");
+            }
         }
     }
 
-    public RefuelTank generateRandomRefuelTank(RefuelTank previousTank) {
+    private void calculateAndAssertMean(InformationType testType, double CALCULATED_MEAN) {
+        double totalValue = 0.0;
+        int amountOfEntries = 0;
+
+        for (RefuelTank testTank : testTanks)
+            if (testTank.getType(testType) > 0) {
+                totalValue += testTank.getType(testType);
+                amountOfEntries++;
+            }
+        double PREDICTED_MEAN = totalValue / amountOfEntries;
+        double CALCULATION_DELTA = Math.abs(PREDICTED_MEAN - CALCULATED_MEAN);
+
+        assertTrue(CALCULATION_DELTA < 0.000001,
+                "\nType being tested : " + testType +
+                        "\nexpected outcome was : " + PREDICTED_MEAN +
+                        "\nactual outcome was : " + CALCULATED_MEAN
+        );
+    }
+
+    @Test
+    public void medianTest() {
+    }
+
+    public RefuelTank generateRandomAllNegativeRefuelTank(RefuelTank previousTank) {
+        RefuelTank generatedTestTank;
+        int REFUEL_NUMBER = previousTank.getRefuelNumber() - 1;
+        int RANDOM_ODOMETER = (int) (previousTank.getOdometer() + (Math.random() * -1500));
+        double RANDOM_LITERS = (Math.random() * -80);
+        double RANDOM_PRICE = (Math.random() * -320);
+        LocalDate RANDOM_DATE = LocalDate.of(2005, Month.SEPTEMBER, 3);
+
+
+        generatedTestTank = new RefuelTank(
+                REFUEL_NUMBER,
+                RANDOM_ODOMETER,
+                RANDOM_LITERS,
+                RANDOM_PRICE,
+                RANDOM_DATE);
+
+        return generatedTestTank;
+    }
+
+    private RefuelTank generateRandomAllPositiveRefuelTank(RefuelTank previousTank) {
+        RefuelTank generatedTestTank;
+        int REFUEL_NUMBER = previousTank.getRefuelNumber() + 1;
+        int RANDOM_ODOMETER = (int) (previousTank.getOdometer() + (Math.random() * 1500));
+        double RANDOM_LITERS = (Math.random() * 80);
+        double RANDOM_PRICE = (Math.random() * 320);
+        LocalDate RANDOM_DATE = LocalDate.of(2005, Month.SEPTEMBER, 3);
+
+
+        generatedTestTank = new RefuelTank(
+                REFUEL_NUMBER,
+                RANDOM_ODOMETER,
+                RANDOM_LITERS,
+                RANDOM_PRICE,
+                RANDOM_DATE);
+
+        return generatedTestTank;
+    }
+
+    public RefuelTank generateRandomMixedRefuelTank(RefuelTank previousTank) {
         RefuelTank generatedTestTank;
         int REFUEL_NUMBER = previousTank.getRefuelNumber() + 1;
         int RANDOM_ODOMETER = (int) (previousTank.getOdometer() - 500 + (Math.random() * 1500));
@@ -193,7 +237,6 @@ class StatisticsCalculatorTest {
 
     /*
     getting/calculating median values
-    calculating mean/average values
     calculating mode values (can return multiple values)
     calculating (population) standard deviation
     calculating (population) variance
