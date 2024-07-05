@@ -80,5 +80,10 @@ the easy part but figuring out a way to write a test without reusing the code it
 
 - at first, I found a bug where the calculator would remove items from the original list it received which turned out to
 be an initialisation error or my part (I didn't know how to properly initialize one arraylist using another)
+- another issue I found was the possibility of every value for a given InformationType within the ArrayList<RefuelTank> to be
+invalid, I fixed this by throwing a NullPointerException if this was the case.
+I am trying to figure out a way t handle this exception in a logical way.
+- I also found out that totalValue would always initialise its outcome at 0.0 which is fine enough however it made it 
+more prone to allowing errors to pass through as it would just not add a number when the list was empty 
 
 here are some bullet points to improve for the next test or iteration of the class.
