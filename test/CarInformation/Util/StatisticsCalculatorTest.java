@@ -45,7 +45,7 @@ class StatisticsCalculatorTest {
             assertEquals(initialSize, testTanks.size());
 
             for (RefuelTank testTank : testTanks)
-                assertTrue(CALCULATED_HIGHEST_VALUE.getType(testType) > testTank.getType(testType),
+                assertFalse(CALCULATED_HIGHEST_VALUE.getType(testType) < testTank.getType(testType),
                         "found a value higher then calculated highest. " +
                                 "\nCalculated Highest: " + CALCULATED_HIGHEST_VALUE.getType(testType) +
                                 "\nHigher value: " + testTank.getType(testType)
@@ -61,7 +61,8 @@ class StatisticsCalculatorTest {
             RefuelTank CALCULATED_LOWEST_VALUE = calculator.lowestRefuelTank(testType);
 
             for (RefuelTank testTank : testTanks)
-                assertTrue(testTank.getType(testType) > 0 && CALCULATED_LOWEST_VALUE.getType(testType) < testTank.getType(testType),
+                assertFalse(
+                        testTank.getType(testType) > 0 && CALCULATED_LOWEST_VALUE.getType(testType) > testTank.getType(testType),
                         "found a value lower then calculated lowest. " +
                                 "\nCalculated lowest: " + CALCULATED_LOWEST_VALUE.getType(testType) +
                                 "\nLower value: " + testTank.getType(testType)
@@ -100,7 +101,7 @@ class StatisticsCalculatorTest {
     }
 
     @Test
-    public void meanTest() {
+    public void meanTest(){
         standardSetup();
         double totalValue = 0.0;
         int amountOfEntries = 0;
@@ -113,7 +114,7 @@ class StatisticsCalculatorTest {
                     totalValue += testTank.getType(testType);
                     amountOfEntries++;
                 }
-            double PREDICTED_MEAN = totalValue / amountOfEntries;
+            double PREDICTED_MEAN = totalValue/amountOfEntries;
             double CALCULATION_DELTA = Math.abs(PREDICTED_MEAN - CALCULATED_MEAN);
 
             assertTrue(CALCULATION_DELTA < 0.000001,
