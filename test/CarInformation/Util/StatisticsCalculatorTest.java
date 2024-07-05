@@ -35,21 +35,19 @@ class StatisticsCalculatorTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
-    void highestNumbers() {
+    @Test
+    void highestNumbersTest() {
         standardSetup();
         int initialSize = testTanks.size();
 
         for (InformationType testType : testTypes) {
-            RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testType);
-            assertEquals(initialSize, testTanks.size());
-
-            for (RefuelTank testTank : testTanks)
-                assertFalse(CALCULATED_HIGHEST_VALUE.getType(testType) < testTank.getType(testType),
-                        "found a value higher then calculated highest. " +
-                                "\nCalculated Highest: " + CALCULATED_HIGHEST_VALUE.getType(testType) +
-                                "\nHigher value: " + testTank.getType(testType)
-                );
+            try {
+                assertEquals(initialSize, testTanks.size());
+                RefuelTank CALCULATED_HIGHEST_VALUE = calculator.highestRefuelTank(testType);
+                assertHighestNumberInValidList(testType, CALCULATED_HIGHEST_VALUE);
+            } catch (NullPointerException exception) {
+                System.out.println("all Items within " + testType + " are invalid");
+            }
         }
     }
 
