@@ -30,7 +30,7 @@ class StatisticsCalculatorTest {
         try {
             calculator = new StatisticsCalculator(new CarData(new ArrayList<>()).getRefuelTanks());
             fail();
-        } catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -49,7 +49,7 @@ class StatisticsCalculatorTest {
                         "found a value higher then calculated highest. " +
                                 "\nCalculated Highest: " + CALCULATED_HIGHEST_VALUE.getType(testType) +
                                 "\nHigher value: " + testTank.getType(testType)
-                        );
+                );
         }
     }
 
@@ -71,21 +71,31 @@ class StatisticsCalculatorTest {
     }
 
     @Test
-    public void totalValueTest(){
+    public void totalValueTest() {
         standardSetup();
-        double totalValue = 0;
+        double totalValue = 0.0;
 
         for (InformationType testType : testTypes) {
-            for (RefuelTank testTank : testTanks) {
-                if (testTank.getType(testType) > 0 )
+            for (RefuelTank testTank : testTanks)
+                if (testTank.getType(testType) > 0)
                     totalValue += testTank.getType(testType);
-            }
-            assertTrue(totalValue == calculator.totalValueRefuleTank(testType),
-                    "expected outcome was : " + totalValue +
-                    "\n actual outcome was : " + calculator.totalValueRefuleTank(testType)
-                    );
-        }
 
+            double CALCULATION_DELTA = Math.abs(totalValue - calculator.totalValueRefuleTank(testType));
+
+            if (testType.equals(InformationType.LITER_PRICE) ||
+                    testType.equals(InformationType.KILOMETERS_PER_LITER) ||
+                    testType.equals(InformationType.REFUEL_NUMBER)
+            )
+                assertEquals(Double.NEGATIVE_INFINITY, calculator.totalValueRefuleTank(testType));
+            else
+                assertTrue(CALCULATION_DELTA < 0.000001,
+                        "\nType being tested : " + testType +
+                                "\nexpected outcome was : " + totalValue +
+                                "\nactual outcome was : " + calculator.totalValueRefuleTank(testType)
+                );
+
+            totalValue = 0.0;
+        }
     }
 
     public RefuelTank generateRandomRefuelTank(RefuelTank previousTank) {

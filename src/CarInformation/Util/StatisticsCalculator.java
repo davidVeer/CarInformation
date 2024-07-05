@@ -32,8 +32,8 @@ import java.util.*;
  * @version 1.1
  */
 public class StatisticsCalculator {
-
     private final ArrayList<RefuelTank> originalList;
+
 
     public StatisticsCalculator(ArrayList<RefuelTank> tankList) {
         this.originalList = tankList;
@@ -51,7 +51,7 @@ public class StatisticsCalculator {
         ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         RefuelTank HIGHEST;
 
-        refuelTanks = orderListByType(refuelTanks, wantedInformation);
+        orderListByType(refuelTanks, wantedInformation);
         HIGHEST = refuelTanks.get(refuelTanks.size() - 1);
 
         return HIGHEST;
@@ -67,11 +67,41 @@ public class StatisticsCalculator {
         ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
         RefuelTank LOWEST;
 
-        refuelTanks = orderListByType(refuelTanks, wantedInformation);
+        orderListByType(refuelTanks, wantedInformation);
 
         LOWEST = refuelTanks.get(0);
 
         return LOWEST;
+    }
+
+    /**
+     * this method calculates the total value of a set using the formula: X[total] = Σ (X[i]).
+     * <p>
+     * basically this means adding up every value in the set to get a total
+     * </p>
+     *
+     * @return total value
+     * @author David van der Veer
+     */
+    public double totalValueRefuleTank(InformationType wantedInformation) {
+        ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
+        double totalValue = 0.0;
+
+        orderListByType(refuelTanks,wantedInformation);
+        if (
+                wantedInformation.equals(InformationType.LITER_PRICE) ||
+                        wantedInformation.equals(InformationType.KILOMETERS_PER_LITER) ||
+                        wantedInformation.equals(InformationType.REFUEL_NUMBER)
+        )
+            return Double.NEGATIVE_INFINITY;
+
+        for (RefuelTank refuelTank : refuelTanks) {
+            double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
+
+            totalValue += REFUEL_TANK_TYPE_VALUE;
+        }
+
+        return totalValue;
     }
 
     /**
@@ -168,35 +198,6 @@ public class StatisticsCalculator {
         MODE_VALUES = mostCommonValues;
 
         return MODE_VALUES;
-    }
-
-    /**
-     * this method calculates the total value of a set using the formula: X[total] = Σ (X[i]).
-     * <p>
-     * basically this means adding up every value in the set to get a total
-     * </p>
-     *
-     * @return total value
-     * @author David van der Veer
-     */
-    public double totalValueRefuleTank(InformationType wantedInformation) {
-        ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
-        double totalValue = 0.0;
-
-        if (
-            wantedInformation.equals(InformationType.LITER_PRICE) ||
-            wantedInformation.equals(InformationType.KILOMETERS_PER_LITER) ||
-            wantedInformation.equals(InformationType.REFUEL_NUMBER)
-        )
-            return Double.NEGATIVE_INFINITY;
-
-        for (RefuelTank refuelTank : refuelTanks) {
-            double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
-
-            totalValue += REFUEL_TANK_TYPE_VALUE;
-        }
-
-        return totalValue;
     }
 
     /**
