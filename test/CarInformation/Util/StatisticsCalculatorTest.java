@@ -133,7 +133,7 @@ class StatisticsCalculatorTest {
     }
 
     @Test
-    public void totalValueTest() {
+    public void totalValueMixedTest() {
         standardSetup();
 
         for (InformationType testType : testTypes) {
@@ -141,9 +141,34 @@ class StatisticsCalculatorTest {
                 double CALCULATED_TOTAL_VALUE = calculator.totalValueRefuelTank(testType);
                 calculateAndAssertTotal(testType, CALCULATED_TOTAL_VALUE);
             } catch (NullPointerException exception) {
-                System.out.println("all Items within " + testType + " are invalid");
+                System.out.println("TotalValueMixed : all Items within " + testType + " are invalid");
             }
 
+        }
+    }
+
+    @Test
+    public void totalValueNegativeTest() {
+        standardSetup("negative");
+
+        for (InformationType testType : testTypes) {
+            try {
+                double CALCULATED_TOTAL_VALUE = calculator.totalValueRefuelTank(testType);
+                calculateAndAssertTotal(testType, CALCULATED_TOTAL_VALUE);
+            } catch (NullPointerException exception) {
+                System.out.println("TotalValueNegative : all Items within " + testType + " are invalid");
+            }
+
+        }
+    }
+
+    @Test
+    public void totalValuePositiveTest() {
+        standardSetup("positive");
+
+        for (InformationType testType : testTypes) {
+                double CALCULATED_TOTAL_VALUE = calculator.totalValueRefuelTank(testType);
+                calculateAndAssertTotal(testType, CALCULATED_TOTAL_VALUE);
         }
     }
 
