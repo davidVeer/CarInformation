@@ -61,17 +61,17 @@ so for the next test I will research how to create more solid tests.
 below are some things I wanted fix before starting to actually write definitive tests, along with some actual bugs I
 somehow managed to find through my still very crude tests.
 
-- [ ] Ordering a list should be done through the calculator rather than both in the calculator and CarData itself
-- [ ] Reorder Enum to be in the same order as the refuel tank (consistency)
-- [ ] CarData should not contain calculations (should only be used as data storage) 
-- [ ] a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
-- [ ] remove 0 catch in calculateLowest method (these will be caught in the orderByType)
+- [x] Ordering a list should be done through the calculator rather than both in the calculator and CarData itself
+- [X] Reorder Enum to be in the same order as the refuel tank (consistency)
+- [X] CarData should not contain calculations (should only be used as data storage), except kilometers driven as which needs to be initialised in CarData  
+- [X] a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
+- [X] remove 0 catch in calculateLowest method (these will be caught in the orderByType)
 - [ ] set kilometers driven to -1 if one of the two odometer readings is -1
-- [ ] Statistics calculator should have an isValid or something to check
+- [X] Statistics calculator should have an isValid or something to check
   whether it can use a measurement in the calculations (figure out concrete max and min value for every type,
   make sure the values can be applied to modern cars). Filter the invalid values out of the calculation list
-- [ ] figure out a way to decrease code duplication for comparators
-- [ ] calculator should make use of an "original" list which all methods use to calculate their statistic
+- [X] figure out a way to decrease code duplication for comparators
+- [X] calculator should make use of an "original" list which all methods use to calculate their statistic
 
 ### test 2 (statistics calculator)
 overall started with more solid code to test however figuring out a way to write solid tests was difficult.
@@ -87,3 +87,4 @@ I am trying to figure out a way t handle this exception in a logical way.
 more prone to allowing errors to pass through as it would just not add a number when the list was empty 
 
 here are some bullet points to improve for the next test or iteration of the class.
+- [ ] don't use random data in tests (as a main test, it's still okay to use as a secondary test)
