@@ -97,3 +97,4 @@ here are some bullet points to improve for the next test or iteration of the cla
 - [X] write tests that test: when there are no values (empty list)
 - [ ] write tests that test: when all values are close together 
 - [ ] write test that tests: whether no values are removed from the originalList when filtered
+- [ ] restructure tests (create diagram in diagram v2_2)
