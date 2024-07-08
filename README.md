@@ -96,3 +96,4 @@ here are some bullet points to improve for the next test or iteration of the cla
 - [ ] write tests that test: when all values are valid with some identical values
 - [X] write tests that test: when there are no values (empty list)
 - [ ] write tests that test: when all values are close together 
+- [ ] write test that tests: whether no values are removed from the originalList when filtered
