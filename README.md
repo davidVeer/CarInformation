@@ -89,3 +89,10 @@ more prone to allowing errors to pass through as it would just not add a number 
 here are some bullet points to improve for the next test or iteration of the class.
 - [ ] don't use random data in tests (as a main test, it's still okay to use as a secondary test)
 - [ ] restructure Calculator (see diagrams v2_2)
+- [ ] write tests that test: when all values are valid but all are different.
+- [ ] write tests that test: when all values are invalid.
+- [ ] write tests that test: when all values are identical (and valid).
+- [ ] write tests that test: when about half of the values are valid and the other half is invalid
+- [ ] write tests that test: when all values are valid with some identical values
+- [X] write tests that test: when there are no values (empty list)
+- [ ] write tests that test: when all values are close together 
