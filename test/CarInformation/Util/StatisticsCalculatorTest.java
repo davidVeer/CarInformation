@@ -12,9 +12,9 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StatisticsCalculatorTest {
-    StatisticsCalculator calculator;
-    ArrayList<RefuelTank> testTanks = new ArrayList<>();
-    ArrayList<InformationType> testTypes = new ArrayList<>(Arrays.asList(
+    public StatisticsCalculator calculator;
+    public ArrayList<RefuelTank> testTanks = new ArrayList<>();
+    public ArrayList<InformationType> testTypes = new ArrayList<>(Arrays.asList(
             InformationType.REFUEL_NUMBER,
             InformationType.REFUEL_PRICE,
             InformationType.KILOMETERS_DRIVEN,
@@ -33,58 +33,83 @@ class StatisticsCalculatorTest {
                 initialisationExeption.getMessage());
     }
 
-    @Test
-    void highestNumbersMixedTest() {
 
+    //TODO: work on filling in all these values
+    public void setupAllValidValues(){
+        testTanks.clear();
+
+        // tank1 : kilometersDriven = -1, liter price = , kilometers per Liter = -1
+        RefuelTank testTank1 = new RefuelTank(1,100, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank2 : kilometersDriven = 30, liter price = , kilometers per Liter =
+        RefuelTank testTank2 = new RefuelTank(2,130, 3.99, 5.75, LocalDate.of(2024,Month.JANUARY,3));
+        // tank3 : kilometersDriven = 110, liter price = , kilometers per Liter =
+        RefuelTank testTank3 = new RefuelTank(3,240, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,4));
+        // tank4 : kilometersDriven = 170, liter price = , kilometers per Liter =
+        RefuelTank testTank4 = new RefuelTank(4,410, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,10));
+        // tank5 : kilometersDriven = 210, liter price = , kilometers per Liter =
+        RefuelTank testTank5 = new RefuelTank(5,620, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,14));
+        // tank6 : kilometersDriven = 20, liter price = , kilometers per Liter =
+        RefuelTank testTank6 = new RefuelTank(6,640, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,17));
+        // tank7 : kilometersDriven = 265, liter price = , kilometers per Liter =
+        RefuelTank testTank7 = new RefuelTank(7,905, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank8 : kilometersDriven = 95, liter price = , kilometers per Liter =
+        RefuelTank testTank8 = new RefuelTank(8,1000, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank9 : kilometersDriven = 234, liter price = , kilometers per Liter =
+        RefuelTank testTank9 = new RefuelTank(9,1234, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank10 : kilometersDriven = 196, liter price = , kilometers per Liter =
+        RefuelTank testTank10 = new RefuelTank(10,1430, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+
+        // tank11 : kilometersDriven = 10, liter price = , kilometers per Liter =
+        RefuelTank testTank11 = new RefuelTank(11,1440, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank12 : kilometersDriven = 90, liter price = , kilometers per Liter =
+        RefuelTank testTank12 = new RefuelTank(12,1530, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank13 : kilometersDriven = 320, liter price = , kilometers per Liter =
+        RefuelTank testTank13 = new RefuelTank(13,1850, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank14 : kilometersDriven = 150, liter price = , kilometers per Liter =
+        RefuelTank testTank14 = new RefuelTank(14,2000, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank15 : kilometersDriven = 5, liter price = , kilometers per Liter =
+        RefuelTank testTank15 = new RefuelTank(15,2005, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank16 : kilometersDriven = 50, liter price = , kilometers per Liter =
+        RefuelTank testTank16 = new RefuelTank(16,2055, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank17 : kilometersDriven = 11, liter price = , kilometers per Liter =
+        RefuelTank testTank17 = new RefuelTank(17,2066, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank18 : kilometersDriven = 24, liter price = , kilometers per Liter =
+        RefuelTank testTank18 = new RefuelTank(18,2090, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank19 : kilometersDriven = 250, liter price = , kilometers per Liter =
+        RefuelTank testTank19 = new RefuelTank(19,2340, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+        // tank20 : kilometersDriven = 155, liter price = , kilometers per Liter =
+        RefuelTank testTank20 = new RefuelTank(20,2595, 10.25, 22.50, LocalDate.of(2024,Month.JANUARY,1));
+
+        testTanks.add(testTank1);
+        testTanks.add(testTank2);
+        testTanks.add(testTank3);
+        testTanks.add(testTank4);
+        testTanks.add(testTank5);
+        testTanks.add(testTank6);
+        testTanks.add(testTank7);
+        testTanks.add(testTank8);
+        testTanks.add(testTank9);
+        testTanks.add(testTank10);
+
+        testTanks.add(testTank11);
+        testTanks.add(testTank12);
+        testTanks.add(testTank13);
+        testTanks.add(testTank14);
+        testTanks.add(testTank15);
+        testTanks.add(testTank16);
+        testTanks.add(testTank17);
+        testTanks.add(testTank18);
+        testTanks.add(testTank19);
+        testTanks.add(testTank20);
+
+        calculator = new StatisticsCalculator(new CarData(testTanks).getRefuelTanks());
     }
-    @Test
-    void highestNumbersNegativeTest() {
+    public void setupNoValidValues(){}
+    public void setupAllIdenticalValues(){}
+    public void setupMixedValidityValues(){}
+    public void setupSimilarValues(){}
+    public void setupAllValidNoIdenticalValues(){}
 
-    }
-    @Test
-    void highestNumbersPositiveTest() {
-
-    }
-
-    @Test
-    void lowestNumbersMixedTest() {
-
-    }
-
-    @Test
-    void lowestNumbersNegativeTest() {
-
-    }
-
-    @Test
-    void lowestNumbersPositiveTest() {
-
-    }
-
-
-    @Test
-    public void totalValueMixedTest() {
-
-    }
-
-    @Test
-    public void totalValueNegativeTest() {
-
-    }
-
-    @Test
-    public void totalValuePositiveTest() {
-
-    }
-
-    @Test
-    public void meanTest() {
-
-    }
-
-    @Test
-    public void medianTest() {
-    }
 
     public RefuelTank generateRandomAllNegativeRefuelTank(RefuelTank previousTank) {
         RefuelTank generatedTestTank;
@@ -196,6 +221,7 @@ class StatisticsCalculatorTest {
 
         calculator = new StatisticsCalculator(new CarData(testTanks).getRefuelTanks());
     }
+
 
     /*
     getting/calculating median values
