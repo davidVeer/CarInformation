@@ -66,7 +66,7 @@ somehow managed to find through my still very crude tests.
 - [X] CarData should not contain calculations (should only be used as data storage), except kilometers driven as which needs to be initialised in CarData  
 - [X] a catch for empty lists should be added to statistics calculator constructor (throw NullPointerExeption)
 - [X] remove 0 catch in calculateLowest method (these will be caught in the orderByType)
-- [ ] set kilometers driven to -1 if one of the two odometer readings is -1
+- [X] set kilometers driven to -1 if one of the two odometer readings is -1
 - [X] Statistics calculator should have an isValid or something to check
   whether it can use a measurement in the calculations (figure out concrete max and min value for every type,
   make sure the values can be applied to modern cars). Filter the invalid values out of the calculation list
