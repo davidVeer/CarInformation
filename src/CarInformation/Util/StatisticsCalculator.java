@@ -37,7 +37,7 @@ public class StatisticsCalculator {
     public StatisticsCalculator(ArrayList<RefuelTank> tankList) {
         this.originalList = tankList;
         if (this.originalList.isEmpty())
-            throw new NullPointerException();
+            throw new NullPointerException("StatisticsCalculator cannot be initialised with empty an ArrayList<RefuelTank>");
     }
 
     /**

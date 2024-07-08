@@ -88,3 +88,4 @@ more prone to allowing errors to pass through as it would just not add a number 
 
 here are some bullet points to improve for the next test or iteration of the class.
 - [ ] don't use random data in tests (as a main test, it's still okay to use as a secondary test)
+- [ ] restructure Calculator (see diagrams v2_2)

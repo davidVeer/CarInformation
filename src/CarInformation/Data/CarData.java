@@ -20,13 +20,10 @@ public class CarData {
     }
 
     private void kilometerDrivenInitialiser() {
-        try {
-            if (refuelTanks.isEmpty())
-                throw new NullPointerException();
-        } catch (NullPointerException exception){
-            System.out.println("the list is empty");
-            return;
-        }
+            if (refuelTanks.isEmpty()) {
+                System.out.println("this list is empty, driven kilometers can not be set");
+                return;
+            }
 
         RefuelTank previousRefuel = refuelTanks.get(0);
         int deltaKilometers;
