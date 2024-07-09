@@ -259,6 +259,86 @@ class StatisticsCalculatorTest {
         return testTypes;
     }
 
+    public RefuelTank getTestTank1() {
+        return testTank1;
+    }
+
+    public RefuelTank getTestTank2() {
+        return testTank2;
+    }
+
+    public RefuelTank getTestTank3() {
+        return testTank3;
+    }
+
+    public RefuelTank getTestTank4() {
+        return testTank4;
+    }
+
+    public RefuelTank getTestTank5() {
+        return testTank5;
+    }
+
+    public RefuelTank getTestTank6() {
+        return testTank6;
+    }
+
+    public RefuelTank getTestTank7() {
+        return testTank7;
+    }
+
+    public RefuelTank getTestTank8() {
+        return testTank8;
+    }
+
+    public RefuelTank getTestTank9() {
+        return testTank9;
+    }
+
+    public RefuelTank getTestTank10() {
+        return testTank10;
+    }
+
+    public RefuelTank getTestTank11() {
+        return testTank11;
+    }
+
+    public RefuelTank getTestTank12() {
+        return testTank12;
+    }
+
+    public RefuelTank getTestTank13() {
+        return testTank13;
+    }
+
+    public RefuelTank getTestTank14() {
+        return testTank14;
+    }
+
+    public RefuelTank getTestTank15() {
+        return testTank15;
+    }
+
+    public RefuelTank getTestTank16() {
+        return testTank16;
+    }
+
+    public RefuelTank getTestTank17() {
+        return testTank17;
+    }
+
+    public RefuelTank getTestTank18() {
+        return testTank18;
+    }
+
+    public RefuelTank getTestTank19() {
+        return testTank19;
+    }
+
+    public RefuelTank getTestTank20() {
+        return testTank20;
+    }
+
     /*
     getting/calculating median values
     calculating mode values (can return multiple values)
