@@ -14,9 +14,31 @@ public class HighestValue extends StatisticsCalculatorTest{
     @Test
     void allValid(){
         super.setupAllValidValues();
-        RefuelTank CalculatedHighest = super.calculator.highestRefuelTank(InformationType.REFUEL_NUMBER);
 
-        assertEquals(super.testTanks.get(19) , CalculatedHighest);
+        for (InformationType type : super.getTestTypes()) {
+            RefuelTank CalculatedHighest = super.getCalculator().highestRefuelTank(type);
+
+            switch (type){
+                case REFUEL_NUMBER:
+                    assertEquals(super.getTestTanks().get(19) , CalculatedHighest);
+                    break;
+                case KILOMETERS_DRIVEN:
+                    assertEquals(super.getTestTanks().get(19) , CalculatedHighest);
+                    break;
+                case LITERS:
+                    assertEquals(super.getTestTanks().get(19) , CalculatedHighest);
+                    break;
+                case REFUEL_PRICE:
+                    assertEquals(super.getTestTanks().get(19) , CalculatedHighest);
+                    break;
+                case LITER_PRICE:
+                    assertEquals(super.getTestTanks().get(19) , CalculatedHighest);
+                    break;
+                case KILOMETERS_PER_LITER:
+                    assertEquals(super.getTestTanks().get(19) , CalculatedHighest);
+                    break;
+            }
+        }
     }
 
     @Test
