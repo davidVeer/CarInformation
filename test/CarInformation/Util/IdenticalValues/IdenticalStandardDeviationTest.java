@@ -2,40 +2,38 @@ package CarInformation.Util.IdenticalValues;
 
 import org.junit.jupiter.api.Test;
 
-public class IdenticalStandardDeviationTest {
+import static org.junit.jupiter.api.Assertions.fail;
+
+public class IdenticalStandardDeviationTest extends IdenticalValues{
 
 	@Test
 	public void refuelNumberStandardDeviation() {
-
+		fail();
 	}
 
 	@Test
 	public void drivenKilometersStandardDeviation() {
-
+		fail();
 	}
 
 	@Test
 	public void litersStandardDeviation() {
-
+		fail();
 	}
 
 	@Test
 	public void refuelPriceStandardDeviation() {
-
+		fail();
 	}
 
 	@Test
 	public void LiterPriceStandardDeviation() {
-
+		fail();
 	}
 
 	@Test
 	public void kilometersPerLiterStandardDeviation() {
-
-	}
-
-	public void setup() {
-
+		fail();
 	}
 
 }

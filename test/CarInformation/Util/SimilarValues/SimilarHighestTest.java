@@ -2,40 +2,32 @@ package CarInformation.Util.SimilarValues;
 
 import org.junit.jupiter.api.Test;
 
-public class SimilarHighestTest {
+import static org.junit.jupiter.api.Assertions.*;
 
-	@Test
+public class SimilarHighestTest extends SimilarValues {
+
 	public void refuelNumberHighest() {
-
+		fail();
 	}
 
-	@Test
 	public void drivenKilometersHighest() {
-
+		fail();
 	}
 
-	@Test
 	public void litersHighest() {
-
+		fail();
 	}
 
-	@Test
 	public void refuelPriceHighest() {
-
+		fail();
 	}
 
-	@Test
 	public void LiterPriceHighest() {
-
+		fail();
 	}
 
-	@Test
 	public void kilometersPerLiterHighest() {
-
-	}
-
-	public void setup() {
-
+		fail();
 	}
 
 }
