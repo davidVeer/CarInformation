@@ -1,27 +1,35 @@
-package IdenticalValues;
+package CarInformation.Util.IdenticalValues;
+
+import org.junit.jupiter.api.Test;
 
 public class IdenticalMeanTest {
 
+	@Test
 	public void refuelNumberMean() {
 
 	}
 
+	@Test
 	public void drivenKilometersMean() {
 
 	}
 
+	@Test
 	public void litersMean() {
 
 	}
 
+	@Test
 	public void refuelPriceMean() {
 
 	}
 
+	@Test
 	public void LiterPriceMean() {
 
 	}
 
+	@Test
 	public void kilometersPerLiterMean() {
 
 	}
