@@ -46,15 +46,25 @@ public class StatisticsCalculator {
      * @return lowest non zero RefuelTank
      * @author David van der Veer
      */
-    public RefuelTank highestRefuelTank(InformationType wantedInformation) {
+    public ArrayList<RefuelTank> highestRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
+        ArrayList<RefuelTank> highestValues = new ArrayList<>();
         RefuelTank HIGHEST;
 
 
             orderListByType(refuelTanks, wantedInformation);
             HIGHEST = refuelTanks.get(refuelTanks.size() - 1);
+            highestValues.add(HIGHEST);
 
-        return HIGHEST;
+        for (RefuelTank refuelTank : refuelTanks) {
+            RefuelTank currentTank = refuelTank;
+
+            if (currentTank.getType(wantedInformation) == HIGHEST.getType(wantedInformation) && currentTank != HIGHEST)
+                highestValues.add(currentTank);
+
+        }
+
+        return highestValues;
     }
 
     /**
