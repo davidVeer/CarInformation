@@ -68,4 +68,31 @@ public class PositiveValues {
         return calculator;
     }
 
+    public void setTestTanks(ArrayList<RefuelTank> testTanks) {
+        this.testTanks = testTanks;
+    }
+
+    public void setTestTank1(RefuelTank testTank1) {
+        this.testTank1 = testTank1;
+    }
+
+    public void setTestTank2(RefuelTank testTank2) {
+        this.testTank2 = testTank2;
+    }
+
+    public void setTestTank3(RefuelTank testTank3) {
+        this.testTank3 = testTank3;
+    }
+
+    public void setTestTank4(RefuelTank testTank4) {
+        this.testTank4 = testTank4;
+    }
+
+    public void setTestTank5(RefuelTank testTank5) {
+        this.testTank5 = testTank5;
+    }
+
+    public void setCalculator(StatisticsCalculator calculator) {
+        this.calculator = calculator;
+    }
 }
