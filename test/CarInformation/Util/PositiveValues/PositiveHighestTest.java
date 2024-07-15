@@ -1,27 +1,35 @@
-package PositiveValues;
+package CarInformation.Util.PositiveValues;
+
+import org.junit.jupiter.api.Test;
 
 public class PositiveHighestTest {
 
+	@Test
 	public void refuelNumberHighest() {
 
 	}
 
+	@Test
 	public void drivenKilometersHighest() {
 
 	}
 
+	@Test
 	public void litersHighest() {
 
 	}
 
+	@Test
 	public void refuelPriceHighest() {
 
 	}
 
+	@Test
 	public void LiterPriceHighest() {
 
 	}
 
+	@Test
 	public void kilometersPerLiterHighest() {
 
 	}
