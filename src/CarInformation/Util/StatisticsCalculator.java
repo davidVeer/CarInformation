@@ -2,6 +2,7 @@ package CarInformation.Util;
 
 import CarInformation.Data.RefuelTank;
 import CarInformation.Util.Comparators.*;
+import com.sun.glass.ui.Clipboard;
 
 import java.util.*;
 
@@ -57,10 +58,9 @@ public class StatisticsCalculator {
             highestValues.add(HIGHEST);
 
         for (RefuelTank refuelTank : refuelTanks) {
-            RefuelTank currentTank = refuelTank;
 
-            if (currentTank.getType(wantedInformation) == HIGHEST.getType(wantedInformation) && currentTank != HIGHEST)
-                highestValues.add(currentTank);
+            if (refuelTank.getType(wantedInformation) == HIGHEST.getType(wantedInformation) && refuelTank != HIGHEST)
+                highestValues.add(refuelTank);
 
         }
 
@@ -73,15 +73,23 @@ public class StatisticsCalculator {
      * @return lowest non zero RefuelTank
      * @author David van der Veer
      */
-    public RefuelTank lowestRefuelTank(InformationType wantedInformation) {
+    public ArrayList<RefuelTank> lowestRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = new ArrayList<>(originalList);
+        ArrayList<RefuelTank> lowestValues = new ArrayList<>();
         RefuelTank LOWEST;
 
         orderListByType(refuelTanks, wantedInformation);
         LOWEST = refuelTanks.get(0);
+        lowestValues.add(LOWEST);
 
+        for (RefuelTank refuelTank : refuelTanks) {
 
-        return LOWEST;
+            if (refuelTank.getType(wantedInformation) == LOWEST.getType(wantedInformation) && refuelTank != LOWEST)
+                lowestValues.add(refuelTank);
+
+        }
+
+        return lowestValues;
     }
 
     /**
