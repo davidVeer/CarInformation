@@ -112,7 +112,7 @@ public class StatisticsCalculator {
                         wantedInformation.equals(InformationType.KILOMETERS_PER_LITER) ||
                         wantedInformation.equals(InformationType.REFUEL_NUMBER)
         )
-            return Double.NEGATIVE_INFINITY;
+            return totalValue;
 
         for (RefuelTank refuelTank : refuelTanks) {
             double REFUEL_TANK_TYPE_VALUE = refuelTank.getType(wantedInformation);
