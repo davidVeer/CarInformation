@@ -1,27 +1,35 @@
-package MixedValues;
+package CarInformation.Util.MixedValues;
+
+import org.junit.jupiter.api.Test;
 
 public class MixedHighestTest {
 
+	@Test
 	public void refuelNumberHighest() {
 
 	}
 
+	@Test
 	public void drivenKilometersHighest() {
 
 	}
 
+	@Test
 	public void litersHighest() {
 
 	}
 
+	@Test
 	public void refuelPriceHighest() {
 
 	}
 
+	@Test
 	public void LiterPriceHighest() {
 
 	}
 
+	@Test
 	public void kilometersPerLiterHighest() {
 
 	}

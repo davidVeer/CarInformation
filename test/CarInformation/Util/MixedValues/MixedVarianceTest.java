@@ -1,27 +1,35 @@
-package MixedValues;
+package CarInformation.Util.MixedValues;
+
+import org.junit.jupiter.api.Test;
 
 public class MixedVarianceTest {
 
+	@Test
 	public void refuelNumberVariance() {
 
 	}
 
+	@Test
 	public void drivenKilometersVariance() {
 
 	}
 
+	@Test
 	public void litersVariance() {
 
 	}
 
+	@Test
 	public void refuelPriceVariance() {
 
 	}
 
+	@Test
 	public void LiterPriceVariance() {
 
 	}
 
+	@Test
 	public void kilometersPerLiterVariance() {
 
 	}
