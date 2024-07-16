@@ -180,6 +180,7 @@ public class StatisticsCalculator {
     /**
      * this method calculates the mean by first creating a frequency table and subsequently comparing every frequency
      * and finding which one(s) are the highest.
+     * frequencies are calculated with a certain step size (so 18 falls within the step 10 for example )
      *
      * @return mode value(s)
      * @author David van der Veer
@@ -222,7 +223,7 @@ public class StatisticsCalculator {
             }
         }
         MODE_VALUES = mostCommonValues;
-
+        MODE_VALUES.sort(Double::compareTo);
 
         return MODE_VALUES;
     }
