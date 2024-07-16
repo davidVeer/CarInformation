@@ -11,36 +11,36 @@ public class NegativeHighestTest extends NegativeValues implements CalculatorHig
 	@Override
 	@Test
 	public void refuelNumberHighest() {
-
+		fail();
 	}
 
 	@Override
 	@Test
 	public void drivenKilometersHighest() {
-
+		fail();
 	}
 
 	@Override
 	@Test
 	public void litersHighest() {
-
+		fail();
 	}
 
 	@Override
 	@Test
 	public void refuelPriceHighest() {
-
+		fail();
 	}
 
 	@Override
 	@Test
 	public void LiterPriceHighest() {
-
+		fail();
 	}
 
 	@Override
 	@Test
 	public void kilometersPerLiterHighest() {
-
+		fail();
 	}
 }

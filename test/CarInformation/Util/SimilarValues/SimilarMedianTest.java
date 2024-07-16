@@ -1,30 +1,99 @@
 package CarInformation.Util.SimilarValues;
 
+import CarInformation.Util.CalculatorMedianTest;
 import org.junit.jupiter.api.Test;
 
-public class SimilarMedianTest extends SimilarValues {
+import static org.junit.jupiter.api.Assertions.fail;
 
-	public void refuelNumberMedian() {
+public class SimilarMedianTest extends SimilarValues implements CalculatorMedianTest {
 
+
+	@Override
+	@Test
+	public void refuelNumberMedianOdd() {
+		fail();
 	}
 
-	public void drivenKilometersMedian() {
 
+	@Override
+	@Test
+	public void drivenKilometersMedianOdd() {
+		fail();
 	}
 
-	public void litersMedian() {
 
+	@Override
+	@Test
+	public void litersMedianOdd() {
+		fail();
 	}
 
-	public void refuelPriceMedian() {
 
+	@Override
+	@Test
+	public void refuelPriceMedianOdd() {
+		fail();
 	}
 
-	public void LiterPriceMedian() {
 
+	@Override
+	@Test
+	public void LiterPriceMedianOdd() {
+		fail();
 	}
 
-	public void kilometersPerLiterMedian() {
+
+	@Override
+	@Test
+	public void kilometersPerLiterMedianOdd() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void refuelNumberMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void drivenKilometersMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void litersMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void refuelPriceMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void LiterPriceMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void kilometersPerLiterMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	public void setupEven() {
 
 	}
 

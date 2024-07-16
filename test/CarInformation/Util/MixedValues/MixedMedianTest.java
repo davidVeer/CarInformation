@@ -1,39 +1,100 @@
 package CarInformation.Util.MixedValues;
 
+import CarInformation.Util.CalculatorMedianTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
+public class MixedMedianTest extends MixedValues implements CalculatorMedianTest {
 
-public class MixedMedianTest extends MixedValues{
 
+	@Override
 	@Test
-	public void refuelNumberMedian() {
+	public void refuelNumberMedianOdd() {
 		fail();
 	}
 
+
+	@Override
 	@Test
-	public void drivenKilometersMedian() {
+	public void drivenKilometersMedianOdd() {
 		fail();
 	}
 
+
+	@Override
 	@Test
-	public void litersMedian() {
+	public void litersMedianOdd() {
 		fail();
 	}
 
+
+	@Override
 	@Test
-	public void refuelPriceMedian() {
+	public void refuelPriceMedianOdd() {
 		fail();
 	}
 
+
+	@Override
 	@Test
-	public void LiterPriceMedian() {
+	public void LiterPriceMedianOdd() {
 		fail();
 	}
 
+
+	@Override
 	@Test
-	public void kilometersPerLiterMedian() {
+	public void kilometersPerLiterMedianOdd() {
 		fail();
+	}
+
+
+	@Override
+	@Test
+	public void refuelNumberMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void drivenKilometersMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void litersMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void refuelPriceMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	@Test
+	public void LiterPriceMedianEven() {
+		fail();
+	}
+
+
+
+	@Override
+	@Test
+	public void kilometersPerLiterMedianEven() {
+		fail();
+	}
+
+
+	@Override
+	public void setupEven() {
+
 	}
 
 }

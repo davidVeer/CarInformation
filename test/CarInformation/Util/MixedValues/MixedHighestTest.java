@@ -1,38 +1,42 @@
 package CarInformation.Util.MixedValues;
 
+import CarInformation.Util.CalculatorHighestTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class MixedHighestTest extends MixedValues{
 
+public class MixedHighestTest extends MixedValues implements CalculatorHighestTest {
+
+	@Override
 	@Test
 	public void refuelNumberHighest() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void drivenKilometersHighest() {
 		fail();
 	}
 
-	@Test
-	public void litersHighest() {
+	@Override
+	@Test	public void litersHighest() {
 		fail();
 	}
 
-	@Test
-	public void refuelPriceHighest() {
+	@Override
+	@Test	public void refuelPriceHighest() {
 		fail();
 	}
 
-	@Test
-	public void LiterPriceHighest() {
+	@Override
+	@Test	public void LiterPriceHighest() {
 		fail();
 	}
 
-	@Test
-	public void kilometersPerLiterHighest() {
+	@Override
+	@Test	public void kilometersPerLiterHighest() {
 		fail();
 	}
 

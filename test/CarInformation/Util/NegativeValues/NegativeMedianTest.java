@@ -11,84 +11,84 @@ public class NegativeMedianTest extends NegativeValues implements CalculatorMedi
 	@Override
 	@Test
 	public void refuelNumberMedianOdd() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void drivenKilometersMedianOdd() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void litersMedianOdd() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void refuelPriceMedianOdd() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void LiterPriceMedianOdd() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void kilometersPerLiterMedianOdd() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void refuelNumberMedianEven() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void drivenKilometersMedianEven() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void litersMedianEven() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void refuelPriceMedianEven() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void LiterPriceMedianEven() {
-
+		fail();
 	}
 
 
 	@Override
 	@Test
 	public void kilometersPerLiterMedianEven() {
-
+		fail();
 	}
 
 

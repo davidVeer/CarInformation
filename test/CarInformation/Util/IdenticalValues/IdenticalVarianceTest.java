@@ -1,36 +1,43 @@
 package CarInformation.Util.IdenticalValues;
 
+import CarInformation.Util.CalculatorVarianceTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class IdenticalVarianceTest extends IdenticalValues{
+public class IdenticalVarianceTest extends IdenticalValues implements CalculatorVarianceTest {
 
+	@Override
 	@Test
 	public void refuelNumberVariance() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void drivenKilometersVariance() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void litersVariance() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void refuelPriceVariance() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void LiterPriceVariance() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void kilometersPerLiterVariance() {
 		fail();

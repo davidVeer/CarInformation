@@ -1,36 +1,44 @@
 package CarInformation.Util.MixedValues;
 
+import CarInformation.Util.CalculatorLowestTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class MixedLowestTest extends MixedValues{
 
+public class MixedLowestTest extends MixedValues implements CalculatorLowestTest {
+
+	@Override
 	@Test
 	public void refuelNumberLowest() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void drivenKilometersLowest() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void litersLowest() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void refuelPriceLowest() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void LiterPriceLowest() {
 		fail();
 	}
 
+	@Override
 	@Test
 	public void kilometersPerLiterLowest() {
 		fail();

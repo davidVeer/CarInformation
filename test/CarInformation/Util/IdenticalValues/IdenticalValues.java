@@ -3,20 +3,14 @@ package CarInformation.Util.IdenticalValues;
 import CarInformation.Data.CarData;
 import CarInformation.Data.RefuelTank;
 import CarInformation.Util.StatisticsCalculator;
+import CarInformation.Util.Values;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 
-public class IdenticalValues {
-    private ArrayList<RefuelTank> testTanks;
-    private RefuelTank testTank1;
-    private RefuelTank testTank2;
-    private RefuelTank testTank3;
-    private RefuelTank testTank4;
-    private RefuelTank testTank5;
 
-    private StatisticsCalculator calculator;
+public class IdenticalValues extends Values {
 
     public void setup() {
         // Kilometers driven:  , literPrice :  , kilometers/Liter :
@@ -38,34 +32,6 @@ public class IdenticalValues {
         testTanks.add(testTank5);
 
         calculator = new StatisticsCalculator(new CarData(testTanks).getRefuelTanks());
-    }
-
-    public ArrayList<RefuelTank> getTestTanks() {
-        return testTanks;
-    }
-
-    public RefuelTank getTestTank1() {
-        return testTank1;
-    }
-
-    public RefuelTank getTestTank2() {
-        return testTank2;
-    }
-
-    public RefuelTank getTestTank3() {
-        return testTank3;
-    }
-
-    public RefuelTank getTestTank4() {
-        return testTank4;
-    }
-
-    public RefuelTank getTestTank5() {
-        return testTank5;
-    }
-
-    public StatisticsCalculator getCalculator() {
-        return calculator;
     }
 
 }
