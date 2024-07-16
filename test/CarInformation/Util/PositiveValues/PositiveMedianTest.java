@@ -2,6 +2,7 @@ package CarInformation.Util.PositiveValues;
 
 import CarInformation.Data.CarData;
 import CarInformation.Data.RefuelTank;
+import CarInformation.Util.InformationType;
 import CarInformation.Util.TestFoundations.CalculatorMedianTest;
 import CarInformation.Util.StatisticsCalculator;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class PositiveMedianTest extends PositiveValues implements CalculatorMedianTest {
@@ -18,84 +20,156 @@ public class PositiveMedianTest extends PositiveValues implements CalculatorMedi
 	@Override
 	@Test
 	public void refuelNumberMedianOdd() {
-		fail();
+		setup();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.REFUEL_NUMBER);
+		double EXPECTED_MEDIAN = 3;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void drivenKilometersMedianOdd() {
-		fail();
+		setupEven();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.KILOMETERS_DRIVEN);
+		double EXPECTED_MEDIAN = 40;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void litersMedianOdd() {
-		fail();
+		setup();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.LITERS);
+		double EXPECTED_MEDIAN = 3;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void refuelPriceMedianOdd() {
-		fail();
+		setup();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.REFUEL_PRICE);
+		double EXPECTED_MEDIAN = 7.10;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void LiterPriceMedianOdd() {
-		fail();
+		setup();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.LITER_PRICE);
+		double EXPECTED_MEDIAN = 2.50;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void kilometersPerLiterMedianOdd() {
-		fail();
+		setupEven();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.KILOMETERS_PER_LITER);
+		double EXPECTED_MEDIAN = 11;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void refuelNumberMedianEven() {
-		fail();
+		setupEven();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.REFUEL_NUMBER);
+		double EXPECTED_MEDIAN = 3.5;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void drivenKilometersMedianEven() {
-		fail();
+		setup();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.KILOMETERS_DRIVEN);
+		double EXPECTED_MEDIAN = 49;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void litersMedianEven() {
-		fail();
+		setupEven();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.LITERS);
+		double EXPECTED_MEDIAN = 2.8;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void refuelPriceMedianEven() {
-		fail();
+		setupEven();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.REFUEL_PRICE);
+		double EXPECTED_MEDIAN = 6.8;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void LiterPriceMedianEven() {
-		fail();
+		setupEven();
+		double CALCULATED_MEDIAN = calculator.medianRefuelTank(InformationType.LITER_PRICE);
+		double EXPECTED_MEDIAN = 2.25;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void kilometersPerLiterMedianEven() {
-		fail();
+		setup();
+		double CALCULATED_MEDIAN = (int)(calculator.medianRefuelTank(InformationType.KILOMETERS_PER_LITER) * 100) / 100.0;
+		double EXPECTED_MEDIAN = 12.39;
+
+		assertEquals(EXPECTED_MEDIAN, CALCULATED_MEDIAN);
+
+		breakdown();
 	}
 
 	public void setupEven() {
@@ -109,14 +183,16 @@ public class PositiveMedianTest extends PositiveValues implements CalculatorMedi
 		super.testTank4 = new RefuelTank(4, 290, 2.60,6.50, LocalDate.of(2005, Month.OCTOBER,1));
 		// Kilometers driven: 58 , literPrice : 0.967, kilometers/Liter : 19.33
 		super.testTank5 = new RefuelTank(5, 348, 3.00,2.90, LocalDate.of(2005, Month.OCTOBER,3));
+		// Kilometers driven: 22 , literPrice : 2.0 , kilometers/Liter : 11
 		RefuelTank testTank6 = new RefuelTank(6,370,2.0,4.0, LocalDate.of(2005, Month.OCTOBER, 5));
 
 		super.testTanks = new ArrayList<>();
-		super.testTanks.add(super.testTank1);
-		super.testTanks.add(super.testTank2);
-		super.testTanks.add(super.testTank3);
-		super.testTanks.add(super.testTank4);
-		super.testTanks.add(super.testTank5);
+		testTanks.add(testTank1);
+		testTanks.add(testTank2);
+		testTanks.add(testTank3);
+		testTanks.add(testTank4);
+		testTanks.add(testTank5);
+		testTanks.add(testTank6);
 
 		super.calculator = new StatisticsCalculator(new CarData(super.testTanks).getRefuelTanks());
 	}

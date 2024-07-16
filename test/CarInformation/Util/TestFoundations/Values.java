@@ -26,7 +26,6 @@ public abstract class Values {
 
 	public void breakdown() {
 		testTanks = new ArrayList<>();
-		calculator = new StatisticsCalculator(new CarData(testTanks).getRefuelTanks());
 	}
 
 }
