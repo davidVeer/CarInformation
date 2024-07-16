@@ -3,7 +3,7 @@ package CarInformation.Util.SimilarValues;
 import CarInformation.Data.CarData;
 import CarInformation.Data.RefuelTank;
 import CarInformation.Util.StatisticsCalculator;
-import CarInformation.Util.Values;
+import CarInformation.Util.TestFoundations.Values;
 
 import java.time.LocalDate;
 import java.time.Month;

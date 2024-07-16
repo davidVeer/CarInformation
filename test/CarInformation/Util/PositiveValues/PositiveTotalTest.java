@@ -1,6 +1,6 @@
 package CarInformation.Util.PositiveValues;
 
-import CarInformation.Util.CalculatorTotalTest;
+import CarInformation.Util.TestFoundations.CalculatorTotalTest;
 import CarInformation.Util.InformationType;
 import org.junit.jupiter.api.Test;
 

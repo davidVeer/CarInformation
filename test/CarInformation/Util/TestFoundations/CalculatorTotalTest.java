@@ -1,4 +1,4 @@
-package CarInformation.Util;
+package CarInformation.Util.TestFoundations;
 
 import org.junit.jupiter.api.Test;
 

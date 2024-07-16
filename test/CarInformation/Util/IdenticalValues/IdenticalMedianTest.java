@@ -1,6 +1,6 @@
 package CarInformation.Util.IdenticalValues;
 
-import CarInformation.Util.CalculatorMedianTest;
+import CarInformation.Util.TestFoundations.CalculatorMedianTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;

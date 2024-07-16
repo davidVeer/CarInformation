@@ -1,6 +1,6 @@
 package CarInformation.Util.NegativeValues;
 
-import CarInformation.Util.CalculatorTotalTest;
+import CarInformation.Util.TestFoundations.CalculatorTotalTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;

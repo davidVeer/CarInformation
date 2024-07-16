@@ -1,7 +1,7 @@
 package CarInformation.Util.PositiveValues;
 
 import CarInformation.Data.RefuelTank;
-import CarInformation.Util.CalculatorHighestTest;
+import CarInformation.Util.TestFoundations.CalculatorHighestTest;
 import CarInformation.Util.InformationType;
 import org.junit.jupiter.api.Test;
 

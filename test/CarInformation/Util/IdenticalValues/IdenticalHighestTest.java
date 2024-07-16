@@ -1,6 +1,6 @@
 package CarInformation.Util.IdenticalValues;
 
-import CarInformation.Util.CalculatorHighestTest;
+import CarInformation.Util.TestFoundations.CalculatorHighestTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

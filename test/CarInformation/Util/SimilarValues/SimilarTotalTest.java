@@ -1,6 +1,6 @@
 package CarInformation.Util.SimilarValues;
 
-import CarInformation.Util.CalculatorTotalTest;
+import CarInformation.Util.TestFoundations.CalculatorTotalTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;

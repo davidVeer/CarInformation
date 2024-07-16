@@ -2,16 +2,13 @@ package CarInformation.Util.PositiveValues;
 
 import CarInformation.Data.CarData;
 import CarInformation.Data.RefuelTank;
-import CarInformation.Util.CalculatorMedianTest;
-import CarInformation.Util.InformationType;
+import CarInformation.Util.TestFoundations.CalculatorMedianTest;
 import CarInformation.Util.StatisticsCalculator;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class PositiveMedianTest extends PositiveValues implements CalculatorMedianTest {
 

@@ -1,6 +1,6 @@
 package CarInformation.Util.MixedValues;
 
-import CarInformation.Util.CalculatorLowestTest;
+import CarInformation.Util.TestFoundations.CalculatorLowestTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
