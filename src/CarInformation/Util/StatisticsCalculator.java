@@ -244,9 +244,12 @@ public class StatisticsCalculator {
     public double populationStandardDeviationRefuelTank(InformationType wantedInformation) {
         ArrayList<RefuelTank> refuelTanks = originalList;
         double SAMPLE_MEAN = meanRefuelTank(wantedInformation);
-        double SET_SIZE = refuelTanks.size();
         double sumOfEntries = 0.0;
         double STANDARD_DEVIATION;
+        double SET_SIZE;
+
+        filterInvalidValues(refuelTanks, wantedInformation);
+        SET_SIZE = refuelTanks.size();
 
         for (RefuelTank refuelTank : refuelTanks) {
             double CURRENT_INDEX = refuelTank.getType(wantedInformation);
