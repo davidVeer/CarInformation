@@ -1,9 +1,17 @@
 package CarInformation.Util.NegativeValues;
 
+import CarInformation.Data.CarData;
+import CarInformation.Data.RefuelTank;
+import CarInformation.Util.InformationType;
+import CarInformation.Util.StatisticsCalculator;
 import CarInformation.Util.TestFoundations.CalculatorMedianTest;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NegativeMedianTest extends NegativeValues implements CalculatorMedianTest {
 
@@ -11,89 +19,244 @@ public class NegativeMedianTest extends NegativeValues implements CalculatorMedi
 	@Override
 	@Test
 	public void refuelNumberMedianOdd() {
-		fail();
+		super.setup();
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.REFUEL_NUMBER));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void drivenKilometersMedianOdd() {
-		fail();
+		super.setup();
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.KILOMETERS_DRIVEN));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void litersMedianOdd() {
-		fail();
+		super.setup();
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.LITERS));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void refuelPriceMedianOdd() {
-		fail();
+		super.setup();
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.REFUEL_PRICE));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void LiterPriceMedianOdd() {
-		fail();
+		setup();
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.LITER_PRICE));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void kilometersPerLiterMedianOdd() {
-		fail();
+		setup();
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.KILOMETERS_PER_LITER));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void refuelNumberMedianEven() {
-		fail();
+		setupEven();
+
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.REFUEL_NUMBER));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
 	}
 
 
 	@Override
 	@Test
 	public void drivenKilometersMedianEven() {
-		fail();
+		setupEven();
+
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.KILOMETERS_DRIVEN));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
+
 	}
 
 
 	@Override
 	@Test
 	public void litersMedianEven() {
-		fail();
+		setupEven();
+
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.LITERS));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
+
 	}
 
 
 	@Override
 	@Test
 	public void refuelPriceMedianEven() {
-		fail();
+		setupEven();
+
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.REFUEL_PRICE));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
+
 	}
 
 
 	@Override
 	@Test
 	public void LiterPriceMedianEven() {
-		fail();
+		setupEvenAlternative();
+
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.LITER_PRICE));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
+
 	}
 
 
 	@Override
 	@Test
 	public void kilometersPerLiterMedianEven() {
-		fail();
+		setupEvenAlternative();
+
+		NullPointerException expectedException = assertThrows(NullPointerException.class ,() ->
+				calculator.medianRefuelTank(InformationType.KILOMETERS_PER_LITER));
+
+		assertEquals("all values were invalid",expectedException.getMessage());
+
+		breakdown();
+
 	}
 
 
 	@Override
 	public void setupEven() {
+		// Kilometers driven: -1 , literPrice :  , kilometers/Liter :
+		super.testTank1 = new RefuelTank(-1, 300, -30,-62.2, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: 0 , literPrice :  , kilometers/Liter :
+		super.testTank2 = new RefuelTank(-2, 300, -26.6,-43.44, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: -200 (-1) , literPrice :  , kilometers/Liter :
+		super.testTank3 = new RefuelTank(-3, 100, -91.18,-83.32, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: -110 (-1) , literPrice : , kilometers/Liter :
+		super.testTank4 = new RefuelTank(-4, -10, -0.87,-1.2, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: -70 (-1) , literPrice : , kilometers/Liter :
+		super.testTank5 = new RefuelTank(-5, -80, -6.94,-12.0, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: -10 (-1) , literPrice : , kilometers/Liter :
+		RefuelTank testTank6 = new RefuelTank(-6, -90, -0.5, -1.2, LocalDate.of(2005, Month.SEPTEMBER, 3));
+
+		super.testTanks = new ArrayList<>();
+		testTanks.add(testTank1);
+		testTanks.add(testTank2);
+		testTanks.add(testTank3);
+		testTanks.add(testTank4);
+		testTanks.add(testTank5);
+		testTanks.add(testTank6);
+
+		super.calculator = new StatisticsCalculator(new CarData(testTanks).getRefuelTanks());
+
+	}
+
+	public void setupEvenAlternative() {
+		// Kilometers driven: -1, literPrice :  , kilometers/Liter :
+		super.testTank1 = new RefuelTank(-1, 300, 30,-62.2, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: 30 , literPrice :  , kilometers/Liter :
+		super.testTank2 = new RefuelTank(-2, 330, -26.6,43.44, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: 170 , literPrice :  , kilometers/Liter :
+		super.testTank3 = new RefuelTank(-3, 500, -91.18,83.32, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: 110 , literPrice : , kilometers/Liter :
+		super.testTank4 = new RefuelTank(-4, 610, -0.87,1.2, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: 70 , literPrice : , kilometers/Liter :
+		super.testTank5 = new RefuelTank(-5, 780, -6.94,12.0, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: -10 (-1) , literPrice : , kilometers/Liter :
+		RefuelTank testTank6 = new RefuelTank(-6, 790, -0.5, 1.2, LocalDate.of(2005, Month.SEPTEMBER, 3));
+
+		super.testTanks = new ArrayList<>();
+		testTanks.add(testTank1);
+		testTanks.add(testTank2);
+		testTanks.add(testTank3);
+		testTanks.add(testTank4);
+		testTanks.add(testTank5);
+		testTanks.add(testTank6);
+
+		super.calculator = new StatisticsCalculator(new CarData(testTanks).getRefuelTanks());
+
+	}
+
+	@Override
+	public void setup() {
+		// Kilometers driven: -1, literPrice :  , kilometers/Liter :
+		super.testTank1 = new RefuelTank(-1, 300, 30,-62.2, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: 30 , literPrice :  , kilometers/Liter :
+		super.testTank2 = new RefuelTank(-2, 330, -26.6,43.44, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: 170 , literPrice :  , kilometers/Liter :
+		super.testTank3 = new RefuelTank(-3, 500, -91.18,83.32, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: 110 , literPrice : , kilometers/Liter :
+		super.testTank4 = new RefuelTank(-4, 610, -0.87,1.2, LocalDate.of(2005, Month.SEPTEMBER,3));
+		// Kilometers driven: 70 , literPrice : , kilometers/Liter :
+		super.testTank5 = new RefuelTank(-5, 780, -6.94,12.0, LocalDate.of(2005, Month.SEPTEMBER,3));
+
+		super.testTanks = new ArrayList<>();
+		testTanks.add(testTank1);
+		testTanks.add(testTank2);
+		testTanks.add(testTank3);
+		testTanks.add(testTank4);
+		testTanks.add(testTank5);
+
+		super.calculator = new StatisticsCalculator(new CarData(testTanks).getRefuelTanks());
 
 	}
 
