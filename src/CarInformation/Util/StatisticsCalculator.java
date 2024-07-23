@@ -198,7 +198,7 @@ public class StatisticsCalculator {
 
         switch (wantedInformation) {
             case LITER_PRICE:
-                STEP_SIZE = 0.5;
+                STEP_SIZE = 0.1;
                 break;
             case KILOMETERS_DRIVEN:
                 STEP_SIZE = 10;
