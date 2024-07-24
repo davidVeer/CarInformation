@@ -14,9 +14,9 @@ public class NegativeValues extends Values {
     public void setup() {
         // Kilometers driven: -1 , literPrice :  , kilometers/Liter :
         super.testTank1 = new RefuelTank(-1, 300, -30,-62.2, LocalDate.of(2005, Month.SEPTEMBER,3));
-        // Kilometers driven: -30 (-1) , literPrice :  , kilometers/Liter :
-        super.testTank2 = new RefuelTank(-2, 270, -26.6,-43.44, LocalDate.of(2005, Month.SEPTEMBER,3));
-        // Kilometers driven: -170 (-1) , literPrice :  , kilometers/Liter :
+        // Kilometers driven: 0 , literPrice :  , kilometers/Liter :
+        super.testTank2 = new RefuelTank(-2, 300, -26.6,-43.44, LocalDate.of(2005, Month.SEPTEMBER,3));
+        // Kilometers driven: -200 (-1) , literPrice :  , kilometers/Liter :
         super.testTank3 = new RefuelTank(-3, 100, -91.18,-83.32, LocalDate.of(2005, Month.SEPTEMBER,3));
         // Kilometers driven: -110 (-1) , literPrice : , kilometers/Liter :
         super.testTank4 = new RefuelTank(-4, -10, -0.87,-1.2, LocalDate.of(2005, Month.SEPTEMBER,3));
