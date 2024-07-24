@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class IdenticalValues extends Values {
 
     public void setup() {
-        // Kilometers driven: -1 , literPrice : 2.095512083, kilometers/Liter : 2.301495972
+        // Kilometers driven: -1 , literPrice : 2.095512083, kilometers/Liter : -0.1150747986
         testTank1 = new RefuelTank(1, 100, 8.69,18.21, LocalDate.of(2005, Month.SEPTEMBER,3));
         // Kilometers driven:  20, literPrice : 2.095, kilometers/Liter : 2.301
         testTank2 = new RefuelTank(1, 120, 8.69,18.21, LocalDate.of(2005, Month.SEPTEMBER,3));
