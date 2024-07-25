@@ -20,6 +20,8 @@ public class IdenticalModeTest extends IdenticalValues implements CalculatorMode
 		EXPECTED_VALUE.add(1.0);
 
 		assertEquals(EXPECTED_VALUE, CALUCATED_VALUE);
+
+		breakdown();
 	}
 
 	@Override
@@ -33,6 +35,7 @@ public class IdenticalModeTest extends IdenticalValues implements CalculatorMode
 
 		assertEquals(EXPECTED_VALUE, CALUCATED_VALUE);
 
+		breakdown();
 	}
 
 	@Override
@@ -46,6 +49,7 @@ public class IdenticalModeTest extends IdenticalValues implements CalculatorMode
 
 		assertEquals(EXPECTED_VALUE, CALUCATED_VALUE);
 
+		breakdown();
 	}
 
 	@Override
@@ -59,6 +63,7 @@ public class IdenticalModeTest extends IdenticalValues implements CalculatorMode
 
 		assertEquals(EXPECTED_VALUE, CALUCATED_VALUE);
 
+		breakdown();
 	}
 
 	@Override
@@ -72,6 +77,7 @@ public class IdenticalModeTest extends IdenticalValues implements CalculatorMode
 
 		assertEquals(EXPECTED_VALUE, CALUCATED_VALUE);
 
+		breakdown();
 	}
 
 	@Override
@@ -84,6 +90,8 @@ public class IdenticalModeTest extends IdenticalValues implements CalculatorMode
 		EXPECTED_VALUE.add(2.0);
 
 		assertEquals(EXPECTED_VALUE, CALUCATED_VALUE);
+
+		breakdown();
 	}
 
 
