@@ -84,19 +84,22 @@ be an initialisation error or my part (I didn't know how to properly initialize 
 invalid, I fixed this by throwing a NullPointerException if this was the case.
 I am trying to figure out a way t handle this exception in a logical way.
 - I also found out that totalValue would always initialise its outcome at 0.0 which is fine enough however it made it 
-more prone to allowing errors to pass through as it would just not add a number when the list was empty 
+more prone to allowing errors to pass through as it would just not add a number when the list was empty
 
-here are some bullet points to improve for the next test or iteration of the class.
+Todo's for during (of after) testing
 - [X] don't use random data in tests (as a main test, it's still okay to use as a secondary test)
-- [ ] restructure Calculator (see diagrams v2_2)
+- [X] restructure tests (create diagram in diagram v2_2)
 - [X] write tests that test: when all values are valid but all are different.
 - [X] write tests that test: when all values are invalid.
-- [ ] write tests that test: when all values are identical (and valid).
+- [X] write tests that test: when all values are identical (and valid).
+- [X] write tests that test: when there are no values (empty list)
 - [ ] write tests that test: when about half of the values are valid and the other half is invalid
 - [ ] write tests that test: when all values are valid with some identical values
-- [X] write tests that test: when there are no values (empty list)
 - [ ] write tests that test: when all values are close together 
 - [ ] write test that tests: whether no values are removed from the originalList when filtered
-- [X] restructure tests (create diagram in diagram v2_2)
 - [ ] use total calculation in mean calculation
 - [ ] total for (specifically) kilometers driven is last - first valid number (more accurate total this way)
+- [ ] for: Liter price, and fuel economy. if any variable in calculation is negative the value should be NaN
+- [ ] for kilometers driven: if odometer is lower (or by extention a negative number) the odometer should be set to -1 
+  to avoid setting the next invalid driven kilometers
+- [ ] restructure Calculator (see classDiagram/diagrams v2/diagrams v2_2)
