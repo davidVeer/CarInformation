@@ -86,7 +86,34 @@ I am trying to figure out a way t handle this exception in a logical way.
 - I also found out that totalValue would always initialise its outcome at 0.0 which is fine enough however it made it 
 more prone to allowing errors to pass through as it would just not add a number when the list was empty
 
-Todo's for during (of after) testing
+#### initial sorting troubles
+a difficult choice I had to make halfway through testing was something I had not considered when setting up the project,
+as I personally keep track of both the refuel count and the date I refueled my vehicle I figured these would always be tied together as variables.
+however I hadn't considered the possibility that someone might not keep track of how many times they 
+refueled their vehicle, or the date they refueled their vehicle.
+what this now means is that I have to choose whether I make the calculator require both of these variables, which allows for 
+the possibility of "skipping" a refueling (let's say someone might have forgotten to get the receipt, this means they now
+cant add that refueling to the list which will also drastically and untruthfully increase the fuel economy for the next
+refueling as the gap in distance is unaccounted for), but could also raise issues if the date does not line up with the 
+refuel number's position in lineup.
+or have only the date required and setting the refuel number based on the order of dates, this simplifies the sorting
+but would also raise the issue of not being able to "skip" a refueling like mentioned in previous option.
+this also removes the option of having mismatched variables.  
+
+the solution I came up with was the following: 
+I wil make a custom comparator that initially sorts by date, if there is no date given it will sort based on the refueling number.
+the reason being: if both the date and refueling number match the pre-entered position nothing will change regardless and if they don't 
+match the date is likely more reliable. if the refueling is added (for example) at a later date and the date is unknown
+the date is set to null and the refueling number is used to place the refueling in the highest likely correct position.
+if neither a date nor a refueling number is given (in this case the refueling number is set to -1) the refueling's
+location is based on the odometer. 
+
+after the list is sorted the remaining incorrect refueling numbers are corrected (for example any negative numbers or 
+relocated refuelings) the main function for this sorting system is optimising the chance of the distance driven (and by 
+extension fuel economy) to be correct
+
+
+#### Todo's for during (of after) testing
 - [X] don't use random data in tests (as a main test, it's still okay to use as a secondary test)
 - [X] restructure tests (create diagram in diagram v2_2)
 - [X] write tests that test: when all values are valid but all are different.
@@ -102,4 +129,6 @@ Todo's for during (of after) testing
 - [ ] for: Liter price, and fuel economy. if any variable in calculation is negative the value should be NaN
 - [ ] for kilometers driven: if odometer is lower (or by extention a negative number) the odometer should be set to -1 
   to avoid setting the next invalid driven kilometers
+- [ ] sort refuelings by their refuel number before calculating kilometers driven (this allows for new older refuelings to be added)
 - [ ] restructure Calculator (see classDiagram/diagrams v2/diagrams v2_2)
+- [ ] implement initial sort (for optimal distance driven calculations)
