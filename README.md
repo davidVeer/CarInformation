@@ -133,4 +133,4 @@ extension fuel economy) to be correct
 - [ ] restructure Calculator (see classDiagram/diagrams v2/diagrams v2_2)
 - [ ] implement initial sort (for optimal distance driven calculations)
 - [ ] add estimated carbon emissions to refueling data
-- [ ] add price per kilometer to refueling data
+- [ ] add price per kilometer to refueling data (price/km)
