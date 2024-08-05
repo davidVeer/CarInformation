@@ -132,3 +132,5 @@ extension fuel economy) to be correct
 - [ ] sort refuelings by their refuel number before calculating kilometers driven (this allows for new older refuelings to be added)
 - [ ] restructure Calculator (see classDiagram/diagrams v2/diagrams v2_2)
 - [ ] implement initial sort (for optimal distance driven calculations)
+- [ ] add estimated carbon emissions to refueling data
+- [ ] add price per kilometer to refueling data
