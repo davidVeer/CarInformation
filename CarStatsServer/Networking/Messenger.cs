@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace CarStatsServer.Networking
 {
-    class Messenger
+    public class Messenger
     {
+        public static void DelegateMessage(string messageToSend) {
+            throw new NotImplementedException();
+        }
+
+        private static void SendMessage(string messageToSend) {
+            throw new NotImplementedException();
+        }
     }
 }
