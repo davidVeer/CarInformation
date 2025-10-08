@@ -1,6 +1,6 @@
 ﻿namespace CarStatsServer.Models
 {
-    public class FuelUpModel
+    public class FuelUp_Model
     {
         public ushort fuelUpNumber { get; }
         public ushort kilometersDriven { get; }
@@ -12,7 +12,7 @@
         public float literPrice { get; }
         public float carbonEmissions { get; }
 
-        public FuelUpModel(ushort fuelUpNumber, ushort kilometersDriven, uint odometerReading, DateTime fuelUpDate, float litersRefueled, float fuelUpCost, float fuelEfficiency, float literPrice, float carbonEmissions)
+        public FuelUp_Model(ushort fuelUpNumber, ushort kilometersDriven, uint odometerReading, DateTime fuelUpDate, float litersRefueled, float fuelUpCost, float fuelEfficiency, float literPrice, float carbonEmissions)
         {
             this.fuelUpNumber = fuelUpNumber;
             this.kilometersDriven = kilometersDriven;
