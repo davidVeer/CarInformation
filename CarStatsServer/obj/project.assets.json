@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Y:\\Leerjaar 3 (2025-2026)\\!Zomervakantie_tot_Periode 2\\Oefentoetsen en Opgaven\\SLOM 2\\CarStatsServer\\CarStatsServer\\CarStatsServer.csproj",
+      "projectUniqueName": "Y:\\Leerjaar 3 (2025-2026)\\!Zomervakantie_tot_Periode 2\\Oefentoetsen en Opgaven\\SLOM 2\\Opdracht 0 - CAA & Maatwerk\\CarStatsServer\\CarStatsServer\\CarStatsServer.csproj",
       "projectName": "CarStatsServer",
-      "projectPath": "Y:\\Leerjaar 3 (2025-2026)\\!Zomervakantie_tot_Periode 2\\Oefentoetsen en Opgaven\\SLOM 2\\CarStatsServer\\CarStatsServer\\CarStatsServer.csproj",
+      "projectPath": "Y:\\Leerjaar 3 (2025-2026)\\!Zomervakantie_tot_Periode 2\\Oefentoetsen en Opgaven\\SLOM 2\\Opdracht 0 - CAA & Maatwerk\\CarStatsServer\\CarStatsServer\\CarStatsServer.csproj",
       "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
-      "outputPath": "Y:\\Leerjaar 3 (2025-2026)\\!Zomervakantie_tot_Periode 2\\Oefentoetsen en Opgaven\\SLOM 2\\CarStatsServer\\CarStatsServer\\obj\\",
+      "outputPath": "Y:\\Leerjaar 3 (2025-2026)\\!Zomervakantie_tot_Periode 2\\Oefentoetsen en Opgaven\\SLOM 2\\Opdracht 0 - CAA & Maatwerk\\CarStatsServer\\CarStatsServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
