@@ -4,7 +4,7 @@ namespace CarStatsServer.Calculators
 {
     public class StatisticsCalculator
     {
-        public static float CalculateMode(float[] dataListFloats)
+        public static T CalculateMode<T>(T[] dataSet)
         {
             throw new NotImplementedException();
         }
@@ -42,46 +42,5 @@ namespace CarStatsServer.Calculators
         {
             throw new NotImplementedException();
         }
-
-
-
-        public static uint CalculateMode(uint[] dataListInts)
-        {
-            throw new NotImplementedException();
-        }
-        public static uint CalculateMean(uint[] dataListInts)
-        {
-            throw new NotImplementedException();
-        }
-        public static uint CalculateStandardDeviation(uint[] dataListInts)
-        {
-            throw new NotImplementedException();
-        }
-        public static uint CalculateIqr(uint[] dataListInts)
-        {
-            throw new NotImplementedException();
-        }
-        public static uint FindMedian(uint[] dataListInts)
-        {
-            throw new NotImplementedException();
-        }
-        public static uint FindHighest(uint[] dataListInts)
-        {
-            throw new NotImplementedException();
-        }
-        public static uint FindLowest(uint[] dataListInts)
-        {
-            throw new NotImplementedException();
-        }
-        public static Hashtable MakeFrequencyTable(uint[] dataListInts)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static uint CalculateTotal(uint[] dataListInts)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

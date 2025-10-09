@@ -9,22 +9,34 @@ namespace CarStatsServer.Calculators
 {
     public class DataCalculator
     {
-        public ushort CalculateKilometerDriven(uint oldOdometerReading, uint newOdometerReading)
+        public static ushort CalculateKilometerDriven(uint oldOdometerReading, uint newOdometerReading)
         {
-            throw new NotImplementedException();
+            if (oldOdometerReading < newOdometerReading) return ushort.MaxValue;
+
+            return (ushort)(newOdometerReading - oldOdometerReading);
         }
 
-        public float CalculateFuelConsumption(ushort kilometersDriven, float litersUsed)
+        public static float CalculateFuelEfficiency(ushort kilometersDriven, float litersUsed)
         {
-            throw new NotImplementedException();
+            float kilometersPerLiter = (float)kilometersDriven / litersUsed;
+
+            if (kilometersPerLiter < 0.0f ||
+                kilometersPerLiter > 50.0f) return float.MaxValue;
+
+            return kilometersPerLiter;
         }
 
-        public float CalculatePricePerLiter(float litersUsed, float fuelUpCost)
+        public static float CalculatePricePerLiter(float litersUsed, float fuelUpCost)
         {
-            throw new NotImplementedException();
+            float pricePerLiter = fuelUpCost / litersUsed;
+
+            if (pricePerLiter < 0.0f ||
+                pricePerLiter > 4.0f) return float.MaxValue;
+
+            return pricePerLiter;
         }
 
-        public float CalculateEmissions(ushort kilometersDriven, float fuelConsumption, FuelType fuelType )
+        public static float CalculateEmissions(ushort kilometersDriven, float fuelConsumption, FuelType fuelType )
         {
             throw new NotImplementedException();
         }      
