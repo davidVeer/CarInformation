@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarStatsServer.DatabaseManagement
 {
-    class DatabaseTableManagement
+    class Database_TableManagement
     {
     }
 }

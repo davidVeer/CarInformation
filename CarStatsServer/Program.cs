@@ -1,4 +1,6 @@
-﻿
+﻿using System.Data.SQLite;
+
+
 namespace CarStatsServer
 {
     public class Program
@@ -8,7 +10,7 @@ namespace CarStatsServer
 
             Console.WriteLine("Hello world!");
         }
-    
+
     }
 
 }
