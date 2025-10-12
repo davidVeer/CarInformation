@@ -12,6 +12,8 @@ namespace CarStatsServer.Models
         public string carModel { get; }
         public string carManufacturer { get; }
         public ushort buildYear { get; } 
+        public Account_Model owner { get; }
+
         public List<FuelUp_Model> fuelUps { get; }
 
         public Car_Model(string licencePlateNumber, string carModel, string carManufacturer, ushort buildYear, List<FuelUp_Model> fuelUps)
