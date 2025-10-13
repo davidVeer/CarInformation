@@ -1,6 +1,4 @@
-﻿using System.Data.SQLite;
-using System.Diagnostics.Contracts;
-using CarStatsServer.DatabaseManagement;
+﻿using CarStatsServer.DatabaseManagement;
 using CarStatsServer.Models;
 
 namespace CarStatsServer
@@ -13,17 +11,15 @@ namespace CarStatsServer
             List<Car_Model> cars;
             List<Account_Model> accounts;
             accounts = Database_DataManagement.LoadAccounts();
-            foreach (Account_Model account in accounts)
-            {
-                Console.WriteLine(account.AccountName);
+            foreach (Account_Model account in accounts) {
+                Console.WriteLine(account.Name);
             }
 
 
             cars = Database_DataManagement.LoadCars();
 
 
-            foreach (Car_Model car in cars)
-            {
+            foreach (Car_Model car in cars) {
                 car.ToString();
             }
 

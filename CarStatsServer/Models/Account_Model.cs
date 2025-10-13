@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CarStatsServer.Models
+﻿namespace CarStatsServer.Models
 {
     public class Account_Model
     {
-        public string AccountName { get; set; }
-        public List<Car_Model> ownedCars { get; }
+        public int UserId { get; set; }
+        public string Name { get; set; }
+        public List<Car_Model> ownedCars { get; set; }
 
-        public Account_Model()
-        {
+        public Account_Model() {
         }
 
-        public Account_Model(string accountName, List<Car_Model> ownedCars)
-        {
-            AccountName = accountName;
+        public Account_Model(string accountName, List<Car_Model> ownedCars) {
+            Name = accountName;
             this.ownedCars = ownedCars;
         }
 
