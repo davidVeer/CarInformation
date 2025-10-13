@@ -8,13 +8,19 @@ namespace CarStatsServer.Models
 {
     public class Account_Model
     {
-        public string accountName { get; }
+        public string AccountName { get; set; }
         public List<Car_Model> ownedCars { get; }
+
+        public Account_Model()
+        {
+        }
 
         public Account_Model(string accountName, List<Car_Model> ownedCars)
         {
-            this.accountName = accountName;
+            AccountName = accountName;
             this.ownedCars = ownedCars;
         }
+
+
     }
 }

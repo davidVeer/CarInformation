@@ -16,6 +16,10 @@ namespace CarStatsServer.Models
 
         public List<FuelUp_Model> fuelUps { get; }
 
+
+        public Car_Model()
+        {
+        }
         public Car_Model(string licencePlateNumber, string carModel, string carManufacturer, ushort buildYear, List<FuelUp_Model> fuelUps)
         {
             this.licencePlateNumber = licencePlateNumber;
@@ -24,5 +28,7 @@ namespace CarStatsServer.Models
             this.buildYear = buildYear;
             this.fuelUps = fuelUps;
         }
+
+
     }
 }

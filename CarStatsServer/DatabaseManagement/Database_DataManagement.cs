@@ -23,7 +23,7 @@ namespace CarStatsServer.DatabaseManagement
 
         public static List<Car_Model> LoadCars()
         {
-            string query = "select * from Cars";
+            string query = "select * from Cars inner join Accounts on Cars.owner = Accounts.name where Cars.owner = @owner";
 
             using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString()))
             {
@@ -45,7 +45,7 @@ namespace CarStatsServer.DatabaseManagement
         public static void SaveFuelUpToDatabase(FuelUp_Model newFuelUp){
             string query = "insert into FuelUps " +
                 "(fuelUpNumber, odometerReading, fuelUpDate,litersFueledUp, fuelUpPrice, distanceDriven, fuelEfficiency, literPrice, carbonEmissions, linkedCar) " +
-                "values (@fuelUpNumber, @odometerReading, @fuelUpDate,@litersFueledUp, @fuelUpPrice, @distanceDriven, @fuelEfficiency, @literPrice, @carbonEmissions, @LinkedCar)";
+                "values (@fuelUpNumber, @odometerReading, @fuelUpDate,@litersFueledUp, @fuelUpPrice, @distanceDriven, @fuelEfficiency, @literPrice, @carbonEmissions, @linkedCar)";
 
             using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString()))
             {
@@ -55,19 +55,22 @@ namespace CarStatsServer.DatabaseManagement
 
         public static void SaveCarToDatabase(Car_Model newCar)
         {
-            string query = "insert into Cars (licencePlateNumber)";
+            string query = "insert into Cars (licencePlateNumber, carModel, buildYear, owner)" +
+                "values (@licencePlateNumber, @carModel, @buildYear, @owner)";
 
             using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString()))
             {
-               
+                Database_Connection.databaseConnection.Execute(query, newCar);
             }
 
         }
         public static void SaveAccountToDatabase(Account_Model newAccount)
         {
+            string query = "insert into Cars (name) values (@name)";
+
             using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString()))
             {
-                
+                Database_Connection.databaseConnection.Execute(query, newAccount);
             }
         }
 

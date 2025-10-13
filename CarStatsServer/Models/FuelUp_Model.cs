@@ -13,6 +13,11 @@
         public float carbonEmissions { get; }
         public Car_Model linkedCar { get; }
 
+
+        public FuelUp_Model()
+        {
+        }
+
         public FuelUp_Model(ushort fuelUpNumber, ushort kilometersDriven, uint odometerReading, DateTime fuelUpDate, float litersRefueled, float fuelUpCost, float fuelEfficiency, float literPrice, float carbonEmissions)
         {
             this.fuelUpNumber = fuelUpNumber;
@@ -25,5 +30,7 @@
             this.literPrice = literPrice;
             this.carbonEmissions = carbonEmissions;
         }
+
+
     }
 }
