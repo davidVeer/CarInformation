@@ -7,16 +7,22 @@ namespace CarStatsServer.DatabaseManagement
     class Database_DataManagement
     {
         public static List<FuelUp_Model> LoadFuelUps() {
-            string query = @"SELECT * FROM Fuelups";
+            string query = """
+                               SELECT FuelUps.*, Cars.LicencePlateNumber, Cars.CarModel, Cars.CarManufacturer, Cars.BuildYear FROM FuelUps
+                               INNER JOIN Cars
+                               ON FuelUps.LinkedCar = Cars.LicencePlateNumber
+                               """;
 
             using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                IEnumerable<FuelUp_Model> output = Database_Connection.databaseConnection.Query<FuelUp_Model>(query, new DynamicParameters());
-                return output.ToList();
+                IEnumerable<FuelUp_Model> fuelUps = Database_Connection.databaseConnection.Query<FuelUp_Model, Car_Model, FuelUp_Model>(
+                    query,
+                    (fuelUp, linkedCar) => { fuelUp.LinkedCar = linkedCar; return fuelUp; }, splitOn: "LinkedCar");
+                return fuelUps.ToList();
             }
         }
 
         public static List<Car_Model> LoadCars() {
-            
+
             Dictionary<int, Account_Model> loadedAccounts = new();
 
 
