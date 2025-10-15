@@ -6,8 +6,8 @@ namespace CarStatsServer.DatabaseManagement
 {
     class Database_DataManagement
     {
-        public static List<FuelUp_Model> LoadFuelUpsFromSpecificCar(Car_Model carmodelFromFuelups) {
-            string query = string.Format("select * from Fuelups where linkedCar = '{0}'", carmodelFromFuelups.LicencePlateNumber);
+        public static List<FuelUp_Model> LoadFuelUps() {
+            string query = @"SELECT * FROM Fuelups";
 
             using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
                 IEnumerable<FuelUp_Model> output = Database_Connection.databaseConnection.Query<FuelUp_Model>(query, new DynamicParameters());
@@ -16,10 +16,20 @@ namespace CarStatsServer.DatabaseManagement
         }
 
         public static List<Car_Model> LoadCars() {
-            string query = @"SELECT * FROM Cars INNER JOIN Accounts ON Cars.Owner = Accounts.UserID;";
+            
+            Dictionary<int, Account_Model> loadedAccounts = new();
+
 
             using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                var cars = Database_Connection.databaseConnection.Query<Car_Model, Account_Model, Car_Model>(query, (car, account) => { car.Owner = account; return car; }, splitOn: "UserID");
+                string query = """
+                               SELECT * FROM Cars 
+                               INNER JOIN Accounts 
+                               ON Cars.Owner = Accounts.UserID
+                               """;
+
+                var cars = Database_Connection.databaseConnection.Query<Car_Model, Account_Model, Car_Model>(
+                    query,
+                    (car, account) => { car.Owner = account; return car; }, splitOn: "Owner");
                 return cars.ToList();
             }
         }
