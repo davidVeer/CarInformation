@@ -37,16 +37,22 @@ namespace CarStatsServer.DatabaseManagement
         }
 
         public static void SaveCarToDatabase(Car_Model newCar) {
-            string query = "insert into Cars (licencePlateNumber, carModel, buildYear, owner)" +
-                "values (@licencePlateNumber, @carModel, @buildYear, @owner)";
+            string query = "insert into Cars (LicencePlateNumber, CarModel, CarManufacturer, BuildYear, Owner)" +
+                "values (@LicencePlateNumber, @CarModel, @CarManufacturer, @BuildYear, @Owner)";
 
             using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                Database_Connection.databaseConnection.Execute(query, newCar);
+                Database_Connection.databaseConnection.Execute(query, new {
+                    newCar.LicencePlateNumber,
+                    newCar.CarModel,
+                    newCar.CarManufacturer,
+                    newCar.BuildYear,
+                    Owner = newCar.Owner.UserId
+                });
             }
 
         }
         public static void SaveAccountToDatabase(Account_Model newAccount) {
-            string query = "insert into Cars (name) values (@name)";
+            string query = "insert into Accounts (Name) values (@Name)";
 
             using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
                 Database_Connection.databaseConnection.Execute(query, newAccount);
