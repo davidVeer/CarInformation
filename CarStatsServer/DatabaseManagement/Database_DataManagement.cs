@@ -1,4 +1,4 @@
-﻿using CarStatsServer.Models;
+using CarStatsServer.Models;
 using Dapper;
 using System.Data.SQLite;
 
@@ -6,47 +6,25 @@ namespace CarStatsServer.DatabaseManagement
 {
     class Database_DataManagement
     {
-        public static List<FuelUp_Model> LoadFuelUps() {
-            string query = """
-                               SELECT FuelUps.*, Cars.LicencePlateNumber, Cars.CarModel, Cars.CarManufacturer, Cars.BuildYear FROM FuelUps
-                               INNER JOIN Cars
-                               ON FuelUps.LinkedCar = Cars.LicencePlateNumber
-                               """;
 
-            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                IEnumerable<FuelUp_Model> fuelUps = Database_Connection.databaseConnection.Query<FuelUp_Model, Car_Model, FuelUp_Model>(
-                    query,
-                    (fuelUp, linkedCar) => { fuelUp.LinkedCar = linkedCar; return fuelUp; }, splitOn: "LinkedCar");
-                return fuelUps.ToList();
-            }
-        }
+        public static Dictionary<int, FuelUp_Model> LoadFuelUps(string query = """
+             SELECT FuelUps.*, Cars.LicencePlateNumber, Cars.CarModel, Cars.CarManufacturer, Cars.BuildYear 
+             FROM FuelUps 
+             INNER JOIN Cars 
+             ON FuelUps.LinkedCar = Cars.LicencePlateNumber
+            """) => LoadFuelUpsFromDatabase(query);
 
-        public static List<Car_Model> LoadCars() {
-
-            Dictionary<int, Account_Model> loadedAccounts = new();
+        public static Dictionary<string, Car_Model> LoadCars(string query = """
+            SELECT * FROM Cars 
+            INNER JOIN Accounts 
+            ON Cars.Owner = Accounts.UserID
+            """) => LoadCarsFromDatabase(query);
 
 
-            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                string query = """
-                               SELECT * FROM Cars 
-                               INNER JOIN Accounts 
-                               ON Cars.Owner = Accounts.UserID
-                               """;
+        public static Dictionary<int, Account_Model> LoadAccounts(string query = """
+            SELECT * FROM Accounts
+            """) => LoadAccountsFromDatabase(query);
 
-                var cars = Database_Connection.databaseConnection.Query<Car_Model, Account_Model, Car_Model>(
-                    query,
-                    (car, account) => { car.Owner = account; return car; }, splitOn: "Owner");
-                return cars.ToList();
-            }
-        }
-        public static List<Account_Model> LoadAccounts() {
-            string query = "select * from Accounts";
-
-            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                var output = Database_Connection.databaseConnection.Query<Account_Model>(query, new DynamicParameters());
-                return output.ToList();
-            }
-        }
 
         public static void SaveFuelUpToDatabase(FuelUp_Model newFuelUp) {
             string query = "insert into FuelUps " +
@@ -75,6 +53,51 @@ namespace CarStatsServer.DatabaseManagement
             }
         }
 
+        private static Dictionary<int, Account_Model> LoadAccountsFromDatabase(string sql) {
+            Dictionary<int, Account_Model> keyValuePairs = new();
+
+            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
+                IEnumerable<Account_Model> accounts = Database_Connection.databaseConnection.Query<Account_Model>(sql, new DynamicParameters());
+
+                foreach (Account_Model account in accounts.ToList()) {
+                    keyValuePairs.Add(account.UserId, account);
+                }
+            }
+
+            return keyValuePairs;
+        }
+
+        private static Dictionary<string, Car_Model> LoadCarsFromDatabase(string sql) {
+            Dictionary<string, Car_Model> keyValuePairs = new();
+
+            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
+                IEnumerable<Car_Model> cars = Database_Connection.databaseConnection.Query<Car_Model, Account_Model, Car_Model>(
+                    sql,
+                    (car, account) => { car.Owner = account; return car; }, splitOn: "Owner");
+
+                foreach (Car_Model car in cars.ToList()) {
+                    keyValuePairs.Add(car.LicencePlateNumber, car);
+                }
+            }
+
+            return keyValuePairs;
+        }
+
+        private static Dictionary<int, FuelUp_Model> LoadFuelUpsFromDatabase(string sql) {
+            Dictionary<int, FuelUp_Model> keyValuePairs = new();
+
+            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
+                IEnumerable<FuelUp_Model> fuelUps = Database_Connection.databaseConnection.Query<FuelUp_Model, Car_Model, FuelUp_Model>(
+                    sql,
+                    (fuelUp, linkedCar) => { fuelUp.LinkedCar = linkedCar; return fuelUp; }, splitOn: "LinkedCar");
+
+                foreach (FuelUp_Model fuelup in fuelUps.ToList()) {
+                    keyValuePairs.Add(fuelup.FuelUpNumber, fuelup);
+                }
+            }
+
+            return keyValuePairs;
+        }
 
     }
 }
