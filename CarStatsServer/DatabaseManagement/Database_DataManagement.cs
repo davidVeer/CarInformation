@@ -51,6 +51,7 @@ namespace CarStatsServer.DatabaseManagement
             }
 
         }
+
         public static void SaveAccountToDatabase(Account_Model newAccount) {
             string query = "insert into Accounts (Name) values (@Name)";
 
@@ -98,7 +99,8 @@ namespace CarStatsServer.DatabaseManagement
                     (fuelUp, linkedCar) => { fuelUp.LinkedCar = linkedCar; return fuelUp; }, splitOn: "LinkedCar");
 
                 foreach (FuelUp_Model fuelup in fuelUps.ToList()) {
-                    keyValuePairs.Add(fuelup.FuelUpNumber, fuelup);
+                    FuelUp_Model ImportedFuelUp = Database_ModelModifyers.ConvertToCodeValues(fuelup);
+                    keyValuePairs.Add(fuelup.FuelUpId, ImportedFuelUp);
                 }
             }
 

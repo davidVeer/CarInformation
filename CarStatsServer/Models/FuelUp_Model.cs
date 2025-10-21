@@ -2,7 +2,7 @@
 {
     public class FuelUp_Model
     {
-        public ushort FuelUpNumber { get; init; }
+        public ushort FuelUpId { get; init; }
         public ushort KilometersDriven { get; init; }
         public uint OdometerReading { get; init; }
         public DateTime FuelUpDate { get; init; }
@@ -17,8 +17,8 @@
         public FuelUp_Model() {
         }
 
-        public FuelUp_Model(ushort fuelUpNumber, ushort kilometersDriven, uint odometerReading, DateTime fuelUpDate, float litersRefueled, float fuelUpCost, float fuelEfficiency, float literPrice, float carbonEmissions, Car_Model linkedCar) {
-            FuelUpNumber = fuelUpNumber;
+        public FuelUp_Model(ushort fuelUpId, ushort kilometersDriven, uint odometerReading, DateTime fuelUpDate, float litersRefueled, float fuelUpCost, float fuelEfficiency, float literPrice, float carbonEmissions, Car_Model linkedCar) {
+            FuelUpId = fuelUpId;
             KilometersDriven = kilometersDriven;
             OdometerReading = odometerReading;
             FuelUpDate = fuelUpDate;

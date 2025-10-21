@@ -9,8 +9,8 @@ namespace CarStatsServer
             Dictionary<int, FuelUp_Model> fuelUps;
             fuelUps = Database_DataManagement.LoadFuelUps();
             foreach (FuelUp_Model fuelUp in fuelUps.Values) {
-                Console.WriteLine("FuelUpNumber: {0},\n - LinkedCar: {1},\n - OdometerReading: {2},\n - LitersFueled: {3},\n - RefuelCost: {4},\n - KilometersDriven: {5}",
-                    fuelUp.FuelUpNumber,
+                Console.WriteLine("FuelUpId: {0},\n - LinkedCar: {1},\n - OdometerReading: {2},\n - LitersFueled: {3},\n - RefuelCost: {4},\n - KilometersDriven: {5}",
+                    fuelUp.FuelUpId,
                     fuelUp.LinkedCar.LicencePlateNumber,
                     fuelUp.OdometerReading,
                     fuelUp.LitersRefueled,
