@@ -19,6 +19,14 @@ namespace CarStatsServer
             }
         }
 
+        public static void EnterNewFuelUp() {
+            Console.WriteLine("Enter the FuelupNumber, LinkedCar's Licenceplate number, odometerReading, Liters fueled, and cost of fuel up:");
+            Database_DataManagement.SaveFuelUpToDatabase(new FuelUp_Model() {
+            });
+        }
+
+
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
         public static void PrintAccountsList() {
             Dictionary<int, Account_Model> accounts;
             accounts = Database_DataManagement.LoadAccounts();
@@ -28,6 +36,7 @@ namespace CarStatsServer
 
         }
 
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
         public static void PrintCarsList() {
             Dictionary<string, Car_Model> cars;
             cars = Database_DataManagement.LoadCars();
@@ -42,6 +51,7 @@ namespace CarStatsServer
             }
         }
 
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
         public static void EnterNewAccount() {
             Console.WriteLine("Enter a Name for the new Account:");
 
@@ -50,6 +60,7 @@ namespace CarStatsServer
             });
         }
 
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
         public static void EnterNewCar() {
             Console.WriteLine("Enter the Licenceplatenumber, ownerID, Manufacturer, model, year");
 
@@ -62,11 +73,6 @@ namespace CarStatsServer
             });
         }
 
-        public static void EnterNewFuelUp() {
-            Console.WriteLine("Enter the FuelupNumber, LinkedCar's Licenceplate number, odometerReading, Liters fueled, and cost of fuel up:");
-            Database_DataManagement.SaveFuelUpToDatabase(new FuelUp_Model() {
-            });
-        }
 
 
     }

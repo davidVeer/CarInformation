@@ -7,25 +7,6 @@ namespace CarStatsServer.DatabaseManagement
     class Database_DataManagement
     {
 
-        public static Dictionary<int, FuelUp_Model> LoadFuelUps(string query = """
-             SELECT FuelUps.*, Cars.LicencePlateNumber, Cars.CarModel, Cars.CarManufacturer, Cars.BuildYear 
-             FROM FuelUps 
-             INNER JOIN Cars 
-             ON FuelUps.LinkedCar = Cars.LicencePlateNumber
-            """) => LoadFuelUpsFromDatabase(query);
-
-        public static Dictionary<string, Car_Model> LoadCars(string query = """
-            SELECT * FROM Cars 
-            INNER JOIN Accounts 
-            ON Cars.Owner = Accounts.UserID
-            """) => LoadCarsFromDatabase(query);
-
-
-        public static Dictionary<int, Account_Model> LoadAccounts(string query = """
-            SELECT * FROM Accounts
-            """) => LoadAccountsFromDatabase(query);
-
-
         public static void SaveFuelUpToDatabase(FuelUp_Model newFuelUp) {
             string query = "insert into FuelUps " +
                 "(FuelUpNumber, OdometerReading, FuelUpDate, LitersFueledUp, FuelUpPrice, DistanceDriven, FuelEfficiency, LiterPrice, CarbonEmissions, LinkedCar) " +
@@ -35,61 +16,12 @@ namespace CarStatsServer.DatabaseManagement
                 Database_Connection.databaseConnection.Execute(query, newFuelUp);
             }
         }
-
-        public static void SaveCarToDatabase(Car_Model newCar) {
-            string query = "insert into Cars (LicencePlateNumber, CarModel, CarManufacturer, BuildYear, Owner)" +
-                "values (@LicencePlateNumber, @CarModel, @CarManufacturer, @BuildYear, @Owner)";
-
-            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                Database_Connection.databaseConnection.Execute(query, new {
-                    newCar.LicencePlateNumber,
-                    newCar.CarModel,
-                    newCar.CarManufacturer,
-                    newCar.BuildYear,
-                    Owner = newCar.Owner.UserId
-                });
-            }
-
-        }
-
-        public static void SaveAccountToDatabase(Account_Model newAccount) {
-            string query = "insert into Accounts (Name) values (@Name)";
-
-            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                Database_Connection.databaseConnection.Execute(query, newAccount);
-            }
-        }
-
-        private static Dictionary<int, Account_Model> LoadAccountsFromDatabase(string sql) {
-            Dictionary<int, Account_Model> keyValuePairs = new();
-
-            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                IEnumerable<Account_Model> accounts = Database_Connection.databaseConnection.Query<Account_Model>(sql, new DynamicParameters());
-
-                foreach (Account_Model account in accounts.ToList()) {
-                    keyValuePairs.Add(account.UserId, account);
-                }
-            }
-
-            return keyValuePairs;
-        }
-
-        private static Dictionary<string, Car_Model> LoadCarsFromDatabase(string sql) {
-            Dictionary<string, Car_Model> keyValuePairs = new();
-
-            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
-                IEnumerable<Car_Model> cars = Database_Connection.databaseConnection.Query<Car_Model, Account_Model, Car_Model>(
-                    sql,
-                    (car, account) => { car.Owner = account; return car; }, splitOn: "Owner");
-
-                foreach (Car_Model car in cars.ToList()) {
-                    keyValuePairs.Add(car.LicencePlateNumber, car);
-                }
-            }
-
-            return keyValuePairs;
-        }
-
+        public static Dictionary<int, FuelUp_Model> LoadFuelUps(string query = """
+             SELECT FuelUps.*, Cars.LicencePlateNumber, Cars.CarModel, Cars.CarManufacturer, Cars.BuildYear 
+             FROM FuelUps 
+             INNER JOIN Cars 
+             ON FuelUps.LinkedCar = Cars.LicencePlateNumber
+            """) => LoadFuelUpsFromDatabase(query);
         private static Dictionary<int, FuelUp_Model> LoadFuelUpsFromDatabase(string sql) {
             Dictionary<int, FuelUp_Model> keyValuePairs = new();
 
@@ -106,6 +38,78 @@ namespace CarStatsServer.DatabaseManagement
 
             return keyValuePairs;
         }
+
+
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
+        public static Dictionary<string, Car_Model> LoadCars(string query = """
+            SELECT * FROM Cars 
+            INNER JOIN Accounts 
+            ON Cars.Owner = Accounts.UserID
+            """) => LoadCarsFromDatabase(query);
+
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
+        public static Dictionary<int, Account_Model> LoadAccounts(string query = """
+            SELECT * FROM Accounts
+            """) => LoadAccountsFromDatabase(query);
+
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
+        public static void SaveCarToDatabase(Car_Model newCar) {
+            string query = "insert into Cars (LicencePlateNumber, CarModel, CarManufacturer, BuildYear, Owner)" +
+                "values (@LicencePlateNumber, @CarModel, @CarManufacturer, @BuildYear, @Owner)";
+
+            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
+                Database_Connection.databaseConnection.Execute(query, new {
+                    newCar.LicencePlateNumber,
+                    newCar.CarModel,
+                    newCar.CarManufacturer,
+                    newCar.BuildYear,
+                    Owner = newCar.Owner.UserId
+                });
+            }
+
+        }
+
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
+        public static void SaveAccountToDatabase(Account_Model newAccount) {
+            string query = "insert into Accounts (Name) values (@Name)";
+
+            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
+                Database_Connection.databaseConnection.Execute(query, newAccount);
+            }
+        }
+
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
+        private static Dictionary<int, Account_Model> LoadAccountsFromDatabase(string sql) {
+            Dictionary<int, Account_Model> keyValuePairs = new();
+
+            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
+                IEnumerable<Account_Model> accounts = Database_Connection.databaseConnection.Query<Account_Model>(sql, new DynamicParameters());
+
+                foreach (Account_Model account in accounts.ToList()) {
+                    keyValuePairs.Add(account.UserId, account);
+                }
+            }
+
+            return keyValuePairs;
+        }
+
+        [Obsolete("This function might be used in the future but was removed to keep proof of concept practical and simple")]
+        private static Dictionary<string, Car_Model> LoadCarsFromDatabase(string sql) {
+            Dictionary<string, Car_Model> keyValuePairs = new();
+
+            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString())) {
+                IEnumerable<Car_Model> cars = Database_Connection.databaseConnection.Query<Car_Model, Account_Model, Car_Model>(
+                    sql,
+                    (car, account) => { car.Owner = account; return car; }, splitOn: "Owner");
+
+                foreach (Car_Model car in cars.ToList()) {
+                    keyValuePairs.Add(car.LicencePlateNumber, car);
+                }
+            }
+
+            return keyValuePairs;
+        }
+
 
     }
 }
