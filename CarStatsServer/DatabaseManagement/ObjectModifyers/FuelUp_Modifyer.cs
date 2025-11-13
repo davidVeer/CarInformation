@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarStatsServer.DatabaseManagement
+namespace CarStatsServer.DatabaseManagement.ObjectModifyers
 {
-    class Database_ModelModifyers
+    class FuelUp_Modifyer : IModelModifyer<ushort, FuelUp_Model>
     {
-        public static FuelUp_Model ConvertToDatabaseValues(FuelUp_Model ExportModel) {
+        public static FuelUp_Model ConvertToDatabaseValues(FuelUp_Model ExportModel)
+        {
             return new()
             {
-                FuelUpId = ExportModel.FuelUpId,
+                ObjectKey = ExportModel.ObjectKey,
                 KilometersDriven = ExportModel.KilometersDriven,
                 OdometerReading = ExportModel.OdometerReading,
                 FuelUpDate = ExportModel.FuelUpDate,
-                LinkedCar = ExportModel.LinkedCar,
 
                 LitersRefueled = ExportModel.LitersRefueled * 100,
                 FuelUpCost = ExportModel.FuelUpCost * 100,
@@ -26,13 +26,14 @@ namespace CarStatsServer.DatabaseManagement
             };
         }
 
-        public static FuelUp_Model ConvertToCodeValues(FuelUp_Model ImportModel) {
-            return new(){
-                FuelUpId = ImportModel.FuelUpId,
+        public static FuelUp_Model ConvertToCodeValues(FuelUp_Model ImportModel)
+        {
+            return new()
+            {
+                ObjectKey = ImportModel.ObjectKey,
                 KilometersDriven = ImportModel.KilometersDriven,
                 OdometerReading = ImportModel.OdometerReading,
                 FuelUpDate = ImportModel.FuelUpDate,
-                LinkedCar = ImportModel.LinkedCar,
 
                 LitersRefueled = ImportModel.LitersRefueled / 100.0f,
                 FuelUpCost = ImportModel.FuelUpCost / 100.0f,
@@ -41,5 +42,6 @@ namespace CarStatsServer.DatabaseManagement
                 CarbonEmissions = ImportModel.CarbonEmissions / 100.0f
             };
         }
+
     }
 }
