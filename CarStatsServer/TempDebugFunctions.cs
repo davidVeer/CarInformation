@@ -25,6 +25,11 @@ namespace CarStatsServer
                 FuelUpCost = ushort.Parse(Console.ReadLine()),
             });
         }
+
+        public static void DeleteFuelUp() {
+            Console.WriteLine("Enter the FuelUpId you want to delete:");
+            FuelUpDatabaseService.DeleteDatabaseObject(ushort.Parse(Console.ReadLine()));
+        }
     }
 }
 

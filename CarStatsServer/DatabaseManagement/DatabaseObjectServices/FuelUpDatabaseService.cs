@@ -9,13 +9,19 @@ namespace CarStatsServer.DatabaseManagement.DatabaseObjectServices
     {
         public static void SaveDatabaseObject(FuelUp_Model ObjectToSave)
         {
-            string query = "INSERT INTO FuelUps " +
-               "(FuelUpId, OdometerReading, FuelUpDate, LitersRefueled, FuelUpCost, DistanceTraveled, FuelEfficiency, LiterPrice, CarbonEmissions) " +
-               "values (@ObjectKey, @OdometerReading, @FuelUpDate, @LitersRefueled, @FuelUpCost, @KilometersDriven, @FuelEfficiency, @LiterPrice, @CarbonEmissions)";
+            string query = @"
+            INSERT INTO FuelUps (FuelUpId, OdometerReading, FuelUpDate, LitersRefueled, FuelUpCost, DistanceTraveled, FuelEfficiency, LiterPrice, CarbonEmissions)
+            VALUES (@ObjectKey, @OdometerReading, @FuelUpDate, @LitersRefueled, @FuelUpCost, @KilometersDriven, @FuelEfficiency, @LiterPrice, @CarbonEmissions)";
 
-            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString()))
+            try
             {
-                Database_Connection.databaseConnection.Execute(query, ObjectToSave);
+                using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString()))
+                {
+                    Database_Connection.databaseConnection.Execute(query, ObjectToSave);
+                    }
+            }
+            catch (SQLiteException ex) {
+                Console.Write(ex.Message);
             }
         }
 
@@ -23,13 +29,21 @@ namespace CarStatsServer.DatabaseManagement.DatabaseObjectServices
         {
             throw new NotImplementedException();
         }
+        
         public static void UpdateDatabaseObject(FuelUp_Model UpdatedDatabaseObject, ushort DatabaseObjectKey)
         {
             throw new NotImplementedException();
         }
+        
         public static void DeleteDatabaseObject(ushort DatabaseObjectKey)
         {
-            throw new NotImplementedException();
+            string query = @"DELETE FROM FuelUps
+                             WHERE FuelUpId = @ObjectKey";
+
+            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString()))
+            {
+                Database_Connection.databaseConnection.Execute(query, new { ObjectKey = DatabaseObjectKey});
+            }
         }
 
     }
