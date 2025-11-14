@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarStatsServer.DatabaseManagement.ObjectModifyers
+namespace CarStatsServer.ObjectModifyers
 {
     interface IModelModifyer<T_Key,T_Object> where T_Object : DatabaseObject<T_Key>
     {

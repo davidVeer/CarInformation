@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarStatsServer.DatabaseManagement.ObjectModifyers
+namespace CarStatsServer.ObjectModifyers
 {
     class FuelUp_Modifyer : IModelModifyer<ushort, FuelUp_Model>
     {
