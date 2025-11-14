@@ -1,6 +1,7 @@
 ﻿using CarStatsServer.DatabaseManagement;
 using CarStatsServer.DatabaseManagement.DatabaseObjectServices;
 using CarStatsServer.Models;
+using CarStatsServer.ObjectModifyers;
 using System.Collections.Generic;
 
 namespace CarStatsServer
@@ -11,6 +12,12 @@ namespace CarStatsServer
             Dictionary<ushort, FuelUp_Model> fuelUps;
 
             fuelUps = FuelUpDatabaseService.LoadDatabaseObjects();
+
+            foreach (ushort key in fuelUps.Keys.ToList())
+            {
+                fuelUps[key] = FuelUp_Modifyer.ConvertToCodeValues(fuelUps[key]);
+            }
+
             foreach (FuelUp_Model model in fuelUps.Values)
             {
                 Console.WriteLine("FuelUpID = {0}: \n - Odometer = {1}\n - Liters = {2}\n - Price = {3}\n - Date = {4}",

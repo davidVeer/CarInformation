@@ -7,14 +7,14 @@
             this.fuelUps = fuelUps;
         }
 
-        public ushort[] fuelUpNumberList { get => AddAllToList(fuelUps, fuelUp => fuelUp.fuelUpNumber); }
-        public ushort[] kilometersDrivenList { get => AddAllToList(fuelUps, fuelUp => fuelUp.kilometersDriven); }
-        public DateTime[] fuelUpDateList { get => AddAllToList(fuelUps, fuelUp => fuelUp.fuelUpDate); }
-        public float[] litersRefueledList { get => AddAllToList(fuelUps, fuelUp => fuelUp.litersRefueled); }
-        public float[] fuelUpCostList { get => AddAllToList(fuelUps, fuelUp => fuelUp.fuelUpCost); }
-        public float[] fuelEfficiencyList { get => AddAllToList(fuelUps, fuelUp => fuelUp.fuelEfficiency); }
-        public float[] literPriceList { get => AddAllToList(fuelUps, fuelUp => fuelUp.literPrice); }
-        public float[] carbonEmissionsList { get => AddAllToList(fuelUps, fuelUp => fuelUp.carbonEmissions); }
+        public ushort[] FuelUpIdList { get => AddAllToList(fuelUps, fuelUp => fuelUp.ObjectKey); }
+        public ushort[] KilometersDrivenList { get => AddAllToList(fuelUps, fuelUp => fuelUp.KilometersDriven); }
+        public DateTime[] FuelUpDateList { get => AddAllToList(fuelUps, fuelUp => fuelUp.FuelUpDate); }
+        public float[] LitersRefueledList { get => AddAllToList(fuelUps, fuelUp => fuelUp.LitersRefueled); }
+        public float[] FuelUpCostList { get => AddAllToList(fuelUps, fuelUp => fuelUp.FuelUpCost); }
+        public float[] FuelEfficiencyList { get => AddAllToList(fuelUps, fuelUp => fuelUp.FuelEfficiency); }
+        public float[] LiterPriceList { get => AddAllToList(fuelUps, fuelUp => fuelUp.LiterPrice); }
+        public float[] CarbonEmissionsList { get => AddAllToList(fuelUps, fuelUp => fuelUp.CarbonEmissions); }
         private List<FuelUp_Model> fuelUps { get; }
 
         private static T[] AddAllToList<T>(List<FuelUp_Model> fuelUpList, Func<FuelUp_Model, T> selector) => fuelUpList.Select(selector).ToArray();
