@@ -1,28 +1,31 @@
 ﻿namespace CarStatsServer.Models
 {
-    public class FuelUp_Model
+    public class FuelUp_Model : DatabaseObject<ushort>
     {
-        public ushort fuelUpNumber { get; }
-        public ushort kilometersDriven { get; }
-        public uint odometerReading { get; }
-        public DateTime fuelUpDate { get; }
-        public float litersRefueled { get; }
-        public float fuelUpCost { get; }
-        public float fuelEfficiency { get; }
-        public float literPrice { get; }
-        public float carbonEmissions { get; }
+        public override ushort ObjectKey { get; init; }
+        public ushort KilometersDriven { get; init; }
+        public uint OdometerReading { get; init; }
+        public DateTime FuelUpDate { get; init; }
+        public float LitersRefueled { get; init; }
+        public float FuelUpCost { get; init; }
+        public float FuelEfficiency { get; init; }
+        public float LiterPrice { get; init; }
+        public float CarbonEmissions { get; init; }
 
-        public FuelUp_Model(ushort fuelUpNumber, ushort kilometersDriven, uint odometerReading, DateTime fuelUpDate, float litersRefueled, float fuelUpCost, float fuelEfficiency, float literPrice, float carbonEmissions)
-        {
-            this.fuelUpNumber = fuelUpNumber;
-            this.kilometersDriven = kilometersDriven;
-            this.odometerReading = odometerReading;
-            this.fuelUpDate = fuelUpDate;
-            this.litersRefueled = litersRefueled;
-            this.fuelUpCost = fuelUpCost;
-            this.fuelEfficiency = fuelEfficiency;
-            this.literPrice = literPrice;
-            this.carbonEmissions = carbonEmissions;
+
+        public FuelUp_Model() {
+        }
+
+        public FuelUp_Model(ushort fuelUpId, ushort kilometersDriven, uint odometerReading, DateTime fuelUpDate, float litersRefueled, float fuelUpCost, float fuelEfficiency, float literPrice, float carbonEmissions) {
+            ObjectKey = fuelUpId;
+            KilometersDriven = kilometersDriven;
+            OdometerReading = odometerReading;
+            FuelUpDate = fuelUpDate;
+            LitersRefueled = litersRefueled;
+            FuelUpCost = fuelUpCost;
+            FuelEfficiency = fuelEfficiency;
+            LiterPrice = literPrice;
+            CarbonEmissions = carbonEmissions;
         }
     }
 }
