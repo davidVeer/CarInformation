@@ -27,7 +27,22 @@ namespace CarStatsServer.DatabaseManagement.DatabaseObjectServices
 
         public static Dictionary<ushort, FuelUp_Model> LoadDatabaseObjects()
         {
-            throw new NotImplementedException();
+            string query = @"
+            SELECT FuelUpId AS ObjectKey, OdometerReading, FuelUpDate, LitersRefueled, FuelUpCost, FuelEfficiency, LiterPRice, CarbonEmissions, DistanceTraveled
+            FROM FuelUps";
+            Dictionary<ushort, FuelUp_Model> keyValuePairs = new();
+
+            using (Database_Connection.databaseConnection = new SQLiteConnection(Database_Connection.LoadConnectionString()))
+            {
+                IEnumerable<FuelUp_Model> fuelUps = Database_Connection.databaseConnection.Query<FuelUp_Model>(query,new DynamicParameters());
+
+                foreach (FuelUp_Model fuelup in fuelUps.ToList())
+                {
+                    keyValuePairs.Add(fuelup.ObjectKey, fuelup);
+                }
+            }
+
+            return keyValuePairs;
         }
         
         public static void UpdateDatabaseObject(FuelUp_Model UpdatedDatabaseObject, ushort DatabaseObjectKey)

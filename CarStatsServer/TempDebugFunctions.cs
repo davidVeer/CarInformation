@@ -11,6 +11,15 @@ namespace CarStatsServer
             Dictionary<ushort, FuelUp_Model> fuelUps;
 
             fuelUps = FuelUpDatabaseService.LoadDatabaseObjects();
+            foreach (FuelUp_Model model in fuelUps.Values)
+            {
+                Console.WriteLine("FuelUpID = {0}: \n - Odometer = {1}\n - Liters = {2}\n - Price = {3}\n - Date = {4}",
+                    model.ObjectKey,
+                    model.OdometerReading,
+                    model.LitersRefueled,
+                    model.FuelUpCost,
+                    model.FuelUpDate);
+            }
         }
 
         public static void EnterNewFuelUp()
