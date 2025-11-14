@@ -1,4 +1,5 @@
-﻿using CarStatsServer.Models;
+﻿using CarStatsServer.Calculators;
+using CarStatsServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,16 @@ namespace CarStatsServer.ObjectModifyers
                 LiterPrice = ImportModel.LiterPrice / 100.0f,
                 CarbonEmissions = ImportModel.CarbonEmissions / 100.0f
             };
+        }
+
+        public static FuelUp_Model CalculateAllValues(FuelUp_Model newFuelUp, FuelUp_Model previousFuelUp) {
+            FuelUp_Model initiatedFuelUp = newFuelUp;
+
+            initiatedFuelUp.KilometersDriven = DataCalculator.CalculateKilometerDriven(previousFuelUp.OdometerReading, newFuelUp.OdometerReading);
+            initiatedFuelUp.FuelEfficiency = DataCalculator.CalculateFuelEfficiency(initiatedFuelUp.KilometersDriven, newFuelUp.LitersRefueled);
+            initiatedFuelUp.LiterPrice = DataCalculator.CalculatePricePerLiter(newFuelUp.LitersRefueled, newFuelUp.FuelUpCost);
+
+            return initiatedFuelUp;
         }
 
     }

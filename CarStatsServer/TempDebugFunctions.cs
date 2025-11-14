@@ -16,16 +16,21 @@ namespace CarStatsServer
             foreach (ushort key in fuelUps.Keys.ToList())
             {
                 fuelUps[key] = FuelUp_Modifyer.ConvertToCodeValues(fuelUps[key]);
+                if (fuelUps.ContainsKey((ushort) (key - 1)))
+                    fuelUps[key] = FuelUp_Modifyer.CalculateAllValues(fuelUps[key], fuelUps[(ushort)(key - 1)]);
             }
 
             foreach (FuelUp_Model model in fuelUps.Values)
             {
-                Console.WriteLine("FuelUpID = {0}: \n - Odometer = {1}\n - Liters = {2}\n - Price = {3}\n - Date = {4}",
+                Console.WriteLine("FuelUpID = {0}: \n - Odometer = {1}\n - Liters = {2}\n - Price = {3}\n - Date = {4}\n - Kilometers Traveled = {5}\n - fuel efficiency = {6}\n - literprice = {7}\n",
                     model.ObjectKey,
                     model.OdometerReading,
                     model.LitersRefueled,
                     model.FuelUpCost,
-                    model.FuelUpDate);
+                    model.FuelUpDate,
+                    model.KilometersDriven,
+                    model.FuelEfficiency,
+                    model.LiterPrice);
             }
         }
 

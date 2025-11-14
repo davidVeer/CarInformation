@@ -11,7 +11,7 @@ namespace CarStatsServer.Calculators
     {
         public static ushort CalculateKilometerDriven(uint oldOdometerReading, uint newOdometerReading)
         {
-            if (oldOdometerReading < newOdometerReading) return ushort.MaxValue;
+            if (oldOdometerReading > newOdometerReading) return ushort.MaxValue;
 
             return (ushort)(newOdometerReading - oldOdometerReading);
         }
